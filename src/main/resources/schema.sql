@@ -18,7 +18,7 @@ USE `mydb` ;
 -- Table `mydb`.`user`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`user` (
-  `mail` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `role` VARCHAR(45) NOT NULL DEFAULT 'USER',
   `pseudo` VARCHAR(45) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`user` (
   `dietary` VARCHAR(45) NULL,
   `create` DATETIME NULL,
   `update` DATETIME NULL,
-  PRIMARY KEY (`mail`),
+  PRIMARY KEY (`email`),
   UNIQUE INDEX `pseudo_UNIQUE` (`pseudo` ASC) VISIBLE)
 ENGINE = InnoDB;
 
@@ -36,7 +36,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`recipe` (
   `id_recipe` INT NOT NULL,
-  `mail` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
   `title` VARCHAR(45) NOT NULL,
   `content` TEXT NULL,
   `image` VARCHAR(255) NULL,
@@ -47,10 +47,10 @@ CREATE TABLE IF NOT EXISTS `mydb`.`recipe` (
   `create` DATETIME NULL,
   `update` DATETIME NULL,
   PRIMARY KEY (`id_recipe`),
-  INDEX `user_mail_idx` (`mail` ASC) VISIBLE,
+  INDEX `user_email_idx` (`email` ASC) VISIBLE,
   CONSTRAINT `fk_recipe_user`
-    FOREIGN KEY (`mail`)
-    REFERENCES `mydb`.`user` (`mail`)
+    FOREIGN KEY (`email`)
+    REFERENCES `mydb`.`user` (`email`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -60,14 +60,14 @@ ENGINE = InnoDB;
 -- Table `mydb`.`favorite`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`favorite` (
-  `mail` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
   `favoriteable_type` VARCHAR(45) NOT NULL COMMENT 'Correspond à la table ou est le favoris',
   `favoriteable_id` INT NOT NULL COMMENT 'Correspond à l\'identifiant dans la table de item_type du favoris',
   `create` DATETIME NULL,
-  PRIMARY KEY (`mail`, `favoriteable_type`, `favoriteable_id`),
+  PRIMARY KEY (`email`, `favoriteable_type`, `favoriteable_id`),
   CONSTRAINT `fk_favorite_user`
-    FOREIGN KEY (`mail`)
-    REFERENCES `mydb`.`user` (`mail`)
+    FOREIGN KEY (`email`)
+    REFERENCES `mydb`.`user` (`email`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -186,19 +186,19 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`opinion` (
   `id_recipe` INT NOT NULL,
-  `mail` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
   `rate` INT NULL,
   `comment` TEXT NULL,
-  PRIMARY KEY (`id_recipe`, `mail`),
-  INDEX `fk_user_idx` (`mail` ASC) VISIBLE,
+  PRIMARY KEY (`id_recipe`, `email`),
+  INDEX `fk_user_idx` (`email` ASC) VISIBLE,
   CONSTRAINT `fk_opinion_recipe`
     FOREIGN KEY (`id_recipe`)
     REFERENCES `mydb`.`recipe` (`id_recipe`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_opinion_user`
-    FOREIGN KEY (`mail`)
-    REFERENCES `mydb`.`user` (`mail`)
+    FOREIGN KEY (`email`)
+    REFERENCES `mydb`.`user` (`email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -209,20 +209,20 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`request` (
   `id_ingredient` INT NOT NULL,
-  `mail` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
   `state` VARCHAR(45) NULL,
   `create` DATETIME NULL,
   `update` DATETIME NULL,
-  PRIMARY KEY (`id_ingredient`, `mail`),
-  INDEX `fk_mail_idx` (`mail` ASC) VISIBLE,
+  PRIMARY KEY (`id_ingredient`, `email`),
+  INDEX `email` (`email` ASC) VISIBLE,
   CONSTRAINT `fk_request_ingredient`
     FOREIGN KEY (`id_ingredient`)
     REFERENCES `mydb`.`ingredient` (`id_ingredient`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_request_user`
-    FOREIGN KEY (`mail`)
-    REFERENCES `mydb`.`user` (`mail`)
+    FOREIGN KEY (`email`)
+    REFERENCES `mydb`.`user` (`email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
