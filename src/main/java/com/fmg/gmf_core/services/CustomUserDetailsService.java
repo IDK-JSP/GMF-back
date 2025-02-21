@@ -1,4 +1,4 @@
-package com.fmg.gmf_core.service;
+package com.fmg.gmf_core.services;
 
 
 import com.fmg.gmf_core.daos.UserDao;

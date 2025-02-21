@@ -47,7 +47,7 @@ public class AuthController {
         );
     }
 
-    /*@PostMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<String> authenticateUser(@RequestBody User user) {
         try {
             Authentication authentication = authenticationManager.authenticate(
@@ -57,11 +57,11 @@ public class AuthController {
                     )
             );
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String token = jwtUtils.generateToken(userDetails.getUsername(), user.getId());
+            String token = jwtUtils.generateToken(userDetails.getUsername());
             return ResponseEntity.ok(token); // Retourne le token si l'authentification est réussie
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Erreur : Identifiants invalides");
         }
-    }*/
+    }
 
 }
