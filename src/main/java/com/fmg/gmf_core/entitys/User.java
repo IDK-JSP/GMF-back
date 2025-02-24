@@ -15,6 +15,7 @@ public class User {
     private String role;
 
     @NotBlank(message = "Pseudo requis")
+
     private String pseudo;
 
 
@@ -43,6 +44,7 @@ public class User {
         this.password = password;
         this.pseudo = pseudo;
     }
+
 
 
     public String getEmail() {
