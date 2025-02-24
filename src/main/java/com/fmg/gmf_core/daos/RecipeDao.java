@@ -3,6 +3,7 @@ package com.fmg.gmf_core.daos;
 import com.fmg.gmf_core.entitys.Recipe;
 import com.fmg.gmf_core.entitys.User;
 import com.fmg.gmf_core.exceptions.ResourceAlreadyExistException;
+import com.fmg.gmf_core.exceptions.ResourceNotFoundException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -32,11 +33,23 @@ public class RecipeDao {
     );
     public List<Recipe> findAll() {
         String sql = "SELECT * FROM recipe";
-        return jdbcTemplate.query(sql, recipeRowMapper);
+        List<Recipe> recipes = jdbcTemplate.query(sql, recipeRowMapper);
+        if (recipes.isEmpty()){
+            throw new ResourceNotFoundException("Aucune recette disponible");
+        }
+        return recipes ;
     }
     public boolean save(Recipe recipe) {
+        if (recipeExist(recipe.getTitle())){
+            throw new ResourceAlreadyExistException("La recette" + recipe.getTitle()+" existe déjà");
+        }
         String sql = "INSERT INTO recipe (id_recipe, email, title) VALUES (?, ?, ?)";
         int rowsAffected = jdbcTemplate.update(sql, recipe.getId_recipe(), recipe.getEmail(), recipe.getTitle());
         return rowsAffected >0;
+    }
+    private boolean recipeExist(String title) {
+        String checkSql = "SELECT COUNT(*) FROM recipe WHERE title = ?";
+        int count = jdbcTemplate.queryForObject(checkSql, Integer.class, title);
+        return count > 0;
     }
 }
