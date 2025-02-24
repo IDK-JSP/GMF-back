@@ -18,3 +18,13 @@ Endpoint liste de recipe:
             email : string,
             title : string
         }
+Endpoint étape des recipe
+    Pour toute les étapes d'une recettes "/stage/{id}"
+    Pour créer les étapes d'une recettes "/stage/new":
+        [
+            {
+                stage : int,
+                recipe_id : int,
+                content : String
+            }
+        ]
