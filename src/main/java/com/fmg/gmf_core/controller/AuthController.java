@@ -3,6 +3,7 @@ package com.fmg.gmf_core.controller;
 import com.fmg.gmf_core.daos.UserDao;
 import com.fmg.gmf_core.entitys.User;
 import com.fmg.gmf_core.security.JwtUtil;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,7 +49,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> authenticateUser(@RequestBody User user) {
+    public ResponseEntity<String> authenticateUser(@Valid @RequestBody User user) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
