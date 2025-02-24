@@ -20,8 +20,6 @@ public class User {
 
     private String image;
 
-    //Vege vegan
-    private String dietery;
 
 
     private LocalDateTime create;
@@ -31,13 +29,12 @@ public class User {
 
     public User(){}
 
-    public User(String email, String password, String role, String pseudo, String image, String dietery, LocalDateTime create, LocalDateTime update) {
+    public User(String email, String password, String role, String pseudo, String image, LocalDateTime create, LocalDateTime update) {
         this.email = email;
         this.password = password;
         this.role = role;
         this.pseudo = pseudo;
         this.image = image;
-        this.dietery = dietery;
         this.create = create;
         this.update = update;
     }
@@ -88,13 +85,6 @@ public class User {
         this.image = image;
     }
 
-    public String getDiatery() {
-        return dietery;
-    }
-
-    public void setDiatery(String dietery) {
-        this.dietery = dietery;
-    }
 
     public LocalDateTime getCreate() {
         return create;

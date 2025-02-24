@@ -1,6 +1,6 @@
 package com.fmg.gmf_core.security;
 
-import com.fmg.gmf_core.service.CustomUserDetailsService;
+import com.fmg.gmf_core.services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

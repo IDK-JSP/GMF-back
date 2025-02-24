@@ -1,6 +1,6 @@
 package com.fmg.gmf_core.security;
 
-import com.fmg.gmf_core.service.CustomUserDetailsService;
+import com.fmg.gmf_core.services.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -2,11 +2,12 @@ package com.fmg.gmf_core.daos;
 
 import com.fmg.gmf_core.entitys.User;
 import com.fmg.gmf_core.exceptions.ResourceAlreadyExistException;
-import com.fmg.gmf_core.exceptions.ResourceNotFoundException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
+
+
 
 import java.util.List;
 
@@ -23,10 +24,10 @@ public class UserDao {
             rs.getString("role"),
             rs.getString("pseudo"),
             rs.getString("image"),
-            rs.getString("dietery"), // Vérifie si c'est bien "dietary" et pas "diatery"
             rs.getTimestamp("create") != null ? rs.getTimestamp("create").toLocalDateTime() : null,
             rs.getTimestamp("update") != null ? rs.getTimestamp("update").toLocalDateTime() : null
     );
+
 
 
     public List<User> findAll() {
@@ -34,7 +35,7 @@ public class UserDao {
         return jdbcTemplate.query(sql, userRowMapper);
     }
     public User findByEmail(String email) {
-        String sql = "SELECT * FROM user WHERE email like ?";
+        String sql = "SELECT * FROM `user` WHERE email = ?";
         return jdbcTemplate.query(sql, userRowMapper, email)
                 .stream()
                 .findFirst()
