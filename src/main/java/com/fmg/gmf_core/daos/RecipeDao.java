@@ -39,13 +39,18 @@ public class RecipeDao {
         }
         return recipes ;
     }
-    public boolean save(Recipe recipe) {
+    public int findRecipeIdByName(String title){
+        String sql = "SELECT id_recipe FROM recipe where title = ?";
+        int id_recipe = jdbcTemplate.update(sql, title);
+        return id_recipe;
+    }
+    public int save(Recipe recipe) {
         if (recipeExist(recipe.getTitle())){
             throw new ResourceAlreadyExistException("La recette" + recipe.getTitle()+" existe déjà");
         }
-        String sql = "INSERT INTO recipe (id_recipe, email, title) VALUES (?, ?, ?)";
-        int rowsAffected = jdbcTemplate.update(sql, recipe.getId_recipe(), recipe.getEmail(), recipe.getTitle());
-        return rowsAffected >0;
+        String sql = "INSERT INTO recipe ( email, title) VALUES ( ?, ?)";
+        jdbcTemplate.update(sql, recipe.getId_recipe(), recipe.getEmail(), recipe.getTitle());
+        return findRecipeIdByName(recipe.getTitle());
     }
     private boolean recipeExist(String title) {
         String checkSql = "SELECT COUNT(*) FROM recipe WHERE title = ?";
