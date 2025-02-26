@@ -30,13 +30,13 @@ public class StageDao {
     public List<Stage> findAll() {
         String sql = "SELECT * FROM stage";
         List<Stage> stages = jdbcTemplate.query(sql, stageRowMapper);
-        globalHelper.isEmpty(stages);
+        globalHelper.isEmpty(stages, "étape");
         return stages;
     }
     public List<Stage> findRecipeStage(int id){
         String sql = "SELECT * FROM stage where id_recipe = ?";
         List<Stage> stages = jdbcTemplate.query(sql, stageRowMapper, id);
-        globalHelper.isEmpty(stages);
+        globalHelper.isEmpty(stages, "étape");
         return stages;
     }
     public boolean save(Stage stage) {

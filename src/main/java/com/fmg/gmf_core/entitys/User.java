@@ -22,30 +22,28 @@ public class User {
     private String image;
 
 
+    private LocalDateTime create_time;
 
-    private LocalDateTime create;
 
+    private LocalDateTime update_time;
 
-    private LocalDateTime update;
+    public User() {
+    }
 
-    public User(){}
-
-    public User(String email, String password, String role, String pseudo, String image, LocalDateTime create, LocalDateTime update) {
+    public User(String email, String password, String role, String pseudo, String image, LocalDateTime create_time, LocalDateTime update_time) {
         this.email = email;
         this.password = password;
         this.role = role;
         this.pseudo = pseudo;
         this.image = image;
-        this.create = create;
-        this.update = update;
+        this.create_time = create_time;
+        this.update_time = update_time;
     }
-    public User(String email, String password, String pseudo) {
+    public User(String email, String password, String pseudo){
         this.email = email;
         this.password = password;
         this.pseudo = pseudo;
     }
-
-
 
     public String getEmail() {
         return email;
@@ -87,20 +85,19 @@ public class User {
         this.image = image;
     }
 
-
-    public LocalDateTime getCreate() {
-        return create;
+    public LocalDateTime getCreate_time() {
+        return create_time;
     }
 
-    public void setCreate(LocalDateTime create) {
-        this.create = create;
+    public void setCreate_time(LocalDateTime create_time) {
+        this.create_time = create_time;
     }
 
-    public LocalDateTime getUpdate() {
-        return update;
+    public LocalDateTime getUpdate_time() {
+        return update_time;
     }
 
-    public void setUpdate(LocalDateTime update) {
-        this.update = update;
+    public void setUpdate_time(LocalDateTime update_time) {
+        this.update_time = update_time;
     }
 }

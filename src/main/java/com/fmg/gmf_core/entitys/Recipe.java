@@ -22,11 +22,11 @@ public class Recipe {
 
     private int nb_rate;
 
-    private LocalDateTime create;
+    private LocalDateTime create_time;
 
-    private LocalDateTime update;
+    private LocalDateTime update_time;
 
-    public Recipe(int id_recipe,String email,  String title, String content, String image, int person, String state, Double rate, int nb_rate, LocalDateTime create, LocalDateTime update) {
+    public Recipe(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nb_rate, LocalDateTime create_time, LocalDateTime update_time) {
         this.id_recipe = id_recipe;
         this.email = email;
         this.title = title;
@@ -36,8 +36,8 @@ public class Recipe {
         this.state = state;
         this.rate = rate;
         this.nb_rate = nb_rate;
-        this.create = create;
-        this.update = update;
+        this.create_time = create_time;
+        this.update_time = update_time;
     }
 
     public int getId_recipe() {
@@ -112,19 +112,19 @@ public class Recipe {
         this.nb_rate = nb_rate;
     }
 
-    public LocalDateTime getCreate() {
-        return create;
+    public LocalDateTime getCreate_time() {
+        return create_time;
     }
 
-    public void setCreate(LocalDateTime create) {
-        this.create = create;
+    public void setCreate_time(LocalDateTime create_time) {
+        this.create_time = create_time;
     }
 
-    public LocalDateTime getUpdate() {
-        return update;
+    public LocalDateTime getUpdate_time() {
+        return update_time;
     }
 
-    public void setUpdate(LocalDateTime update) {
-        this.update = update;
+    public void setUpdate_time(LocalDateTime update_time) {
+        this.update_time = update_time;
     }
 }

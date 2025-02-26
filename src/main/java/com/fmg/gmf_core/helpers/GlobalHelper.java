@@ -9,9 +9,9 @@ import java.util.List;
 
 @Component
 public class GlobalHelper {
-    public void isEmpty(List list){
+    public void isEmpty(List list, String dataName){
         if (list.isEmpty()){
-            throw new ResourceNotFoundException("Aucunne données disponible");
+            throw new ResourceNotFoundException("Aucun(ne) "+ dataName+ " trouvé");
         }
     }
 

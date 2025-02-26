@@ -16,7 +16,7 @@ public class RecipeController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Recipe>> getAllUser() {
+    public ResponseEntity<List<Recipe>> getAllRecipe() {
         return ResponseEntity.ok(recipeDao.findAll());
     }
 

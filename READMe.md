@@ -60,3 +60,19 @@
    }
 ]
 ```
+
+## 🛠️ Endpoints ingrédients
+
+### 🔹 Toute les ingrédients (`/ingredient/all`)
+> **Méthode :** `GET`  
+> **Description :** Récuperer tout les ingrédients.
+
+### 🔹 Créer un ingrédient (`/ingredient/new`)
+> **Méthode :** `POST`  
+> **Description :** Créer un ingrédient.  
+> **Body :**
+```json
+{
+   name: string
+}
+```
