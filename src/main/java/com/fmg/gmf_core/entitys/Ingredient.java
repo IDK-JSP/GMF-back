@@ -13,6 +13,7 @@ public class Ingredient {
 
     private LocalDateTime update_time;
 
+
     public Ingredient(int id_ingredient, String name, String content, LocalDateTime create_time, LocalDateTime update_time) {
         this.id_ingredient = id_ingredient;
         this.name = name;

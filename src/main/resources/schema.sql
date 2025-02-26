@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `bddgmf`.`recipe_ingredient` (
   `id_recipe` INT NOT NULL,
   `id_ingredient` INT NOT NULL,
   `quantity` INT NOT NULL,
-  `id_measurment` INT NOT NULL,
+  `id_measurement` INT NOT NULL,
   PRIMARY KEY (`id_recipe`, `id_ingredient`),
   INDEX `id_ingredient_idx` (`id_ingredient` ASC) VISIBLE,
   INDEX `id_mesearment_idx` (`id_measurment` ASC) VISIBLE,
