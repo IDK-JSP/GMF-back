@@ -25,10 +25,10 @@ public class StageController {
         return ResponseEntity.ok(stageDao.findRecipeStage(id));
     }
     @PostMapping("/new")
-    public ResponseEntity<Integer> newRecipe(@RequestBody Stage[] stage){
+    public ResponseEntity<String> newRecipe(@RequestBody Stage[] stage){
         for (int i = 0; i < stage.length; i++){
             stageDao.save(stage[i]);
         }
-        return ResponseEntity.ok(stage[0].getId_recipe());
+        return ResponseEntity.ok(stage.length + " étapes créer");
     }
 }

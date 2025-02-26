@@ -8,9 +8,9 @@
 > **Body :**
 ```json
 {
-  "email": "string",
-  "password": "string",
-  "pseudo": "string"
+  email: string,
+  password: string,
+  pseudo: string
 }
 ```
 ### 🔹 Connexion (`/auth/login`)
@@ -19,9 +19,9 @@
 > **Body :**
 ```json
 {
-  "email": "string",
-  "password": "string",
-  "pseudo": "string(Pseudo de ton choix)"
+  email: string,
+  password: string,
+  pseudo: string(Pseudo de ton choix)
 }
 ```
 ## 🛠️ Endpoints Recette
@@ -36,8 +36,8 @@
 > **Body :**
 ```json
 { 
-    "email": "string",
-    "title": "string"
+    email: string,
+    title: string
 }
 ```
 
@@ -54,9 +54,9 @@
 ```json
 [
    {
-       "stage": "int",
-       "recipe_id": "int",
-       "content": "String"
+       stage: int,
+       recipe_id: int,
+       content: String
    }
 ]
 ```
