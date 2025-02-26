@@ -9,16 +9,16 @@ public class Ingredient {
 
     private String Content;
 
-    private LocalDateTime create;
+    private LocalDateTime create_time;
 
-    private LocalDateTime update;
+    private LocalDateTime update_time;
 
-    public Ingredient(int id_ingredient, String name, String content, LocalDateTime create, LocalDateTime update) {
+    public Ingredient(int id_ingredient, String name, String content, LocalDateTime create_time, LocalDateTime update_time) {
         this.id_ingredient = id_ingredient;
         this.name = name;
         Content = content;
-        this.create = create;
-        this.update = update;
+        this.create_time = create_time;
+        this.update_time = update_time;
     }
 
     public int getId_ingredient() {
@@ -45,19 +45,19 @@ public class Ingredient {
         Content = content;
     }
 
-    public LocalDateTime getCreate() {
-        return create;
+    public LocalDateTime getCreate_time() {
+        return create_time;
     }
 
-    public void setCreate(LocalDateTime create) {
-        this.create = create;
+    public void setCreate_time(LocalDateTime create_time) {
+        this.create_time = create_time;
     }
 
-    public LocalDateTime getUpdate() {
-        return update;
+    public LocalDateTime getUpdate_time() {
+        return update_time;
     }
 
-    public void setUpdate(LocalDateTime update) {
-        this.update = update;
+    public void setUpdate_time(LocalDateTime update_time) {
+        this.update_time = update_time;
     }
 }
