@@ -3,6 +3,10 @@ TRUNCATE TABLE `measurement`;
 TRUNCATE TABLE `ingredient`;
 TRUNCATE TABLE `diet`;
 TRUNCATE TABLE `diet_ingredient`;
+TRUNCATE TABLE `user`;
+TRUNCATE TABLE `recipe`;
+TRUNCATE TABLE `recipe_ingredient`;
+TRUNCATE TABLE `stage`;
 
 INSERT INTO `measurement` (`name`, `type`) VALUES
 ('cl', 'volume'),
@@ -144,6 +148,186 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (2, 36), -- Cannelle
 (2, 37), -- Piment
 (2, 38); -- Vanille
+
+INSERT INTO `user` (`email`, `password`, `role`, `pseudo`, `image`, `create_time`, `update`) VALUES
+('root', '$2a$10$NBi3OvkcKhjSuMXEBY4oNeRVZWgK4QFqquZbH2.pE8LgEw2BvE/k2af8f1e329fdb023e52355d9470e3cd8cd7d04d221a724687945c1be9026d93ad', 'ADMIN', 'admin', NULL, NOW(), NOW());
+
+INSERT INTO `recipe` (`email`, `title`, `content`, `image`, `person`, `state`, `rate`, `nb_rate`, `create_time`, `update_time`) VALUES
+('root', 'Pâtes à la Carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('root', 'Salade César', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse.', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW()),
+('root', 'Ratatouille', 'Un plat provençal à base de légumes mijotés : tomates, courgettes, aubergines et poivrons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('root', 'Quiche Lorraine', 'Tarte salée garnie de crème, lardons et fromage.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
+('root', 'Tarte aux Pommes', 'Pâte sablée croustillante garnie de pommes caramélisées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
+('root', 'Soupe de légumes', 'Un mélange de légumes mijotés pour une soupe savoureuse et réconfortante.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('root', 'Couscous Royal', 'Plat traditionnel nord-africain avec semoule, légumes et viandes variées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
+('root', 'Poulet au curry', 'Poulet mijoté dans une sauce crémeuse au curry et lait de coco.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('root', 'Mousse au chocolat', 'Dessert aérien et fondant à base de chocolat noir et œufs.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('root', 'Pizza Margherita', 'Une pizza classique avec une sauce tomate, mozzarella et basilic.', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW());
+
+-- Pâtes à la Carbonara (id_recipe = 1)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+(1, 16, 200, 1), -- Pâtes (g)
+(1, 7, 2, 19),  -- Œufs (pièce)
+(1, 22, 100, 1), -- Fromage (g)
+(1, 2, 50, 1),  -- Beurre (g)
+(1, 5, 1, 18),  -- Sel (pincée)
+(1, 6, 1, 18);  -- Poivre (pincée)
+
+-- Salade César (id_recipe = 2)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+(2, 21, 200, 1), -- Poulet (g)
+(2, 10, 2, 19),  -- Tomates (pièce)
+(2, 11, 1, 19),  -- Oignon (pièce)
+(2, 5, 1, 18),   -- Sel (pincée)
+(2, 6, 1, 18),   -- Poivre (pincée)
+(2, 8, 20, 2);   -- Huile d'olive (ml)
+
+-- Ratatouille (id_recipe = 3)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+(3, 10, 3, 19), -- Tomates (pièce)
+(3, 13, 1, 19), -- Carotte (pièce)
+(3, 29, 100, 1), -- Champignons (g)
+(3, 11, 1, 19), -- Oignon (pièce)
+(3, 12, 1, 19), -- Ail (pièce)
+(3, 8, 30, 2),  -- Huile d’olive (ml)
+(3, 5, 1, 18),  -- Sel (pincée)
+(3, 6, 1, 18);  -- Poivre (pincée)
+
+-- Quiche Lorraine (id_recipe = 4)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+(4, 3, 250, 1), -- Farine (g)
+(4, 7, 3, 19),  -- Œufs (pièce)
+(4, 2, 100, 1), -- Beurre (g)
+(4, 22, 150, 1), -- Fromage (g)
+(4, 5, 1, 18),  -- Sel (pincée)
+(4, 6, 1, 18);  -- Poivre (pincée)
+
+-- Tarte aux Pommes (id_recipe = 5)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+(5, 3, 250, 1), -- Farine (g)
+(5, 2, 100, 1), -- Beurre (g)
+(5, 4, 100, 1), -- Sucre (g)
+(5, 10, 3, 19); -- Pommes (pièce)
+
+-- Soupe de légumes (id_recipe = 6)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+(6, 13, 2, 19), -- Carotte (pièce)
+(6, 14, 2, 19), -- Pomme de terre (pièce)
+(6, 29, 100, 1), -- Champignons (g)
+(6, 11, 1, 19), -- Oignon (pièce)
+(6, 8, 30, 2),  -- Huile d'olive (ml)
+(6, 5, 1, 18);  -- Sel (pincée)
+
+-- Couscous Royal (id_recipe = 7)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+(7, 15, 250, 1), -- Semoule (g)
+(7, 18, 300, 1), -- Viande de boeuf (g)
+(7, 21, 300, 1), -- Poulet (g)
+(7, 13, 2, 19),  -- Carotte (pièce)
+(7, 14, 2, 19),  -- Pomme de terre (pièce)
+(7, 5, 1, 18);   -- Sel (pincée)
+
+-- Poulet au curry (id_recipe = 8)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+(8, 21, 300, 1), -- Poulet (g)
+(8, 35, 10, 2),  -- Curcuma (ml)
+(8, 5, 1, 18),   -- Sel (pincée)
+(8, 6, 1, 18);   -- Poivre (pincée)
+
+-- Mousse au Chocolat (id_recipe = 9)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+(9, 25, 200, 1), -- Chocolat (g)
+(9, 7, 3, 19),   -- Œufs (pièce)
+(9, 4, 50, 1);   -- Sucre (g)
+
+-- Pizza Margherita (id_recipe = 10)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+(10, 3, 250, 1), -- Farine (g)
+(10, 8, 20, 2),  -- Huile d'olive (ml)
+(10, 10, 3, 19), -- Tomates (pièce)
+(10, 22, 200, 1), -- Fromage (g)
+(10, 5, 1, 18),  -- Sel (pincée)
+(10, 6, 1, 18);  -- Poivre (pincée)
+
+-- Pâtes à la Carbonara (id_recipe = 1)
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
+(1, 1, 'Faites cuire les pâtes dans une grande casserole d’eau bouillante salée.'),
+(2, 1, 'Pendant ce temps, battez les œufs avec le parmesan râpé.'),
+(3, 1, 'Faites revenir les lardons à feu moyen sans matière grasse.'),
+(4, 1, 'Égouttez les pâtes et mélangez-les immédiatement avec les œufs battus et les lardons.'),
+(5, 1, 'Servez chaud avec un peu de poivre et du parmesan supplémentaire.');
+
+-- Salade César (id_recipe = 2)
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
+(1, 2, 'Lavez et coupez la salade en morceaux.'),
+(2, 2, 'Faites griller le poulet, puis coupez-le en lamelles.'),
+(3, 2, 'Mélangez la salade avec les tomates coupées, l’oignon émincé et les croûtons.'),
+(4, 2, 'Ajoutez le poulet grillé et assaisonnez avec une vinaigrette maison.'),
+(5, 2, 'Parsemez de parmesan râpé avant de servir.');
+
+-- Ratatouille (id_recipe = 3)
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
+(1, 3, 'Lavez et découpez tous les légumes en petits morceaux.'),
+(2, 3, 'Faites revenir l’oignon et l’ail dans un peu d’huile d’olive.'),
+(3, 3, 'Ajoutez les légumes et laissez mijoter à feu doux pendant 30 minutes.'),
+(4, 3, 'Remuez de temps en temps et assaisonnez avec sel et poivre.'),
+(5, 3, 'Servez chaud, seul ou en accompagnement.');
+
+-- Quiche Lorraine (id_recipe = 4)
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
+(1, 4, 'Préchauffez le four à 180°C.'),
+(2, 4, 'Étalez la pâte dans un moule à tarte et piquez le fond avec une fourchette.'),
+(3, 4, 'Dans un bol, battez les œufs avec la crème, le sel et le poivre.'),
+(4, 4, 'Ajoutez les lardons et le fromage râpé, puis versez sur la pâte.'),
+(5, 4, 'Enfournez pendant 30 minutes, jusqu’à ce que la quiche soit dorée.');
+
+-- Tarte aux Pommes (id_recipe = 5)
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
+(1, 5, 'Préchauffez le four à 180°C.'),
+(2, 5, 'Étalez la pâte dans un moule et piquez le fond.'),
+(3, 5, 'Épluchez et coupez les pommes en fines tranches.'),
+(4, 5, 'Disposez les pommes sur la pâte et saupoudrez de sucre.'),
+(5, 5, 'Enfournez pendant 30 minutes jusqu’à ce que les pommes soient dorées.');
+
+-- Soupe de légumes (id_recipe = 6)
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
+(1, 6, 'Épluchez et coupez les légumes en morceaux.'),
+(2, 6, 'Faites revenir l’oignon dans un peu d’huile d’olive.'),
+(3, 6, 'Ajoutez tous les légumes et couvrez d’eau.'),
+(4, 6, 'Laissez mijoter pendant 20 minutes.'),
+(5, 6, 'Mixez la soupe et servez chaude.');
+
+-- Couscous Royal (id_recipe = 7)
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
+(1, 7, 'Préparez la semoule en l’arrosant d’eau chaude et en égrainant avec une fourchette.'),
+(2, 7, 'Dans une grande casserole, faites cuire la viande avec les légumes.'),
+(3, 7, 'Ajoutez les épices et laissez mijoter pendant 40 minutes.'),
+(4, 7, 'Ajoutez les pois chiches 10 minutes avant la fin de la cuisson.'),
+(5, 7, 'Servez avec la semoule et arrosez de sauce.');
+
+-- Poulet au curry (id_recipe = 8)
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
+(1, 8, 'Faites revenir le poulet dans une poêle avec un peu d’huile.'),
+(2, 8, 'Ajoutez le curry et mélangez bien.'),
+(3, 8, 'Versez un peu de lait de coco et laissez mijoter 15 minutes.'),
+(4, 8, 'Assaisonnez avec sel et poivre.'),
+(5, 8, 'Servez avec du riz.');
+
+-- Mousse au Chocolat (id_recipe = 9)
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
+(1, 9, 'Faites fondre le chocolat au bain-marie.'),
+(2, 9, 'Séparez les blancs des jaunes d’œufs.'),
+(3, 9, 'Incorporez les jaunes au chocolat fondu.'),
+(4, 9, 'Montez les blancs en neige et ajoutez-les délicatement au chocolat.'),
+(5, 9, 'Réfrigérez pendant au moins 3 heures avant de servir.');
+
+-- Pizza Margherita (id_recipe = 10)
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
+(1, 10, 'Préchauffez le four à 220°C.'),
+(2, 10, 'Étalez la pâte à pizza sur une plaque de cuisson.'),
+(3, 10, 'Étalez la sauce tomate et ajoutez la mozzarella.'),
+(4, 10, 'Parsemez de basilic et d’un filet d’huile d’olive.'),
+(5, 10, 'Enfournez pendant 15 minutes jusqu’à ce que la pizza soit dorée.');
 
 
 SET FOREIGN_KEY_CHECKS = 1;
