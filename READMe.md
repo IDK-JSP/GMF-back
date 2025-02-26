@@ -63,7 +63,7 @@
 
 ## 🛠️ Endpoints ingrédients
 
-### 🔹 Toute les ingrédients (`/ingredient/all`)
+### 🔹 Tout les ingrédients (`/ingredient/all`)
 > **Méthode :** `GET`  
 > **Description :** Récuperer tout les ingrédients.
 
@@ -74,5 +74,23 @@
 ```json
 {
    name: string
+}
+```
+
+## 🛠️ Endpoints mesures
+
+### 🔹 Toute les mesures (`/measurement/all`)
+> **Méthode :** `GET`  
+> **Description :** Récuperer toute les mesures.
+
+### 🔹 Créer une mesure (`/measurement/new`)
+> **Méthode :** `POST`  
+> **Description :** Créer une mesure.  
+> **Body :**
+
+```json
+{
+  name: string,
+  type: string
 }
 ```
