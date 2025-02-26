@@ -34,7 +34,7 @@ public class IngredientDao {
         return ingredients;
     }
     public Ingredient save(Ingredient ingredient) {
-        globalHelper.notExist(ingredientExist(ingredient.getName()),"Recette");
+        globalHelper.notExist(ingredientExist(ingredient.getName()),"Mesure");
         String sql = "INSERT INTO ingredient (name, create_time) VALUES (?, ?)";
         jdbcTemplate.update(sql, ingredient.getName(), dateTimeService.getCurrentDateTime());
         return ingredient;
