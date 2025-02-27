@@ -26,6 +26,7 @@ public class Recipe {
 
     private LocalDateTime update_time;
 
+
     public Recipe(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nb_rate, LocalDateTime create_time, LocalDateTime update_time) {
         this.id_recipe = id_recipe;
         this.email = email;
@@ -39,6 +40,7 @@ public class Recipe {
         this.create_time = create_time;
         this.update_time = update_time;
     }
+
 
     public int getId_recipe() {
         return id_recipe;

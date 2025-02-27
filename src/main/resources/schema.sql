@@ -122,10 +122,10 @@ CREATE TABLE IF NOT EXISTS `bddgmf`.`recipe_ingredient` (
   `id_recipe` INT NOT NULL,
   `id_ingredient` INT NOT NULL,
   `quantity` INT NOT NULL,
-  `id_measurment` INT NOT NULL,
+  `id_measurement` INT NOT NULL,
   PRIMARY KEY (`id_recipe`, `id_ingredient`),
   INDEX `id_ingredient_idx` (`id_ingredient` ASC) VISIBLE,
-  INDEX `id_mesearment_idx` (`id_measurment` ASC) VISIBLE,
+  INDEX `id_mesearment_idx` (`id_measurement` ASC) VISIBLE,
   CONSTRAINT `fk_recipeingredient_recipe`
     FOREIGN KEY (`id_recipe`)
     REFERENCES `bddgmf`.`recipe` (`id_recipe`)
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `bddgmf`.`recipe_ingredient` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_recipeingredient_mesearment`
-    FOREIGN KEY (`id_measurment`)
+    FOREIGN KEY (`id_measurement`)
     REFERENCES `bddgmf`.`measurement` (`id_measurement`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

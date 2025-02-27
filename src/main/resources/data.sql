@@ -165,7 +165,7 @@ INSERT INTO `recipe` (`email`, `title`, `content`, `image`, `person`, `state`, `
 ('root', 'Pizza Margherita', 'Une pizza classique avec une sauce tomate, mozzarella et basilic.', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW());
 
 -- Pâtes à la Carbonara (id_recipe = 1)
-INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (1, 16, 200, 1), -- Pâtes (g)
 (1, 7, 2, 19),  -- Œufs (pièce)
 (1, 22, 100, 1), -- Fromage (g)
@@ -174,7 +174,7 @@ INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_m
 (1, 6, 1, 18);  -- Poivre (pincée)
 
 -- Salade César (id_recipe = 2)
-INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (2, 21, 200, 1), -- Poulet (g)
 (2, 10, 2, 19),  -- Tomates (pièce)
 (2, 11, 1, 19),  -- Oignon (pièce)
@@ -183,7 +183,7 @@ INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_m
 (2, 8, 20, 2);   -- Huile d'olive (ml)
 
 -- Ratatouille (id_recipe = 3)
-INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (3, 10, 3, 19), -- Tomates (pièce)
 (3, 13, 1, 19), -- Carotte (pièce)
 (3, 29, 100, 1), -- Champignons (g)
@@ -194,7 +194,7 @@ INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_m
 (3, 6, 1, 18);  -- Poivre (pincée)
 
 -- Quiche Lorraine (id_recipe = 4)
-INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (4, 3, 250, 1), -- Farine (g)
 (4, 7, 3, 19),  -- Œufs (pièce)
 (4, 2, 100, 1), -- Beurre (g)
@@ -203,14 +203,14 @@ INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_m
 (4, 6, 1, 18);  -- Poivre (pincée)
 
 -- Tarte aux Pommes (id_recipe = 5)
-INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (5, 3, 250, 1), -- Farine (g)
 (5, 2, 100, 1), -- Beurre (g)
 (5, 4, 100, 1), -- Sucre (g)
 (5, 10, 3, 19); -- Pommes (pièce)
 
 -- Soupe de légumes (id_recipe = 6)
-INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (6, 13, 2, 19), -- Carotte (pièce)
 (6, 14, 2, 19), -- Pomme de terre (pièce)
 (6, 29, 100, 1), -- Champignons (g)
@@ -219,7 +219,7 @@ INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_m
 (6, 5, 1, 18);  -- Sel (pincée)
 
 -- Couscous Royal (id_recipe = 7)
-INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (7, 15, 250, 1), -- Semoule (g)
 (7, 18, 300, 1), -- Viande de boeuf (g)
 (7, 21, 300, 1), -- Poulet (g)
@@ -228,20 +228,20 @@ INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_m
 (7, 5, 1, 18);   -- Sel (pincée)
 
 -- Poulet au curry (id_recipe = 8)
-INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (8, 21, 300, 1), -- Poulet (g)
 (8, 35, 10, 2),  -- Curcuma (ml)
 (8, 5, 1, 18),   -- Sel (pincée)
 (8, 6, 1, 18);   -- Poivre (pincée)
 
 -- Mousse au Chocolat (id_recipe = 9)
-INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (9, 25, 200, 1), -- Chocolat (g)
 (9, 7, 3, 19),   -- Œufs (pièce)
 (9, 4, 50, 1);   -- Sucre (g)
 
 -- Pizza Margherita (id_recipe = 10)
-INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurment`) VALUES
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (10, 3, 250, 1), -- Farine (g)
 (10, 8, 20, 2),  -- Huile d'olive (ml)
 (10, 10, 3, 19), -- Tomates (pièce)
