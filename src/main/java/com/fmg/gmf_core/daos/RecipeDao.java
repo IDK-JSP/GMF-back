@@ -1,7 +1,7 @@
 package com.fmg.gmf_core.daos;
 
+import com.fmg.gmf_core.entitys.IngredientDetails;
 import com.fmg.gmf_core.entitys.Recipe;
-import com.fmg.gmf_core.entitys.RecipeDetails;
 import com.fmg.gmf_core.helpers.GlobalHelper;
 import com.fmg.gmf_core.helpers.UserHelper;
 import com.fmg.gmf_core.services.DateTimeService;
@@ -39,11 +39,7 @@ public class RecipeDao {
             rs.getTimestamp("update_time").toLocalDateTime()
 
     );
-    private final RowMapper<RecipeDetails> recipeDetailsRowMapper = (rs, _) -> new RecipeDetails(
-            rs.getString("ingredient_name"),
-            rs.getInt("quantity"),
-            rs.getString("measurement")
-    );
+
     public List<Recipe> findAll() {
         String sql = "SELECT * FROM recipe";
         List<Recipe> recipes = jdbcTemplate.query(sql, recipeRowMapper);
@@ -75,9 +71,5 @@ public class RecipeDao {
         int id_recipe = jdbcTemplate.queryForObject(sql,Integer.class, title);
         return id_recipe;
     }
-    public List<RecipeDetails> findRecipeIngredients(int id_recipe) {
-        String sql = "SELECT  i.name as ingredient_name, ri.quantity, m.name as measurement FROM recipe_ingredient ri JOIN ingredient i ON ri.id_ingredient = i.id_ingredient join recipe r on ri.id_recipe = r.id_recipe join measurement m on ri.id_measurment = m.id_measurement where r.id_recipe = ?";
-        List<RecipeDetails> recipeDetails = jdbcTemplate.query(sql, recipeDetailsRowMapper, id_recipe);
-        return recipeDetails;
-    }
+
 }
