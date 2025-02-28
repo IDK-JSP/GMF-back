@@ -88,3 +88,10 @@
 > **Méthode :** `GET`  
 > **Description :** Récuperer un objet contenant une liste de recette ou d'ingrédient en fonction du nom.
 
+### 🔹 Faire une recherche avec des filtres (`/search/filter`)
+> **Méthode :** `POST`  
+> **Description :** Récuperer une liste de recette en fonction d'une liste d'ingrédient données.
+
+```json
+[ int ]
+```
