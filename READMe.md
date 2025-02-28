@@ -30,6 +30,11 @@
 > **Méthode :** `GET`  
 > **Description :** Récuperer toute les recettes sans filtre.  
 
+### 🔹 Détails d'une recette (`/recipe/details/{id}`)
+
+> **Méthode :** `GET`
+> **Description :** Récuperer tout les détails d'une recette (ingrédients et étapes).
+
 ### 🔹 Créer une recette (`/recipe/new`)
 > **Méthode :** `POST`  
 > **Description :** Créer une recette.  
@@ -41,10 +46,6 @@
 }
 ```
 
-### 🔹 Détails d'une recette (`/recipe/details/{id}`)
-
-> **Méthode :** `GET`
-> **Description :** Récuperer tout les détails d'une recette (ingrédients et étapes).
 
 
 ## 🛠️ Endpoints ingrédients
@@ -85,5 +86,5 @@
 
 ### 🔹 Faire une recherche (`/search?name={search}`)
 > **Méthode :** `GET`  
-> **Description :** Récuperer un objet contenant une liste de recette ou d'ingrédients en fonction du nom.
+> **Description :** Récuperer un objet contenant une liste de recette ou d'ingrédient en fonction du nom.
 
