@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -58,6 +59,28 @@ public class RecipeDao {
         jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(),dateTimeService.getCurrentDateTime());
         return findRecipeIdByName(recipe.getTitle());
     }
+    public List<Recipe> findRecipesByIngredients(List<Integer> ingredientIds) {
+        // Vérifie que la liste des ingrédients n'est pas vide
+        if (ingredientIds == null || ingredientIds.isEmpty()) {
+            throw new IllegalArgumentException("La liste des ingrédients ne peut pas être vide");
+        }
+
+        // Générer les paramètres dynamiques pour la clause IN
+        String placeholders = String.join(",", Collections.nCopies(ingredientIds.size(), "?"));
+
+        // Créer la requête SQL dynamique
+        String sql = "SELECT r.id_recipe, r.email, r.title, r.content, r.image, r.person, r.state, r.rate, r.nb_rate, r.create_time, r.update_time, COUNT(ri.id_ingredient) AS matching_ingredients " +
+                "FROM recipe r " +
+                "JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe " +
+                "WHERE ri.id_ingredient IN (" + placeholders + ") " +
+                "GROUP BY r.id_recipe " +
+                "ORDER BY matching_ingredients DESC";
+
+        // Exécuter la requête et récupérer les résultats
+        List<Recipe> recipes = jdbcTemplate.query(sql, recipeRowMapper, ingredientIds.toArray());
+        return recipes;
+    }
+
 
 
     //Utilitaires
