@@ -34,7 +34,10 @@ public class RecipeController {
         recipeDetails.setStages(stageDao.findRecipeStage(id));
         return  ResponseEntity.ok(recipeDetails);
     }
-
+    @GetMapping("/search")
+    public List<Recipe> searchRecipes(@RequestParam String name) {
+        return recipeDao.findRecipeByName(name);
+    }
     @PostMapping("/new")
     public ResponseEntity<String> newRecipe(@RequestBody Recipe recipe){
         recipeDao.save(recipe);

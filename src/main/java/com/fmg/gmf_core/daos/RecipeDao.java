@@ -45,6 +45,12 @@ public class RecipeDao {
         globalHelper.isEmpty(recipes, "recette");
         return recipes ;
     }
+    public List<Recipe> findRecipeByName(String research){
+        String sql = "SELECT * FROM recipe WHERE title LIKE ?";
+        List<Recipe> recipes = jdbcTemplate.query(sql, recipeRowMapper, "%" + research + "%");
+        return recipes;
+    }
+
     public int save(Recipe recipe) {
         globalHelper.notExist(recipeExist(recipe.getTitle()),"Recette");
         userHelper.emailExist(recipe.getEmail());

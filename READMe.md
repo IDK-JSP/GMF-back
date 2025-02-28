@@ -81,4 +81,9 @@
 }
 ```
 
+## 🛠️ Endpoints recherche
+
+### 🔹 Faire une recherche (`/search?name={search}`)
+> **Méthode :** `GET`  
+> **Description :** Récuperer un objet contenant une liste de recette ou d'ingrédients en fonction du nom.
 
