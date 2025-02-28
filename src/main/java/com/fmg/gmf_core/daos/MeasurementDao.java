@@ -1,6 +1,5 @@
 package com.fmg.gmf_core.daos;
 
-import com.fmg.gmf_core.entitys.Ingredient;
 import com.fmg.gmf_core.entitys.Measurement;
 import com.fmg.gmf_core.helpers.GlobalHelper;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -1,13 +1,10 @@
 package com.fmg.gmf_core.daos;
 
 import com.fmg.gmf_core.entitys.User;
-import com.fmg.gmf_core.exceptions.ResourceAlreadyExistException;
 import com.fmg.gmf_core.helpers.GlobalHelper;
-import com.fmg.gmf_core.helpers.UserHelper;
 import com.fmg.gmf_core.services.DateTimeService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 
@@ -44,8 +41,8 @@ public class UserDao {
         return users;
     }
     public User findByEmail(String email) {
-        String sql = "SELECT * FROM `user` WHERE email = ?";
         globalHelper.notExist(!emailExists(email),"Email");
+        String sql = "SELECT * FROM `user` WHERE email = ?";
         return jdbcTemplate.queryForObject(sql, userRowMapper, email);
 
     }

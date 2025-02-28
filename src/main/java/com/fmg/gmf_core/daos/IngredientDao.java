@@ -33,6 +33,11 @@ public class IngredientDao {
         globalHelper.isEmpty(ingredients, "ingredient");
         return ingredients;
     }
+    public List<Ingredient> findIngredientByName(String research){
+        String sql = "SELECT * FROM ingredient WHERE name LIKE ?";
+        List<Ingredient> ingredients = jdbcTemplate.query(sql, ingredientRowMapper, "%" + research + "%");
+        return ingredients;
+    }
     public Ingredient save(Ingredient ingredient) {
         globalHelper.notExist(ingredientExist(ingredient.getName()),"Mesure");
         String sql = "INSERT INTO ingredient (name, create_time) VALUES (?, ?)";

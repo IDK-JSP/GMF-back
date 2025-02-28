@@ -1,8 +1,6 @@
 package com.fmg.gmf_core.daos;
 
 import com.fmg.gmf_core.entitys.Stage;
-import com.fmg.gmf_core.exceptions.ResourceAlreadyExistException;
-import com.fmg.gmf_core.exceptions.ResourceNotFoundException;
 import com.fmg.gmf_core.helpers.GlobalHelper;
 import com.fmg.gmf_core.helpers.RecipeHelper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -34,6 +32,7 @@ public class StageDao {
         return stages;
     }
     public List<Stage> findRecipeStage(int id){
+        recipeHelper.recipeExist(id);
         String sql = "SELECT * FROM stage where id_recipe = ?";
         List<Stage> stages = jdbcTemplate.query(sql, stageRowMapper, id);
         globalHelper.isEmpty(stages, "étape");

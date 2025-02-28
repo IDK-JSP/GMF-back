@@ -41,25 +41,11 @@
 }
 ```
 
-## 🛠️ Endpoints étape(s) d'une recette
+### 🔹 Détails d'une recette (`/recipe/details/{id}`)
 
-### 🔹 Toute les étapes d'une recette (`/stage/{id}`)
-> **Méthode :** `GET`  
-> **Description :** Récuperer toute les étapes d'une recette.  
+> **Méthode :** `GET`
+> **Description :** Récuperer tout les détails d'une recette (ingrédients et étapes).
 
-### 🔹 Créer les étapes d'une recette (`/stage/new`)
-> **Méthode :** `POST`  
-> **Description :** Créer toute les étapes d'une recette.  
-> **Body :**
-```json
-[
-   {
-       stage: int,
-       recipe_id: int,
-       content: String
-   }
-]
-```
 
 ## 🛠️ Endpoints ingrédients
 
@@ -94,3 +80,10 @@
   type: string
 }
 ```
+
+## 🛠️ Endpoints recherche
+
+### 🔹 Faire une recherche (`/search?name={search}`)
+> **Méthode :** `GET`  
+> **Description :** Récuperer un objet contenant une liste de recette ou d'ingrédients en fonction du nom.
+

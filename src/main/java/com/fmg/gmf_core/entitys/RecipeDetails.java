@@ -1,40 +1,34 @@
 package com.fmg.gmf_core.entitys;
 
 
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
 public class RecipeDetails {
-    private String ingredient_name;
+    private List<IngredientDetails> ingredientDetails;
 
-    private int quantity;
+    private List<Stage> stages;
 
-    private String measurement;
-
-    public RecipeDetails(String ingredient_name, int quantity, String measurement) {
-        this.ingredient_name = ingredient_name;
-        this.quantity = quantity;
-        this.measurement = measurement;
+    public RecipeDetails(List<IngredientDetails> ingredientDetails, List<Stage> stages) {
+        this.ingredientDetails = ingredientDetails;
+        this.stages = stages;
     }
 
-    public String getIngredient_name() {
-        return ingredient_name;
+    public List<IngredientDetails> getIngredientDetails() {
+        return ingredientDetails;
     }
 
-    public void setIngredient_name(String ingredient_name) {
-        this.ingredient_name = ingredient_name;
+    public void setIngredientDetails(List<IngredientDetails> ingredientDetails) {
+        this.ingredientDetails = ingredientDetails;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public List<Stage> getStages() {
+        return stages;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getMeasurement() {
-        return measurement;
-    }
-
-    public void setMeasurement(String measurement) {
-        this.measurement = measurement;
+    public void setStages(List<Stage> stages) {
+        this.stages = stages;
     }
 }
