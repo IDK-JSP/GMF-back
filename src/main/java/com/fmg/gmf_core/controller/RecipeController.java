@@ -4,7 +4,6 @@ import com.fmg.gmf_core.daos.RecipeDao;
 import com.fmg.gmf_core.daos.IngredientDetailsDao;
 import com.fmg.gmf_core.daos.StageDao;
 import com.fmg.gmf_core.entitys.Recipe;
-import com.fmg.gmf_core.entitys.IngredientDetails;
 import com.fmg.gmf_core.entitys.RecipeDetails;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

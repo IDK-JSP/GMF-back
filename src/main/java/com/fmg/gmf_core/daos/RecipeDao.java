@@ -1,6 +1,5 @@
 package com.fmg.gmf_core.daos;
 
-import com.fmg.gmf_core.entitys.IngredientDetails;
 import com.fmg.gmf_core.entitys.Recipe;
 import com.fmg.gmf_core.helpers.GlobalHelper;
 import com.fmg.gmf_core.helpers.UserHelper;

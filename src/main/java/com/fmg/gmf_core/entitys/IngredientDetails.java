@@ -7,10 +7,13 @@ public class IngredientDetails {
 
     private String measurement;
 
-    public IngredientDetails(String ingredient_name, int quantity, String measurement) {
+    private String diet;
+
+    public IngredientDetails(String ingredient_name, int quantity, String measurement, String diet) {
         this.ingredient_name = ingredient_name;
         this.quantity = quantity;
         this.measurement = measurement;
+        this.diet = diet;
     }
 
     public String getIngredient_name() {
@@ -35,5 +38,13 @@ public class IngredientDetails {
 
     public void setMeasurement(String measurement) {
         this.measurement = measurement;
+    }
+
+    public String getDiet() {
+        return diet;
+    }
+
+    public void setDiet(String diet) {
+        this.diet = diet;
     }
 }
