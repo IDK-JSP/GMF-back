@@ -23,7 +23,8 @@ public class RecipeController {
     private final RecipeDietsDao recipeDietsDao;
     private final RecipeDetails recipeDetails;
     private final StageDao stageDao;
-    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDietsDao recipeDietsDao1, RecipeDetails recipeDetails, StageDao stageDao){
+    private final JwtUtil  jwtUtil;
+    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDietsDao recipeDietsDao1, RecipeDetails recipeDetails, StageDao stageDao, JwtUtil jwtUtil){
         this.recipeDao =recipeDao;
         this.ingredientDetailsDao = ingredientDetailsDao;
         this.recipeDietsDao = recipeDietsDao1;
