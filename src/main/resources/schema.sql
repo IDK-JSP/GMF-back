@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `bddgmf`.`user` (
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `role` VARCHAR(45) NOT NULL DEFAULT 'USER',
-  `pseudo` VARCHAR(45) NOT NULL,
+  `pseudo` VARCHAR(45),
   `image` VARCHAR(255) NULL,
   `create_time` DATETIME NULL,
   `update` DATETIME NULL,

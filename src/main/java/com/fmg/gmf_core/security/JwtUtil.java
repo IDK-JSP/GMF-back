@@ -21,9 +21,8 @@ public class JwtUtil {
 
     @PostConstruct
     public void init() {
-        this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+        this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));  // Assurez-vous que le secret est suffisamment long
     }
-
 
     public String generateToken(String email) {
         return Jwts.builder()
@@ -35,26 +34,50 @@ public class JwtUtil {
     }
 
     public String getEmailFromToken(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(key).build()
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+        try {
+            // Analyser et valider le token JWT
+            return Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();  // Retourne l'email ou le sujet du token
+        } catch (ExpiredJwtException e) {
+            // Si le token est expiré, renvoyer une exception spécifique
+            throw new IllegalArgumentException("JWT token is expired: " + e.getMessage(), e);
+        } catch (UnsupportedJwtException e) {
+            // Si le token est du mauvais type
+            throw new IllegalArgumentException("JWT token is unsupported: " + e.getMessage(), e);
+        } catch (MalformedJwtException e) {
+            // Si le token est mal formé
+            throw new IllegalArgumentException("Invalid JWT token: " + e.getMessage(), e);
+        } catch (SignatureException e) {
+            // Si la signature du token est invalide
+            throw new IllegalArgumentException("Invalid JWT signature: " + e.getMessage(), e);
+        } catch (IllegalArgumentException e) {
+            // Si le token est nul ou vide
+            throw new IllegalArgumentException("JWT claims string is empty: " + e.getMessage(), e);
+        }
     }
+
     public int getUserIdFromToken(String token) {
-        return (int) Jwts.parser()
+        return (int) Jwts.parserBuilder()
                 .setSigningKey(key)
+                .build()
                 .parseClaimsJws(token)
                 .getBody()
-                .get("userId");  // On extrait l'id de l'utilisateur
+                .get("userId");
     }
 
     public boolean validateJwtToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            Jwts.parserBuilder()  // Utilisation de parserBuilder() au lieu de l'ancienne méthode
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token);
             return true;
         } catch (SecurityException e) {
-            throw  new SecurityException("Invalid JWT signature: " + e.getMessage());
+            throw new SecurityException("Invalid JWT signature: " + e.getMessage());
         } catch (MalformedJwtException e) {
             throw new MalformedJwtException("Invalid JWT token: " + e.getMessage());
         } catch (ExpiredJwtException e) {
@@ -65,5 +88,4 @@ public class JwtUtil {
             throw new IllegalArgumentException("JWT claims string is empty: " + e.getMessage());
         }
     }
-
 }

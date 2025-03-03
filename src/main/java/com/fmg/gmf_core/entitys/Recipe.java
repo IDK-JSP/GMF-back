@@ -1,5 +1,7 @@
 package com.fmg.gmf_core.entitys;
 
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDateTime;
 
 public class Recipe {
