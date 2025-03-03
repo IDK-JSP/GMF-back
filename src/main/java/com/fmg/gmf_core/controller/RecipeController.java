@@ -5,6 +5,8 @@ import com.fmg.gmf_core.daos.IngredientDetailsDao;
 import com.fmg.gmf_core.daos.StageDao;
 import com.fmg.gmf_core.entitys.Recipe;
 import com.fmg.gmf_core.entitys.RecipeDetails;
+import com.fmg.gmf_core.security.JwtFilter;
+import com.fmg.gmf_core.security.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +19,13 @@ public class RecipeController {
     private final IngredientDetailsDao ingredientDetailsDao;
     private final RecipeDetails recipeDetails;
     private final StageDao stageDao;
-    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDetails recipeDetails, StageDao stageDao){
+    private final JwtUtil jwtUtil;
+    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDetails recipeDetails, StageDao stageDao, JwtUtil jwtUtil){
         this.recipeDao =recipeDao;
         this.ingredientDetailsDao = ingredientDetailsDao;
         this.recipeDetails = recipeDetails;
         this.stageDao = stageDao;
+        this.jwtUtil = jwtUtil;
     }
 
     @GetMapping("/all")
@@ -39,7 +43,8 @@ public class RecipeController {
         return recipeDao.findRecipeByName(name);
     }
     @PostMapping("/new")
-    public ResponseEntity<String> newRecipe(@RequestBody Recipe recipe){
+    public ResponseEntity<String> newRecipe(@RequestBody Recipe recipe, @RequestHeader("Authorization") String token){
+        System.out.println(jwtUtil.getEmailFromToken(token));
         recipeDao.save(recipe);
         return ResponseEntity.ok(recipe.getTitle());
     }
