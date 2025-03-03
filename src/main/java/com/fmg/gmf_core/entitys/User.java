@@ -14,7 +14,6 @@ public class User {
 
     private String role;
 
-    @NotBlank(message = "Pseudo requis")
 
     private String pseudo;
 
@@ -39,10 +38,9 @@ public class User {
         this.create_time = create_time;
         this.update_time = update_time;
     }
-    public User(String email, String password, String pseudo){
+    public User(String email, String password){
         this.email = email;
         this.password = password;
-        this.pseudo = pseudo;
     }
 
     public String getEmail() {

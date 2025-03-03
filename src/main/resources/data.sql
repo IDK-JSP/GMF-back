@@ -149,8 +149,6 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (2, 37), -- Piment
 (2, 38); -- Vanille
 
-INSERT INTO `user` (`email`, `password`, `role`, `pseudo`, `image`, `create_time`, `update`) VALUES
-('root', '$2a$10$NBi3OvkcKhjSuMXEBY4oNeRVZWgK4QFqquZbH2.pE8LgEw2BvE/k2af8f1e329fdb023e52355d9470e3cd8cd7d04d221a724687945c1be9026d93ad', 'ADMIN', 'admin', NULL, NOW(), NOW());
 
 INSERT INTO `recipe` (`email`, `title`, `content`, `image`, `person`, `state`, `rate`, `nb_rate`, `create_time`, `update_time`) VALUES
 ('root', 'Pâtes à la Carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
