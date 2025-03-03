@@ -3,6 +3,7 @@ package com.fmg.gmf_core.controller;
 import com.fmg.gmf_core.daos.RecipeDao;
 import com.fmg.gmf_core.daos.IngredientDetailsDao;
 import com.fmg.gmf_core.daos.StageDao;
+import com.fmg.gmf_core.dtos.RecipeDietsDto;
 import com.fmg.gmf_core.entitys.Recipe;
 import com.fmg.gmf_core.entitys.RecipeDetails;
 import com.fmg.gmf_core.security.JwtFilter;
@@ -10,6 +11,7 @@ import com.fmg.gmf_core.security.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.fmg.gmf_core.daos.RecipeDietsDao;
 
 import java.util.List;
 
@@ -18,12 +20,13 @@ import java.util.List;
 public class RecipeController {
     private final RecipeDao recipeDao;
     private final IngredientDetailsDao ingredientDetailsDao;
+    private final RecipeDietsDao recipeDietsDao;
     private final RecipeDetails recipeDetails;
     private final StageDao stageDao;
-    private final JwtUtil jwtUtil;
-    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDetails recipeDetails, StageDao stageDao, JwtUtil jwtUtil){
+    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDietsDao recipeDietsDao1, RecipeDetails recipeDetails, StageDao stageDao){
         this.recipeDao =recipeDao;
         this.ingredientDetailsDao = ingredientDetailsDao;
+        this.recipeDietsDao = recipeDietsDao1;
         this.recipeDetails = recipeDetails;
         this.stageDao = stageDao;
         this.jwtUtil = jwtUtil;
@@ -63,6 +66,11 @@ public class RecipeController {
             // Si l'en-tête Authorization est manquant ou mal formé
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Authorization header");
         }
+    }
+    // Controller pour ajouter les régimes aux recettes
+    @GetMapping("/diet/all")
+    public ResponseEntity<List<RecipeDietsDto>> getAllRecipes() {
+        return ResponseEntity.ok(recipeDietsDao.findAll());
     }
 
 }
