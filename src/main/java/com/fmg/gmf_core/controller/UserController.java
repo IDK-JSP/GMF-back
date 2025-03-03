@@ -16,11 +16,6 @@ public class UserController {
     public UserController(UserDao userDao) {
         this.userDao = userDao;
     }
-
-    /*@GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id) {
-        return ResponseEntity.ok(userDao.findById(id));
-    }*/
     @GetMapping("/search")
     public ResponseEntity<List<User>> getUserByEmail(@RequestParam String query){
         return  ResponseEntity.ok(Collections.singletonList(userDao.findByEmail(query)));
