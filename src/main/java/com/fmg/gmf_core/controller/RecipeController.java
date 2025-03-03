@@ -53,7 +53,7 @@ public class RecipeController {
             // Utiliser le token pour récupérer l'email
             String email = jwtUtil.getEmailFromToken(token);  // Appel de votre méthode getEmailFromToken
             System.out.println("Email extrait du token : " + email);
-
+            recipe.setEmail(email);
             // Sauvegarder la recette dans la base de données
             recipeDao.save(recipe);
 
