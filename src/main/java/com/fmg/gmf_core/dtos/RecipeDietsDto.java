@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class RecipeDietsDto {
-    private int id;
+    private int id_recipe;
     private String email;
     private String title;
     private String content;
@@ -17,12 +17,12 @@ public class RecipeDietsDto {
     private int nbRate;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
-    private List<Diet> diets;
+    private String diet;
 
     public RecipeDietsDto() {}
 
-    public RecipeDietsDto(int id, String email, String title, String content, String image, int person, String state, Double rate, int nbRate, LocalDateTime createTime, LocalDateTime updateTime, List<Diet> diets) {
-        this.id = id;
+    public RecipeDietsDto(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nbRate, LocalDateTime createTime, LocalDateTime updateTime, String diet) {
+        this.id_recipe = id_recipe;
         this.email = email;
         this.title = title;
         this.content = content;
@@ -33,15 +33,15 @@ public class RecipeDietsDto {
         this.nbRate = nbRate;
         this.createTime = createTime;
         this.updateTime = updateTime;
-        this.diets = diets;
+        this.diet = diet;
     }
 
-    public int getId() {
-        return id;
+    public int getId_recipe() {
+        return id_recipe;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_recipe(int id_recipe) {
+        this.id_recipe = id_recipe;
     }
 
     public String getEmail() {
@@ -124,11 +124,11 @@ public class RecipeDietsDto {
         this.updateTime = updateTime;
     }
 
-    public List<Diet> getDiets() {
-        return diets;
+    public String getDiet() {
+        return diet;
     }
 
-    public void setDiets(List<Diet> diets) {
-        this.diets = diets;
+    public void setDiet(String diet) {
+        this.diet = diet;
     }
 }

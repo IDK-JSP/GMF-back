@@ -33,9 +33,10 @@ public class RecipeController {
         this.jwtUtil = jwtUtil;
     }
 
+
     @GetMapping("/all")
-    public ResponseEntity<List<Recipe>> getAllRecipe() {
-        return ResponseEntity.ok(recipeDao.findAll());
+    public ResponseEntity<List<RecipeDietsDto>> getAllRecipes() {
+        return ResponseEntity.ok(recipeDietsDao.findAll());
     }
     @GetMapping("/details/{id}")
     public ResponseEntity<RecipeDetails> getRecipeDetails(@PathVariable int id){
@@ -69,9 +70,5 @@ public class RecipeController {
         }
     }
     // Controller pour ajouter les régimes aux recettes
-    @GetMapping("/diet/all")
-    public ResponseEntity<List<RecipeDietsDto>> getAllRecipes() {
-        return ResponseEntity.ok(recipeDietsDao.findAll());
-    }
 
 }
