@@ -1,6 +1,6 @@
 package com.fmg.gmf_core.daos;
 
-import com.fmg.gmf_core.entitys.IngredientDetails;
+import com.fmg.gmf_core.dtos.IngredientDetailsDto;
 import com.fmg.gmf_core.helpers.GlobalHelper;
 import com.fmg.gmf_core.helpers.RecipeHelper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,19 +21,19 @@ public class IngredientDetailsDao {
         this.recipeHelper = recipeHelper;
         this.globalHelper = globalHelper;
     }
-    private final RowMapper<IngredientDetails> recipeDetailsRowMapper = (rs, _) -> new IngredientDetails(
+    private final RowMapper<IngredientDetailsDto> recipeDetailsRowMapper = (rs, _) -> new IngredientDetailsDto(
             rs.getString("ingredient_name"),
             rs.getInt("quantity"),
             rs.getString("measurement"),
             rs.getString("diet")
     );
 
-    public List<IngredientDetails> findRecipeIngredients(int id_recipe) {
+    public List<IngredientDetailsDto> findRecipeIngredients(int id_recipe) {
         recipeHelper.recipeExist(id_recipe);
         String sql = "SELECT i.name AS ingredient_name, ri.quantity, m.name AS measurement, CASE WHEN GROUP_CONCAT(DISTINCT d.name ORDER BY d.name SEPARATOR ', ') LIKE '%Végan%' THEN 'Végan' ELSE GROUP_CONCAT(DISTINCT d.name ORDER BY d.name SEPARATOR ', ') END AS diet FROM recipe_ingredient ri  JOIN ingredient i ON ri.id_ingredient = i.id_ingredient  JOIN recipe r ON ri.id_recipe = r.id_recipe  JOIN measurement m ON ri.id_measurement = m.id_measurement  JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient JOIN diet d ON di.id_diet = d.id_diet WHERE r.id_recipe = ? GROUP BY i.name, ri.quantity, m.name;";
-        List<IngredientDetails> ingredientDetails = jdbcTemplate.query(sql, recipeDetailsRowMapper, id_recipe);
-        globalHelper.isEmpty(ingredientDetails, "détails d'ingrédient");
-        return ingredientDetails;
+        List<IngredientDetailsDto> ingredientDetailDtos = jdbcTemplate.query(sql, recipeDetailsRowMapper, id_recipe);
+        globalHelper.isEmpty(ingredientDetailDtos, "détails d'ingrédient");
+        return ingredientDetailDtos;
     }
 
 
