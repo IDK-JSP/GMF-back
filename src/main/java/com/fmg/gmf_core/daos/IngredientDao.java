@@ -39,16 +39,21 @@ public class IngredientDao {
         return ingredients;
     }
     public Ingredient save(Ingredient ingredient) {
-        globalHelper.notExist(ingredientExist(ingredient.getName()),"Mesure");
+        globalHelper.notExist(ingredientNameExist(ingredient.getName()),"Ingrédient");
         String sql = "INSERT INTO ingredient (name, create_time) VALUES (?, ?)";
         jdbcTemplate.update(sql, ingredient.getName(), dateTimeService.getCurrentDateTime());
         return ingredient;
     }
 
     //Utilitaire
-    public Boolean ingredientExist(String name){
+    public Boolean ingredientNameExist(String name){
         String checkSql = "SELECT COUNT(*) FROM ingredient WHERE name = ?";
         int count = jdbcTemplate.queryForObject(checkSql, Integer.class, name);
+        return count > 0;
+    }
+    public Boolean ingredientExist(int id){
+        String checkSql = "SELECT COUNT(*) FROM ingredient WHERE id_ingredient = ?";
+        int count = jdbcTemplate.queryForObject(checkSql, Integer.class, id);
         return count > 0;
     }
 }

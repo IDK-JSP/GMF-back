@@ -47,10 +47,6 @@ public class RecipeController {
         recipeDetailsDto.setOpinions(opinionDao.findRecipeOpinion(id));
         return  ResponseEntity.ok(recipeDetailsDto);
     }
-    @GetMapping("/search")
-    public List<Recipe> searchRecipes(@RequestParam String name) {
-        return recipeDao.findRecipeByName(name);
-    }
     @PostMapping("/new")
     public ResponseEntity<String> newRecipe(@RequestBody Recipe recipe, @RequestHeader("Authorization") String authorizationHeader) {
         // Vérifier que l'en-tête Authorization est bien présent et commence par "Bearer "
