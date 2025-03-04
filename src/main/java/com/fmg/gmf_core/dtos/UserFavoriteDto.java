@@ -1,18 +1,19 @@
-package com.fmg.gmf_core.entitys;
+package com.fmg.gmf_core.dtos;
 
+import com.fmg.gmf_core.entitys.Ingredient;
+import com.fmg.gmf_core.entitys.Recipe;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class Search {
+public class UserFavoriteDto {
     private List<Ingredient> ingredients;
-
     private List<Recipe> recipes;
 
-    public Search(List<Ingredient> ingredients, List<Recipe> recipes) {
-        this.ingredients = ingredients;
+    public UserFavoriteDto(List<Recipe> recipes, List<Ingredient> ingredients) {
         this.recipes = recipes;
+        this.ingredients = ingredients;
     }
 
     public List<Ingredient> getIngredients() {

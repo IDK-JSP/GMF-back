@@ -5,8 +5,7 @@ import com.fmg.gmf_core.daos.IngredientDetailsDao;
 import com.fmg.gmf_core.daos.StageDao;
 import com.fmg.gmf_core.dtos.RecipeDietsDto;
 import com.fmg.gmf_core.entitys.Recipe;
-import com.fmg.gmf_core.entitys.RecipeDetails;
-import com.fmg.gmf_core.security.JwtFilter;
+import com.fmg.gmf_core.dtos.RecipeDetailsDto;
 import com.fmg.gmf_core.security.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,27 +20,28 @@ public class RecipeController {
     private final RecipeDao recipeDao;
     private final IngredientDetailsDao ingredientDetailsDao;
     private final RecipeDietsDao recipeDietsDao;
-    private final RecipeDetails recipeDetails;
+    private final RecipeDetailsDto recipeDetailsDto;
     private final StageDao stageDao;
     private final JwtUtil  jwtUtil;
-    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDietsDao recipeDietsDao1, RecipeDetails recipeDetails, StageDao stageDao, JwtUtil jwtUtil){
+    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDietsDao recipeDietsDao1, RecipeDetailsDto recipeDetailsDto, StageDao stageDao, JwtUtil jwtUtil){
         this.recipeDao =recipeDao;
         this.ingredientDetailsDao = ingredientDetailsDao;
         this.recipeDietsDao = recipeDietsDao1;
-        this.recipeDetails = recipeDetails;
+        this.recipeDetailsDto = recipeDetailsDto;
         this.stageDao = stageDao;
         this.jwtUtil = jwtUtil;
     }
 
+
     @GetMapping("/all")
-    public ResponseEntity<List<Recipe>> getAllRecipe() {
-        return ResponseEntity.ok(recipeDao.findAll());
+    public ResponseEntity<List<RecipeDietsDto>> getAllRecipes() {
+        return ResponseEntity.ok(recipeDietsDao.findAll());
     }
     @GetMapping("/details/{id}")
-    public ResponseEntity<RecipeDetails> getRecipeDetails(@PathVariable int id){
-        recipeDetails.setIngredientDetails(ingredientDetailsDao.findRecipeIngredients(id));
-        recipeDetails.setStages(stageDao.findRecipeStage(id));
-        return  ResponseEntity.ok(recipeDetails);
+    public ResponseEntity<RecipeDetailsDto> getRecipeDetails(@PathVariable int id){
+        recipeDetailsDto.setIngredientDetails(ingredientDetailsDao.findRecipeIngredients(id));
+        recipeDetailsDto.setStages(stageDao.findRecipeStage(id));
+        return  ResponseEntity.ok(recipeDetailsDto);
     }
     @GetMapping("/search")
     public List<Recipe> searchRecipes(@RequestParam String name) {
@@ -69,9 +69,5 @@ public class RecipeController {
         }
     }
     // Controller pour ajouter les régimes aux recettes
-    @GetMapping("/diet/all")
-    public ResponseEntity<List<RecipeDietsDto>> getAllRecipes() {
-        return ResponseEntity.ok(recipeDietsDao.findAll());
-    }
 
 }

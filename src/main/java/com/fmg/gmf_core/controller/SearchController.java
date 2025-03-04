@@ -2,9 +2,8 @@ package com.fmg.gmf_core.controller;
 
 import com.fmg.gmf_core.daos.IngredientDao;
 import com.fmg.gmf_core.daos.RecipeDao;
-import com.fmg.gmf_core.entitys.Ingredient;
 import com.fmg.gmf_core.entitys.Recipe;
-import com.fmg.gmf_core.entitys.Search;
+import com.fmg.gmf_core.dtos.Search;
 import com.fmg.gmf_core.exceptions.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 

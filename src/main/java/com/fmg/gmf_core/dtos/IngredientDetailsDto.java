@@ -1,6 +1,6 @@
-package com.fmg.gmf_core.entitys;
+package com.fmg.gmf_core.dtos;
 
-public class IngredientDetails {
+public class IngredientDetailsDto {
     private String ingredient_name;
 
     private int quantity;
@@ -9,7 +9,7 @@ public class IngredientDetails {
 
     private String diet;
 
-    public IngredientDetails(String ingredient_name, int quantity, String measurement, String diet) {
+    public IngredientDetailsDto(String ingredient_name, int quantity, String measurement, String diet) {
         this.ingredient_name = ingredient_name;
         this.quantity = quantity;
         this.measurement = measurement;
