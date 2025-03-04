@@ -30,6 +30,10 @@
 > **Méthode :** `GET`  
 > **Description :** Récuperer toute les recettes sans filtre.  
 
+### 🔹 Recherche d'une recette avec son id (`/recipe/{id}`)
+> **Méthode :** `GET`  
+> **Description :** Récuperer une recette grace à son id.
+
 ### 🔹 Détails d'une recette (`/recipe/details/{id}`)
 
 > **Méthode :** `GET`

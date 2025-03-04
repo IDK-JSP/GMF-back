@@ -36,6 +36,10 @@ public class RecipeController {
     public ResponseEntity<List<RecipeDietsDto>> getAllRecipes() {
         return ResponseEntity.ok(recipeDietsDao.findAll());
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Recipe> getRecipeFromId(@PathVariable int id){
+        return ResponseEntity.ok(recipeDao.findRecipeById(id));
+    }
     @GetMapping("/details/{id}")
     public ResponseEntity<RecipeDetailsDto> getRecipeDetails(@PathVariable int id){
         recipeDetailsDto.setIngredientDetailDtos(ingredientDetailsDao.findRecipeIngredients(id));

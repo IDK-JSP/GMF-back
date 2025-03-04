@@ -44,7 +44,6 @@ public class UserDao {
     public User findByEmail(String email) {
         String sql = "SELECT * FROM `user` WHERE email = ?";
         return jdbcTemplate.queryForObject(sql, userRowMapper, email);
-
     }
 
     public boolean save(User user) {
