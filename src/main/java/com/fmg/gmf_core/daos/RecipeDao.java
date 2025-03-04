@@ -2,6 +2,7 @@ package com.fmg.gmf_core.daos;
 
 import com.fmg.gmf_core.entitys.Recipe;
 import com.fmg.gmf_core.helpers.GlobalHelper;
+import com.fmg.gmf_core.helpers.IngredientHelper;
 import com.fmg.gmf_core.helpers.UserHelper;
 import com.fmg.gmf_core.services.DateTimeService;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,13 +19,15 @@ public class RecipeDao {
     private final GlobalHelper globalHelper;
     private final UserHelper userHelper;
     private final DateTimeService dateTimeService;
+    private final IngredientHelper ingredientHelper;
 
 
-    public RecipeDao(JdbcTemplate jdbcTemplate, UserDao userDao, GlobalHelper globalHelper, UserHelper userHelper, DateTimeService dateTimeService){
+    public RecipeDao(JdbcTemplate jdbcTemplate, UserDao userDao, GlobalHelper globalHelper, UserHelper userHelper, DateTimeService dateTimeService, IngredientHelper ingredientHelper){
         this.jdbcTemplate = jdbcTemplate;
         this.globalHelper = globalHelper;
         this.userHelper = userHelper;
         this.dateTimeService = dateTimeService;
+        this.ingredientHelper = ingredientHelper;
     }
     private final RowMapper<Recipe> recipeRowMapper =(rs, _)-> new Recipe (
             rs.getInt("id_recipe"),
@@ -46,11 +49,6 @@ public class RecipeDao {
         List<Recipe> recipes = jdbcTemplate.query(sql, recipeRowMapper);
         globalHelper.isEmpty(recipes, "recette");
         return recipes ;
-    }
-    public List<Recipe> findRecipeByName(String research){
-        String sql = "SELECT * FROM recipe WHERE title LIKE ?";
-        List<Recipe> recipes = jdbcTemplate.query(sql, recipeRowMapper, "%" + research + "%");
-        return recipes;
     }
 
     public int save(Recipe recipe) {
@@ -75,6 +73,9 @@ public class RecipeDao {
 
         // Ajout de la condition sur les ingrédients uniquement si la liste n'est pas vide
         if (ingredientIds != null && !ingredientIds.isEmpty()) {
+            for (int i = 0; i< ingredientIds.size(); i++){
+                ingredientHelper.ingredientExist(ingredientIds.get(i));
+            }
             String placeholders = String.join(",", Collections.nCopies(ingredientIds.size(), "?"));
             sql.append("WHERE ri.id_ingredient IN (").append(placeholders).append(") ");
             params.addAll(ingredientIds);
@@ -99,9 +100,12 @@ public class RecipeDao {
 
     public Recipe findRecipeById (int id){
         String sql = "SELECT * from recipe where id_recipe = ?";
+        globalHelper.exist(!recipeIdExist(id), "Recette");
         return jdbcTemplate.queryForObject(sql, recipeRowMapper, id);
     }
     public Recipe updateRecipe (Recipe recipe){
+        userHelper.emailExist(recipe.getEmail());
+        globalHelper.exist(!recipeIdExist(recipe.getId_recipe()), "Recette");
         String sql = "UPDATE recipe set email = ?, title = ?, content = ?, image = ?, person = ?, state = ?, rate = ?, nb_rate = ? where id_recipe = ?;";
         jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(), recipe.getContent(), recipe.getImage(), recipe.getPerson(), recipe.getState(), recipe.getRate(), recipe.getNb_rate(), recipe.getId_recipe());
         return recipe;

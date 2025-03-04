@@ -31,6 +31,7 @@ public class OpinionDao {
             rs.getString("comment")
     );
     public List<Opinion> findRecipeOpinion(int id_recipe){
+        recipeHelper.recipeExist(id_recipe);
         String sql = "SELECT * FROM opinion where id_recipe = ?";
         List<Opinion> opinions = jdbcTemplate.query(sql, opinionRowMapper, id_recipe);
         return opinions;
