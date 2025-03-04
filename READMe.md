@@ -33,7 +33,7 @@
 ### 🔹 Détails d'une recette (`/recipe/details/{id}`)
 
 > **Méthode :** `GET`
-> **Description :** Récuperer tout les détails d'une recette (ingrédients et étapes).
+> **Description :** Récuperer tout les détails d'une recette (ingrédients, étapes et avis).
 
 ### 🔹 Créer une recette (`/recipe/new`)
 > **Méthode :** `POST`  
@@ -94,4 +94,40 @@
 
 ```json
 [ int ]
+```
+
+## 🛠️ Endpoints favoris
+
+### 🔹 Trouver les favoris d'un utilisateur (`favorite/search?email={email}`)
+> **Méthode :** `GET`  
+> **Description :** Récuperer un objet contenant une liste de recette favoris et d'ingrédient favoris en fonction d'un email.
+
+### 🔹 Créer un favoris (`/favorite/new`)
+> **Méthode :** `POST`  
+> **Description :** Créer un favoris.  
+> **Body :**
+
+```json
+{
+  email: string,
+  favoriteable_type: string //ingredient ou recipe,
+  favoriteable_id: int // id de la recette ou de l'ingrédient
+}
+```
+
+## 🛠️ Endpoints avis
+
+### 🔹 Créer un avis avec une note sur une recette (`opinion/new`)
+> **Méthode :** `POST`  
+> **Description :** Créer un avis sur une recette, ça modifiera la note de la recette en conséquence.  
+> **Body :**
+>
+
+```json
+{
+  id_recipe: int,
+  email: string,
+  rate: int,
+  comment: string
+}
 ```

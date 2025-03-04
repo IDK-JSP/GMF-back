@@ -150,7 +150,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bddgmf`.`opinion` (
   `id_recipe` INT NOT NULL,
   `email` VARCHAR(255) NOT NULL,
-  `rate` DECIMAL(10,2) NOT NULL DEFAULT 0,
+  `rate` int NOT NULL,
   `comment` TEXT(10000) NULL,
   PRIMARY KEY (`id_recipe`, `email`),
   INDEX `fk_user_idx` (`email` ASC) VISIBLE,
