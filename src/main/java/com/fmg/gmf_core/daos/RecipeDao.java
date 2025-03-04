@@ -7,6 +7,7 @@ import com.fmg.gmf_core.services.DateTimeService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collections;
 import java.util.List;
@@ -79,6 +80,15 @@ public class RecipeDao {
         // Exécuter la requête et récupérer les résultats
         List<Recipe> recipes = jdbcTemplate.query(sql, recipeRowMapper, ingredientIds.toArray());
         return recipes;
+    }
+    public Recipe findRecipeById (int id){
+        String sql = "SELECT * from recipe where id_recipe = ?";
+        return jdbcTemplate.queryForObject(sql, recipeRowMapper, id);
+    }
+    public Recipe updateRecipe (Recipe recipe){
+        String sql = "UPDATE recipe set email = ?, title = ?, content = ?, image = ?, person = ?, state = ?, rate = ?, nb_rate = ? where id_recipe = ?;";
+        jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(), recipe.getContent(), recipe.getImage(), recipe.getPerson(), recipe.getState(), recipe.getRate(), recipe.getNb_rate(), recipe.getId_recipe());
+        return recipe;
     }
 
 

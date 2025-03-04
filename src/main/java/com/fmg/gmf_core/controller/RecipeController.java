@@ -1,8 +1,6 @@
 package com.fmg.gmf_core.controller;
 
-import com.fmg.gmf_core.daos.RecipeDao;
-import com.fmg.gmf_core.daos.IngredientDetailsDao;
-import com.fmg.gmf_core.daos.StageDao;
+import com.fmg.gmf_core.daos.*;
 import com.fmg.gmf_core.dtos.RecipeDietsDto;
 import com.fmg.gmf_core.entitys.Recipe;
 import com.fmg.gmf_core.dtos.RecipeDetailsDto;
@@ -10,7 +8,6 @@ import com.fmg.gmf_core.security.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.fmg.gmf_core.daos.RecipeDietsDao;
 
 import java.util.List;
 
@@ -23,13 +20,15 @@ public class RecipeController {
     private final RecipeDetailsDto recipeDetailsDto;
     private final StageDao stageDao;
     private final JwtUtil  jwtUtil;
-    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDietsDao recipeDietsDao1, RecipeDetailsDto recipeDetailsDto, StageDao stageDao, JwtUtil jwtUtil){
+    private final OpinionDao opinionDao;
+    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDietsDao recipeDietsDao1, RecipeDetailsDto recipeDetailsDto, StageDao stageDao, JwtUtil jwtUtil, OpinionDao opinionDao){
         this.recipeDao =recipeDao;
         this.ingredientDetailsDao = ingredientDetailsDao;
         this.recipeDietsDao = recipeDietsDao1;
         this.recipeDetailsDto = recipeDetailsDto;
         this.stageDao = stageDao;
         this.jwtUtil = jwtUtil;
+        this.opinionDao = opinionDao;
     }
 
 
@@ -39,8 +38,9 @@ public class RecipeController {
     }
     @GetMapping("/details/{id}")
     public ResponseEntity<RecipeDetailsDto> getRecipeDetails(@PathVariable int id){
-        recipeDetailsDto.setIngredientDetails(ingredientDetailsDao.findRecipeIngredients(id));
+        recipeDetailsDto.setIngredientDetailDtos(ingredientDetailsDao.findRecipeIngredients(id));
         recipeDetailsDto.setStages(stageDao.findRecipeStage(id));
+        recipeDetailsDto.setOpinions(opinionDao.findRecipeOpinion(id));
         return  ResponseEntity.ok(recipeDetailsDto);
     }
     @GetMapping("/search")
