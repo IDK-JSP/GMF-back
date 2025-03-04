@@ -21,17 +21,22 @@ public class SearchController {
         this.recipeDao = recipeDao;
         this.search = search;
     }
-    @GetMapping
-    public Search searchIngredient(@RequestParam String name) {
-        search.setIngredients(ingredientDao.findIngredientByName(name));
-        search.setRecipes(recipeDao.findRecipeByName(name));
+//    @GetMapping
+//    public Search search(@RequestParam String name) {
+//        search.setIngredients(ingredientDao.findIngredientByName(name));
+//        search.setRecipes(recipeDao.findRecipeByName(name));
+//        if (search.getRecipes().isEmpty() && search.getIngredients().isEmpty()){
+//            throw new ResourceNotFoundException("Aucun résultat de recherche");
+//        }
+//        return search;
+//    }
+    @PostMapping
+    public Search filterRecipe(@RequestBody List<Integer> ingredients, @RequestParam String title){
+        search.setIngredients(ingredientDao.findIngredientByName(title));
+        search.setRecipes(recipeDao.findRecipesByIngredientsAndName(ingredients, title));
         if (search.getRecipes().isEmpty() && search.getIngredients().isEmpty()){
             throw new ResourceNotFoundException("Aucun résultat de recherche");
         }
         return search;
-    }
-    @PostMapping("/filter")
-    public List<Recipe> filterRecipe(@RequestBody List<Integer> ingredients){
-        return (recipeDao.findRecipesByIngredients(ingredients));
     }
 }

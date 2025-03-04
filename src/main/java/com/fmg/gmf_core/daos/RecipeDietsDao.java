@@ -3,6 +3,7 @@ package com.fmg.gmf_core.daos;
 
 import com.fmg.gmf_core.dtos.RecipeDietsDto;
 import com.fmg.gmf_core.entitys.Diet;
+import com.fmg.gmf_core.helpers.GlobalHelper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -13,9 +14,11 @@ import java.util.List;
 @Repository
 public class RecipeDietsDao {
     private final JdbcTemplate jdbcTemplate;
+    private final GlobalHelper globalHelper;
 
-    public RecipeDietsDao(JdbcTemplate jdbcTemplate) {
+    public RecipeDietsDao(JdbcTemplate jdbcTemplate, GlobalHelper globalHelper) {
         this.jdbcTemplate = jdbcTemplate;
+        this.globalHelper = globalHelper;
     }
 
     private final RowMapper<RecipeDietsDto> recipeRowMapper = (rs, rowNum) -> new RecipeDietsDto(
@@ -50,23 +53,23 @@ public class RecipeDietsDao {
                 " LEFT JOIN diet d ON di.id_diet = d.id_diet " +
                 " GROUP BY r.id_recipe; ";
         List<RecipeDietsDto> recipes = jdbcTemplate.query(sql, recipeRowMapper);
+        globalHelper.isEmpty(recipes, "recette");
         return recipes;
     }
-
-    public List<Diet> findDietsByRecipeId(int recipeId) {
-        String sql = "SELECT DISTINCT d.id_diet, d.name, d.content " +
-                "FROM diet d " +
-                "JOIN diet_ingredient di ON d.id_diet = di.id_diet " +
-                "JOIN ingredient i ON di.id_ingredient = i.id_ingredient " +
-                "JOIN recipe_ingredient ri ON i.id_ingredient = ri.id_ingredient " +
-                "WHERE ri.id_recipe = ? " +
-                "GROUP BY d.id_diet " +
-                "HAVING COUNT(DISTINCT ri.id_ingredient) = ( " +
-                "    SELECT COUNT(*) FROM recipe_ingredient WHERE id_recipe = ? " +
-                ")";
-
-        return jdbcTemplate.query(sql, (rs, rowNum) ->
-                        new Diet(rs.getInt("id_diet"), rs.getString("name"), rs.getString("content")),
-                recipeId, recipeId);
-    }
+//    public List<Diet> findDietsByRecipeId(int recipeId) {
+//        String sql = "SELECT DISTINCT d.id_diet, d.name, d.content " +
+//                "FROM diet d " +
+//                "JOIN diet_ingredient di ON d.id_diet = di.id_diet " +
+//                "JOIN ingredient i ON di.id_ingredient = i.id_ingredient " +
+//                "JOIN recipe_ingredient ri ON i.id_ingredient = ri.id_ingredient " +
+//                "WHERE ri.id_recipe = ? " +
+//                "GROUP BY d.id_diet " +
+//                "HAVING COUNT(DISTINCT ri.id_ingredient) = ( " +
+//                "    SELECT COUNT(*) FROM recipe_ingredient WHERE id_recipe = ? " +
+//                ")";
+//
+//        return jdbcTemplate.query(sql, (rs, rowNum) ->
+//                        new Diet(rs.getInt("id_diet"), rs.getString("name"), rs.getString("content")),
+//                recipeId, recipeId);
+//    }
 }

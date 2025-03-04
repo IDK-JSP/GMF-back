@@ -7,8 +7,8 @@ import com.fmg.gmf_core.services.DateTimeService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -60,27 +60,43 @@ public class RecipeDao {
         jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(),dateTimeService.getCurrentDateTime());
         return findRecipeIdByName(recipe.getTitle());
     }
-    public List<Recipe> findRecipesByIngredients(List<Integer> ingredientIds) {
-        // Vérifie que la liste des ingrédients n'est pas vide
-        if (ingredientIds == null || ingredientIds.isEmpty()) {
-            throw new IllegalArgumentException("La liste des ingrédients ne peut pas être vide");
+    public List<Recipe> findRecipesByIngredientsAndName(List<Integer> ingredientIds, String search) {
+        // Base de la requête SQL
+        StringBuilder sql = new StringBuilder(
+                "SELECT r.id_recipe, r.email, r.title, r.content, r.image, r.person, " +
+                        "r.state, r.rate, r.nb_rate, r.create_time, r.update_time, " +
+                        "COUNT(ri.id_ingredient) AS matching_ingredients " +
+                        "FROM recipe r " +
+                        "LEFT JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe "
+        );
+
+        // Liste pour stocker les paramètres SQL
+        List<Object> params = new ArrayList<>();
+
+        // Ajout de la condition sur les ingrédients uniquement si la liste n'est pas vide
+        if (ingredientIds != null && !ingredientIds.isEmpty()) {
+            String placeholders = String.join(",", Collections.nCopies(ingredientIds.size(), "?"));
+            sql.append("WHERE ri.id_ingredient IN (").append(placeholders).append(") ");
+            params.addAll(ingredientIds);
         }
 
-        // Générer les paramètres dynamiques pour la clause IN
-        String placeholders = String.join(",", Collections.nCopies(ingredientIds.size(), "?"));
+        // Ajout de la condition sur le titre (si une condition WHERE existe déjà, on utilise AND)
+        if (search != null && !search.isBlank()) {
+            if (params.isEmpty()) {
+                sql.append("WHERE ");
+            } else {
+                sql.append("AND ");
+            }
+            sql.append("r.title LIKE ? ");
+            params.add("%" + search + "%");
+        }
 
-        // Créer la requête SQL dynamique
-        String sql = "SELECT r.id_recipe, r.email, r.title, r.content, r.image, r.person, r.state, r.rate, r.nb_rate, r.create_time, r.update_time, COUNT(ri.id_ingredient) AS matching_ingredients " +
-                "FROM recipe r " +
-                "JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe " +
-                "WHERE ri.id_ingredient IN (" + placeholders + ") " +
-                "GROUP BY r.id_recipe " +
-                "ORDER BY matching_ingredients DESC";
+        // Ajout du GROUP BY et ORDER BY
+        sql.append("GROUP BY r.id_recipe ORDER BY matching_ingredients DESC");
 
-        // Exécuter la requête et récupérer les résultats
-        List<Recipe> recipes = jdbcTemplate.query(sql, recipeRowMapper, ingredientIds.toArray());
-        return recipes;
+        return jdbcTemplate.query(sql.toString(), recipeRowMapper, params.toArray());
     }
+
     public Recipe findRecipeById (int id){
         String sql = "SELECT * from recipe where id_recipe = ?";
         return jdbcTemplate.queryForObject(sql, recipeRowMapper, id);

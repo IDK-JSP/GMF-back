@@ -30,6 +30,10 @@
 > **Méthode :** `GET`  
 > **Description :** Récuperer toute les recettes sans filtre.  
 
+### 🔹 Recherche d'une recette avec son id (`/recipe/{id}`)
+> **Méthode :** `GET`  
+> **Description :** Récuperer une recette grace à son id.
+
 ### 🔹 Détails d'une recette (`/recipe/details/{id}`)
 
 > **Méthode :** `GET`
@@ -88,9 +92,9 @@
 > **Méthode :** `GET`  
 > **Description :** Récuperer un objet contenant une liste de recette ou d'ingrédient en fonction du nom.
 
-### 🔹 Faire une recherche avec des filtres (`/search/filter`)
+### 🔹 Faire une recherche avec des filtres (`/search?title={title}`) 
 > **Méthode :** `POST`  
-> **Description :** Récuperer une liste de recette en fonction d'une liste d'ingrédient données.
+> **Description :** Récuperer une liste de recette en fonction d'une liste d'ingrédient données et du nom de l'ingrédient ou de la recette.
 
 ```json
 [ int ]
