@@ -73,8 +73,15 @@ public class FavoriteDao {
     }
     public Favorite save(Favorite favorite) {
         userHelper.emailExist(favorite.getEmail());
+        globalHelper.notExist(favoriteExist(favorite.getEmail(),favorite.getFavoriteable_type(),favorite.getFavoriteable_id()), "Favoris");
         String sql = "INSERT INTO favorite (email, favoriteable_type, favoriteable_id, create_time) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(sql, favorite.getEmail(),favorite.getFavoriteable_type(),favorite.getFavoriteable_id(), dateTimeService.getCurrentDateTime());
         return favorite;
+    }
+    //Utilitaire
+    public boolean favoriteExist(String email, String favoriteable_type, int favoriteable_id) {
+        String checkSql = "SELECT COUNT(*) FROM favorite WHERE email = ? and favoriteable_type = ? and favoriteable_id= ?";
+        int count = jdbcTemplate.queryForObject(checkSql, Integer.class, email, favoriteable_type, favoriteable_id);
+        return count > 0;
     }
 }
