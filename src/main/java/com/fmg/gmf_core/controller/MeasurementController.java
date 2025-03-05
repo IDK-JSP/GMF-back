@@ -22,7 +22,7 @@ public class MeasurementController {
         return ResponseEntity.ok(measurementDao.findAll());
     }
     @PostMapping("/new")
-    public ResponseEntity<Measurement> newMeasurement(@RequestBody Measurement measurement){
+    public ResponseEntity<Measurement> newMeasurement(@RequestBody Measurement measurement, @RequestHeader("Authorization") String authorizationHeader){
         measurementDao.save(measurement);
         return ResponseEntity.ok(measurement);
     }
