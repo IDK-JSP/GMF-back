@@ -29,7 +29,7 @@ public class UserDao {
             rs.getString("pseudo"),
             rs.getString("image"),
             rs.getTimestamp("create_time") != null ? rs.getTimestamp("create_time").toLocalDateTime() : null,
-            rs.getTimestamp("update") != null ? rs.getTimestamp("update").toLocalDateTime() : null
+            rs.getTimestamp("update_time") != null ? rs.getTimestamp("update_time").toLocalDateTime() : null
     );
 
 
@@ -49,7 +49,7 @@ public class UserDao {
     public boolean save(User user) {
         //Verifie si l'email n'existe pas déjà en base
         globalHelper.notExist(emailExists(user.getEmail()),"Email");
-        String sql = "INSERT INTO user (email, password, create_time, update) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO user (email, password, create_time, update_time) VALUES (?, ?, ?, ?)";
         int rowsAffected = jdbcTemplate.update(sql, user.getEmail(), user.getPassword(), dateTimeService.getCurrentDateTime(), dateTimeService.getCurrentDateTime());
         return rowsAffected >0;
     }
