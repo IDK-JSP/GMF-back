@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `bddgmf`.`user` (
   `pseudo` VARCHAR(45),
   `image` VARCHAR(255) NULL,
   `create_time` DATETIME NULL,
-  `update` DATETIME NULL,
+  `update_time` DATETIME NULL,
   PRIMARY KEY (`email`),
   UNIQUE INDEX `pseudo_UNIQUE` (`pseudo` ASC) VISIBLE)
 ENGINE = InnoDB;

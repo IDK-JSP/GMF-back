@@ -102,7 +102,7 @@
 ```
 ### 🔹 Créer une recette (`/recipe/new`)
 > **Méthode :** `POST`  
-> **Description :** Créer une recette.  
+> **Description :** Créer une recette, un token dans le header est nécessaire.  
 > **Body :**
 ```json
 {
@@ -199,7 +199,7 @@
 
 ### 🔹 Trouver les favoris d'un utilisateur (`favorite/search?email={email}`)
 > **Méthode :** `GET`  
-> **Description :** Récuperer un objet contenant une liste de recette favoris et d'ingrédient favoris en fonction d'un email.  
+> **Description :** Récuperer un objet contenant une liste de recette favoris et d'ingrédient favoris en fonction d'un email, un token dans le header est nécessaire.  
 > **Réponse :**
 ```json
 {
@@ -231,12 +231,11 @@
 ```
 ### 🔹 Créer un favoris (`/favorite/new`)
 > **Méthode :** `POST`  
-> **Description :** Créer un favoris.  
+> **Description :** Créer un favoris, un token dans le header est nécessaire.  
 > **Body :**
 
 ```json
 {
-  email: string,
   favoriteable_type: string //ingredient ou recipe,
   favoriteable_id: int // id de la recette ou de l'ingrédient
 }
@@ -246,14 +245,13 @@
 
 ### 🔹 Créer un avis avec une note sur une recette (`opinion/new`)
 > **Méthode :** `POST`  
-> **Description :** Créer un avis sur une recette, ça modifiera la note de la recette en conséquence.  
+> **Description :** Créer un avis sur une recette, ça modifiera la note de la recette en conséquence, un token dans le header est nécessaire.  
 > **Body :**
 >
 
 ```json
 {
   id_recipe: int,
-  email: string,
   rate: int,
   comment: string
 }
