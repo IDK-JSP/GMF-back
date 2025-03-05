@@ -150,7 +150,7 @@
 
 ### 🔹 Créer un ingrédient (`/ingredient/new`)
 > **Méthode :** `POST`  
-> **Description :** Créer un ingrédient.  
+> **Description :** Créer un ingrédient, un token dans le header est nécessaire.  
 > **Body :**
 ```json
 {
@@ -175,7 +175,7 @@
 ```
 ### 🔹 Créer une mesure (`/measurement/new`)
 > **Méthode :** `POST`  
-> **Description :** Créer une mesure.  
+> **Description :** Créer une mesure, un token dans le header est nécessaire.  
 > **Body :**
 
 ```json
