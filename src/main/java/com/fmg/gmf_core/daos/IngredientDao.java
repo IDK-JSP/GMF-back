@@ -40,7 +40,7 @@ public class IngredientDao {
     }
     public Ingredient save(Ingredient ingredient) {
         globalHelper.notExist(ingredientNameExist(ingredient.getName()),"Ingrédient");
-        String sql = "INSERT INTO ingredient (name, create_time, update_time) VALUES (?, ?)";
+        String sql = "INSERT INTO ingredient (name, create_time, update_time) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, ingredient.getName(), dateTimeService.getCurrentDateTime(), dateTimeService.getCurrentDateTime());
         return ingredient;
     }
