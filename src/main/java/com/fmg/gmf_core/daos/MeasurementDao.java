@@ -30,16 +30,21 @@ public class MeasurementDao {
         return measurements;
     }
     public Measurement save(Measurement measurement) {
-        globalHelper.notExist(measurementExist(measurement.getName()),"Mesure");
+        globalHelper.notExist(measurementAlreadyExist(measurement.getName()),"Mesure");
         String sql = "INSERT INTO measurement (name, type) VALUES (?, ?)";
         jdbcTemplate.update(sql, measurement.getName(), measurement.getType());
         return measurement;
     }
 
     //Utilitaire
-    public Boolean measurementExist(String name){
+    public Boolean measurementAlreadyExist(String name){
         String checkSql = "SELECT COUNT(*) FROM measurement WHERE name = ?";
         int count = jdbcTemplate.queryForObject(checkSql, Integer.class, name);
+        return count > 0;
+    }
+    public Boolean measurementExist(int id){
+        String sql = "SELECT COUNT(*) FROM measurement where id_measurement = ?";
+        int count = jdbcTemplate.queryForObject(sql,Integer.class,id);
         return count > 0;
     }
 }

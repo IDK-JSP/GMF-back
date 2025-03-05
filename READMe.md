@@ -105,9 +105,28 @@
 > **Description :** Créer une recette.  
 > **Body :**
 ```json
-{ 
-    email: string,
-    title: string
+{
+  "recipe":{
+    "title" : string
+  },
+  "stages" : [
+    {
+      "stage" : int,
+      "content" : string
+    }
+  ],
+  "recipeIngredients": [
+    {
+      "id_ingredient": int,
+      "quantity" : int,
+      "id_measurement" : int
+    },
+    {
+      "id_ingredient": int,
+      "quantity" : int,
+      "id_measurement" : int
+    }
+  ]
 }
 ```
 
