@@ -1,10 +1,13 @@
 package com.fmg.gmf_core.entitys;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.time.LocalDateTime;
 
 public class Ingredient {
     private int id_ingredient;
 
+    @NotBlank(message = "Un nom d'ingrédient est requis")
     private String name;
 
     private String Content;

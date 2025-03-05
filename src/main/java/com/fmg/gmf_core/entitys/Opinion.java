@@ -1,8 +1,17 @@
 package com.fmg.gmf_core.entitys;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
 public class Opinion {
+    @NotNull(message = "Un id de recette est requis")
     private int id_recipe;
     private String email;
+
+    @NotNull(message = "La note ne peut pas être nulle")
+    @Min(value = 1, message = "La note doit être au minimum 1")
+    @Max(value = 5, message = "La note doit être au maximum 5")
     private int rate;
     private String comment;
 

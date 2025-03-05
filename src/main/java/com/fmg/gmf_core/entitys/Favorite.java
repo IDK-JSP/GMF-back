@@ -1,11 +1,16 @@
 package com.fmg.gmf_core.entitys;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Favorite {
     private String email;
+    @NotBlank(message = "Un type est requis (recipe, ingredient)")
     private String favoriteable_type;
+    @NotNull(message = "Un id d'ingrédient ou de recette est requis")
     private int favoriteable_id;
     private LocalDateTime create_time;
 

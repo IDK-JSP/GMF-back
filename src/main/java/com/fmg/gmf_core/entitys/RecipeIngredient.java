@@ -1,9 +1,14 @@
 package com.fmg.gmf_core.entitys;
 
+import jakarta.validation.constraints.NotNull;
+
 public class RecipeIngredient {
     private int id_recipe;
+    @NotNull(message = "Un id d'ingrédient est requis")
     private int id_ingredient;
+    @NotNull(message = "Une quantité est requise")
     private int quantity;
+    @NotNull(message = "Un id de mesure est requis")
     private int id_measurement;
 
     public RecipeIngredient(int id_recipe, int id_ingredient, int quantity, int id_measurement) {

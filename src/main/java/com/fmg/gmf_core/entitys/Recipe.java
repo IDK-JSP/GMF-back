@@ -1,5 +1,7 @@
 package com.fmg.gmf_core.entitys;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -9,13 +11,13 @@ public class Recipe {
     private int id_recipe;
 
     private String email;
-
+    @NotBlank(message = "Un titre de recette est requis")
     private String title;
 
     private String content;
 
     private String image;
-
+    @NotNull(message = "Un nombre de personne est requis")
     private int person;
 
     private String state;
