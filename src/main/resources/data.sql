@@ -152,7 +152,7 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 
 INSERT INTO `recipe` (`email`, `title`, `content`, `image`, `person`, `state`, `rate`, `nb_rate`, `create_time`, `update_time`) VALUES
 ('root', 'Pâtes à la Carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('root', 'Salade César', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse.', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW()),
+('root', 'Salade César miam miam miam miam Salade César miam miam mia', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse.  miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW()),
 ('root', 'Ratatouille', 'Un plat provençal à base de légumes mijotés : tomates, courgettes, aubergines et poivrons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
 ('root', 'Quiche Lorraine', 'Tarte salée garnie de crème, lardons et fromage.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
 ('root', 'Tarte aux Pommes', 'Pâte sablée croustillante garnie de pommes caramélisées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
