@@ -189,7 +189,7 @@
 
 ### 🔹 Faire une recherche avec des filtres et le nom (`/search?title={title}`) 
 > **Méthode :** `POST`  
-> **Description :** Récuperer une liste de recette en fonction d'une liste d'ingrédient données et du nom de l'ingrédient ou de la recette.
+> **Description :** Récuperer une liste de recette/ingrédient en fonction d'une liste d'ingrédient données et du nom de l'ingrédient ou de la recette.
 
 ```json
 [ int ]
