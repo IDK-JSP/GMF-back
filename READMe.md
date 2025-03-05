@@ -107,7 +107,8 @@
 ```json
 {
   "recipe":{
-    "title" : string
+    "title" : string,
+    "person" : int
   },
   "stages" : [
     {
@@ -252,7 +253,6 @@
 ```json
 {
   id_recipe: int,
-  rate: int,
-  comment: string
+  rate: int
 }
 ```

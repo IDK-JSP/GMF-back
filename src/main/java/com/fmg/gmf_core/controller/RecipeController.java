@@ -7,6 +7,7 @@ import com.fmg.gmf_core.entitys.Recipe;
 import com.fmg.gmf_core.dtos.RecipeDetailsDto;
 import com.fmg.gmf_core.entitys.RecipeIngredient;
 import com.fmg.gmf_core.security.JwtUtil;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,7 @@ public class RecipeController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<String> newRecipe(@RequestBody NewRecipeDto newRecipeDto, @RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<String> newRecipe(@Valid @RequestBody NewRecipeDto newRecipeDto, @RequestHeader("Authorization") String authorizationHeader) {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             String token = authorizationHeader.substring(7);  // Supprime "Bearer " (7 caractères)
             String email = jwtUtil.getEmailFromToken(token);  // Appel de votre méthode getEmailFromToken

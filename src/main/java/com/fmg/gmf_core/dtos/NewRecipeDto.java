@@ -3,12 +3,16 @@ package com.fmg.gmf_core.dtos;
 import com.fmg.gmf_core.entitys.Recipe;
 import com.fmg.gmf_core.entitys.RecipeIngredient;
 import com.fmg.gmf_core.entitys.Stage;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
 public class NewRecipeDto {
+    @Valid
     private Recipe recipe;
+    @Valid
     private List<Stage> stages;
+    @Valid
     private List<RecipeIngredient> recipeIngredients;
 
     public NewRecipeDto(Recipe recipe, List<Stage> stages, List<RecipeIngredient> recipeIngredients) {

@@ -1,12 +1,16 @@
 package com.fmg.gmf_core.entitys;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class Measurement {
 
     private int id_measurement;
-
+    @NotBlank(message = "Un nom de mesure est requis")
     private String name;
 
     //Masse / volume / autre
+    @NotBlank(message = "Un type de mesure est requis (masse, volume, autre)")
     private String type;
 
     public Measurement(int id_measurement, String name, String type) {

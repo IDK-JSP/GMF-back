@@ -33,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody User user) {
+    public ResponseEntity<String> registerUser(@Valid @RequestBody User user) {
         User newUser = getUser(user);
         userDao.save(newUser);
         return ResponseEntity.ok("User registered successfully!");

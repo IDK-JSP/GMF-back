@@ -1,8 +1,15 @@
 package com.fmg.gmf_core.entitys;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class Stage {
+
+    @NotNull(message = "Un numéro d'étape est requis")
     private int stage;
     private int id_recipe;
+    @NotBlank(message = "Un contenu d'étape est requis")
     private String content;
 
     public Stage(int stage, int id_recipe, String content) {

@@ -2,6 +2,7 @@ package com.fmg.gmf_core.controller;
 
 import com.fmg.gmf_core.daos.IngredientDao;
 import com.fmg.gmf_core.entitys.Ingredient;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class IngredientController {
         return ingredientDao.findIngredientByName(name);
     }*/
     @PostMapping("/new")
-    public ResponseEntity<Ingredient> newIngredient(@RequestBody Ingredient ingredient, @RequestHeader("Authorization") String authorizationHeader){
+    public ResponseEntity<Ingredient> newIngredient(@Valid @RequestBody Ingredient ingredient, @RequestHeader("Authorization") String authorizationHeader){
         ingredientDao.save(ingredient);
         return ResponseEntity.ok(ingredient);
     }

@@ -4,6 +4,7 @@ import com.fmg.gmf_core.daos.FavoriteDao;
 import com.fmg.gmf_core.dtos.UserFavoriteDto;
 import com.fmg.gmf_core.entitys.Favorite;
 import com.fmg.gmf_core.security.JwtUtil;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class FavoriteController {
         this.jwtUtil = jwtUtil;
     }
     @PostMapping("/new")
-    public ResponseEntity<Favorite> newFavorite (@RequestBody Favorite favorite, @RequestHeader("Authorization") String authorizationHeader){
+    public ResponseEntity<Favorite> newFavorite (@Valid @RequestBody Favorite favorite, @RequestHeader("Authorization") String authorizationHeader){
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             String token = authorizationHeader.substring(7);  // Supprime "Bearer " (7 caractères)
             String email = jwtUtil.getEmailFromToken(token);  // Appel de votre méthode getEmailFromToken
