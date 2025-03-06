@@ -1,5 +1,6 @@
 package com.fmg.gmf_core.entitys;
 
+import com.fmg.gmf_core.annotation.ValidEmail;
 import com.fmg.gmf_core.annotation.ValidPasswordDigitCount;
 import com.fmg.gmf_core.annotation.ValidPasswordSpecialCharCount;
 import com.fmg.gmf_core.annotation.ValidPasswordLength;
@@ -8,7 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 public class User {
-
+    @ValidEmail
     @NotBlank(message = "Email requis")
     private String email;
 
