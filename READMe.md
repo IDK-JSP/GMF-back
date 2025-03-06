@@ -119,12 +119,12 @@
   "recipeIngredients": [
     {
       "id_ingredient": int,
-      "quantity" : int,
+      "quantity" : double,
       "id_measurement" : int
     },
     {
       "id_ingredient": int,
-      "quantity" : int,
+      "quantity" : double,
       "id_measurement" : int
     }
   ]
@@ -254,5 +254,50 @@
 {
   id_recipe: int,
   rate: int
+}
+```
+
+## 🛠️ Endpoints validation de recette
+
+### 🔹 Récupérer toute les recettes à valider (`request/all`)
+> **Méthode :** `GET`  
+> **Description :** Récuperer la totalité des recettes qui sont en attente de validation, un token dans le header est nécessaire.  
+> **Réponse :**
+```json
+[
+    {
+        id_recipe: number;
+        email: string;
+        title: string;
+        content: string;
+        image: string;
+        person: number;
+        state: string;
+        rate: number;
+        nbRate: number;
+        createTime: string;
+        updateTime: string
+    }
+]
+```
+
+### 🔹 Valider une recette (`request/recipe`)
+
+> **Méthode :** `POST`  
+> **Description :** Valider une recette.
+> **Body :**
+```json
+{
+    id_recipe: int,
+    email: string,
+    title: string,
+    content: string,
+    image: string,
+    person: int,
+    state: string,
+    rate: int,
+    nbRate: int,
+    createTime: string,
+    updateTime: string
 }
 ```
