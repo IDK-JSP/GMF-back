@@ -1,9 +1,13 @@
 package com.fmg.gmf_core.entitys;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class Stage {
+    @Min(value = 1, message = "La première étape est forcément 1")
+    @Max(value = 99, message = "Le nombre d'étape maximum est 99")
     @NotNull(message = "Un numéro d'étape est requis")
     private int stage;
     private int id_recipe;

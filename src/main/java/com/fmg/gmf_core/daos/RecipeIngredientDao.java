@@ -26,7 +26,7 @@ public class RecipeIngredientDao {
     private final RowMapper<RecipeIngredient> recipeIngredientRowMapper = (rs,_)-> new RecipeIngredient(
             rs.getInt("id_recipe"),
             rs.getInt("id_ingredient"),
-            rs.getInt("quantity"),
+            rs.getDouble("quantity"),
             rs.getInt("id_measurement")
     );
     public RecipeIngredient save(RecipeIngredient recipeIngredient){
