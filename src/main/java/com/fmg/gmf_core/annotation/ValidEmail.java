@@ -1,7 +1,6 @@
 package com.fmg.gmf_core.annotation;
 
 import com.fmg.gmf_core.validator.EmailValidator;
-import com.fmg.gmf_core.validator.FavoriteTypeValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
