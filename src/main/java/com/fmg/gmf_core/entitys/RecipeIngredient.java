@@ -7,11 +7,11 @@ public class RecipeIngredient {
     @NotNull(message = "Un id d'ingrédient est requis")
     private int id_ingredient;
     @NotNull(message = "Une quantité est requise")
-    private int quantity;
+    private Double quantity;
     @NotNull(message = "Un id de mesure est requis")
     private int id_measurement;
 
-    public RecipeIngredient(int id_recipe, int id_ingredient, int quantity, int id_measurement) {
+    public RecipeIngredient(int id_recipe, int id_ingredient, Double quantity, int id_measurement) {
         this.id_recipe = id_recipe;
         this.id_ingredient = id_ingredient;
         this.quantity = quantity;
@@ -34,11 +34,11 @@ public class RecipeIngredient {
         this.id_ingredient = id_ingredient;
     }
 
-    public int getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 

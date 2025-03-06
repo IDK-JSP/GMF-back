@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/auth/**","/recipe/all","/recipe/{id}","/recipe/details/{id}","/ingredient/all","/measurement/all", "/search/**").permitAll()
-                                .requestMatchers("/users/**","/opinion/**","/favorite/**","/recipe/new","/ingredient/new","/measurement/new" ).hasRole("USER")
+                                .requestMatchers("/users/**","/opinion/**","/favorite/**","/recipe/new","/ingredient/new","/measurement/new","/request/**" ).hasRole("USER")
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 ).cors(Customizer.withDefaults());

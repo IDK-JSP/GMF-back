@@ -3,7 +3,6 @@ TRUNCATE TABLE `measurement`;
 TRUNCATE TABLE `ingredient`;
 TRUNCATE TABLE `diet`;
 TRUNCATE TABLE `diet_ingredient`;
-TRUNCATE TABLE `user`;
 TRUNCATE TABLE `recipe`;
 TRUNCATE TABLE `recipe_ingredient`;
 TRUNCATE TABLE `stage`;
@@ -327,5 +326,26 @@ INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (4, 10, 'Parsemez de basilic et d’un filet d’huile d’olive.'),
 (5, 10, 'Enfournez pendant 15 minutes jusqu’à ce que la pizza soit dorée.');
 
-
+TRUNCATE TABLE opinion;
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment) VALUES
+(2, 'eva10@example.com', 2, 'Pas terrible, manque de saveur.'),
+(3, 'charlie93@hotmail.com', 2, 'Moyen, mais peut être amélioré.'),
+(5, 'frank80@hotmail.com', 1, 'Vraiment pas bon, je ne referai pas.'),
+(2, 'alice52@yahoo.com', 2, 'Assez fade, déçu du résultat.'),
+(5, 'david10@hotmail.com', 1, 'Horrible expérience, goût désagréable.'),
+(1, 'bob25@gmail.com', 5, 'Fantastique, je recommande vivement !'),
+(4, 'grace12@example.com', 4, "Très bon, j'ai bien aimé."),
+(3, 'henry99@yahoo.com', 3, 'Bon, mais pourrait être meilleur.'),
+(1, 'irene45@gmail.com', 5, 'Incroyable, un vrai délice !'),
+(2, 'jack33@hotmail.com', 4, 'Un plat savoureux, je le referai.'),
+(3, 'alice88@example.com', 3, "Correct, mais rien d'exceptionnel."),
+(4, 'charlie77@yahoo.com', 5, 'Un pur régal, bravo pour la recette !'),
+(1, 'david60@gmail.com', 4, 'Excellente recette, presque parfaite.'),
+(5, 'eva99@example.com', 1, 'Très décevant, je ne recommande pas.'),
+(2, 'frank45@yahoo.com', 2, 'Moyen, mais peut être amélioré.'),
+(4, 'grace78@hotmail.com', 3, 'Une recette sympa mais sans plus.'),
+(3, 'henry21@example.com', 5, 'Fantastique, je recommande vivement !'),
+(5, 'irene67@yahoo.com', 1, 'Horrible expérience, goût désagréable.'),
+(1, 'jack50@hotmail.com', 5, 'Un pur régal, bravo pour la recette !'),
+(2, 'bob75@gmail.com', 4, "Très bon, j'ai bien aimé.");
 SET FOREIGN_KEY_CHECKS = 1;
