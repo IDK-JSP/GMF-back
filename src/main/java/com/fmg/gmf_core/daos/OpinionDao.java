@@ -39,8 +39,15 @@ public class OpinionDao {
     public Opinion save(Opinion opinion) {
         userHelper.emailExist(opinion.getEmail());
         recipeHelper.recipeExist(opinion.getId_recipe());
+        globalHelper.notExist(opinionExist(opinion),"L'avis");
         String sql = "INSERT INTO opinion (id_recipe, email, rate, comment) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(sql, opinion.getId_recipe(),opinion.getEmail(),opinion.getRate(),opinion.getComment());
         return opinion;
+    }
+    //Utilitaire
+    public boolean opinionExist(Opinion opinion) {
+        String checkSql = "SELECT COUNT(*) FROM recipe WHERE id_recipe = ? and email = ?";
+        int count = jdbcTemplate.queryForObject(checkSql, Integer.class, opinion.getId_recipe(), opinion.getEmail());
+        return count > 0;
     }
 }
