@@ -104,7 +104,7 @@ public class RecipeDao {
         return jdbcTemplate.queryForObject(sql, recipeRowMapper, id);
     }
     public int updateRecipe (Recipe recipe){
-        userHelper.emailExist(recipe.getEmail());
+        //userHelper.emailExist(recipe.getEmail());
         globalHelper.exist(!recipeIdExist(recipe.getId_recipe()), "Recette");
         String sql = "UPDATE recipe set email = ?, title = ?, content = ?, image = ?, person = ?, state = ?, rate = ?, nb_rate = ? where id_recipe = ?;";
         jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(), recipe.getContent(), recipe.getImage(), recipe.getPerson(), recipe.getState(), recipe.getRate(), recipe.getNb_rate(), recipe.getId_recipe());
