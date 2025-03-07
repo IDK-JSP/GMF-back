@@ -10,9 +10,9 @@ import java.util.List;
 public class Search {
     private List<Ingredient> ingredients;
 
-    private List<Recipe> recipes;
+    private List<SearchResultRecipeDto> recipes;
 
-    public Search(List<Ingredient> ingredients, List<Recipe> recipes) {
+    public Search(List<Ingredient> ingredients, List<SearchResultRecipeDto> recipes) {
         this.ingredients = ingredients;
         this.recipes = recipes;
     }
@@ -25,11 +25,11 @@ public class Search {
         this.ingredients = ingredients;
     }
 
-    public List<Recipe> getRecipes() {
+    public List<SearchResultRecipeDto> getRecipes() {
         return recipes;
     }
 
-    public void setRecipes(List<Recipe> recipes) {
+    public void setRecipes(List<SearchResultRecipeDto> recipes) {
         this.recipes = recipes;
     }
 }
