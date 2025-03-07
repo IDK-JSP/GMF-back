@@ -6,6 +6,8 @@ TRUNCATE TABLE `diet_ingredient`;
 TRUNCATE TABLE `recipe`;
 TRUNCATE TABLE `recipe_ingredient`;
 TRUNCATE TABLE `stage`;
+TRUNCATE TABLE `opinion`;
+TRUNCATE TABLE `favorite`;
 
 INSERT INTO `measurement` (`name`, `type`) VALUES
 ('cl', 'volume'),
@@ -148,18 +150,17 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (2, 37), -- Piment
 (2, 38); -- Vanille
 
-
 INSERT INTO `recipe` (`email`, `title`, `content`, `image`, `person`, `state`, `rate`, `nb_rate`, `create_time`, `update_time`) VALUES
-('root', 'Pâtes à la Carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('root', 'Salade César miam miam miam miam Salade César miam miam mia', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse.  miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW()),
-('root', 'Ratatouille', 'Un plat provençal à base de légumes mijotés : tomates, courgettes, aubergines et poivrons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('root', 'Quiche Lorraine', 'Tarte salée garnie de crème, lardons et fromage.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
-('root', 'Tarte aux Pommes', 'Pâte sablée croustillante garnie de pommes caramélisées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
-('root', 'Soupe de légumes', 'Un mélange de légumes mijotés pour une soupe savoureuse et réconfortante.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('root', 'Couscous Royal', 'Plat traditionnel nord-africain avec semoule, légumes et viandes variées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
-('root', 'Poulet au curry', 'Poulet mijoté dans une sauce crémeuse au curry et lait de coco.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('root', 'Mousse au chocolat', 'Dessert aérien et fondant à base de chocolat noir et œufs.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('root', 'Pizza Margherita', 'Une pizza classique avec une sauce tomate, mozzarella et basilic.', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW());
+('root.@', 'Pâtes à la Carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('root.@', 'Salade César miam miam miam miam Salade César miam miam mia', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse.  miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW()),
+('root.@', 'Ratatouille', 'Un plat provençal à base de légumes mijotés : tomates, courgettes, aubergines et poivrons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('root.@', 'Quiche Lorraine', 'Tarte salée garnie de crème, lardons et fromage.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
+('root.@', 'Tarte aux Pommes', 'Pâte sablée croustillante garnie de pommes caramélisées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
+('root.@', 'Soupe de légumes', 'Un mélange de légumes mijotés pour une soupe savoureuse et réconfortante.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('root.@', 'Couscous Royal', 'Plat traditionnel nord-africain avec semoule, légumes et viandes variées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
+('root.@', 'Poulet au curry', 'Poulet mijoté dans une sauce crémeuse au curry et lait de coco.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('root.@', 'Mousse au chocolat', 'Dessert aérien et fondant à base de chocolat noir et œufs.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('root.@', 'Pizza Margherita', 'Une pizza classique avec une sauce tomate, mozzarella et basilic.', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW());
 
 -- Pâtes à la Carbonara (id_recipe = 1)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
@@ -327,25 +328,25 @@ INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (5, 10, 'Enfournez pendant 15 minutes jusqu’à ce que la pizza soit dorée.');
 
 TRUNCATE TABLE opinion;
-INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment) VALUES
-(2, 'eva10@example.com', 2, 'Pas terrible, manque de saveur.'),
-(3, 'charlie93@hotmail.com', 2, 'Moyen, mais peut être amélioré.'),
-(5, 'frank80@hotmail.com', 1, 'Vraiment pas bon, je ne referai pas.'),
-(2, 'alice52@yahoo.com', 2, 'Assez fade, déçu du résultat.'),
-(5, 'david10@hotmail.com', 1, 'Horrible expérience, goût désagréable.'),
-(1, 'bob25@gmail.com', 5, 'Fantastique, je recommande vivement !'),
-(4, 'grace12@example.com', 4, "Très bon, j'ai bien aimé."),
-(3, 'henry99@yahoo.com', 3, 'Bon, mais pourrait être meilleur.'),
-(1, 'irene45@gmail.com', 5, 'Incroyable, un vrai délice !'),
-(2, 'jack33@hotmail.com', 4, 'Un plat savoureux, je le referai.'),
-(3, 'alice88@example.com', 3, "Correct, mais rien d'exceptionnel."),
-(4, 'charlie77@yahoo.com', 5, 'Un pur régal, bravo pour la recette !'),
-(1, 'david60@gmail.com', 4, 'Excellente recette, presque parfaite.'),
-(5, 'eva99@example.com', 1, 'Très décevant, je ne recommande pas.'),
-(2, 'frank45@yahoo.com', 2, 'Moyen, mais peut être amélioré.'),
-(4, 'grace78@hotmail.com', 3, 'Une recette sympa mais sans plus.'),
-(3, 'henry21@example.com', 5, 'Fantastique, je recommande vivement !'),
-(5, 'irene67@yahoo.com', 1, 'Horrible expérience, goût désagréable.'),
-(1, 'jack50@hotmail.com', 5, 'Un pur régal, bravo pour la recette !'),
-(2, 'bob75@gmail.com', 4, "Très bon, j'ai bien aimé.");
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
+(2, 'eva10@example.com', 2, 'Pas terrible, manque de saveur.',NOW()),
+(3, 'charlie93@hotmail.com', 2, 'Moyen, mais peut être amélioré.',NOW()),
+(5, 'frank80@hotmail.com', 1, 'Vraiment pas bon, je ne referai pas.',NOW()),
+(2, 'alice52@yahoo.com', 2, 'Assez fade, déçu du résultat.',NOW()),
+(5, 'david10@hotmail.com', 1, 'Horrible expérience, goût désagréable.',NOW()),
+(1, 'bob25@gmail.com', 5, 'Fantastique, je recommande vivement !',NOW()),
+(4, 'grace12@example.com', 4, "Très bon, j'ai bien aimé.",NOW()),
+(3, 'henry99@yahoo.com', 3, 'Bon, mais pourrait être meilleur.',NOW()),
+(1, 'irene45@gmail.com', 5, 'Incroyable, un vrai délice !',NOW()),
+(2, 'jack33@hotmail.com', 4, 'Un plat savoureux, je le referai.',NOW()),
+(3, 'alice88@example.com', 3, "Correct, mais rien d'exceptionnel.",NOW()),
+(4, 'charlie77@yahoo.com', 5, 'Un pur régal, bravo pour la recette !',NOW()),
+(1, 'david60@gmail.com', 4, 'Excellente recette, presque parfaite.',NOW()),
+(5, 'eva99@example.com', 1, 'Très décevant, je ne recommande pas.',NOW()),
+(2, 'frank45@yahoo.com', 2, 'Moyen, mais peut être amélioré.',NOW()),
+(4, 'grace78@hotmail.com', 3, 'Une recette sympa mais sans plus.',NOW()),
+(3, 'henry21@example.com', 5, 'Fantastique, je recommande vivement !',NOW()),
+(5, 'irene67@yahoo.com', 1, 'Horrible expérience, goût désagréable.',NOW()),
+(1, 'jack50@hotmail.com', 5, 'Un pur régal, bravo pour la recette !',NOW()),
+(2, 'bob75@gmail.com', 4, "Très bon, j'ai bien aimé.",NOW());
 SET FOREIGN_KEY_CHECKS = 1;

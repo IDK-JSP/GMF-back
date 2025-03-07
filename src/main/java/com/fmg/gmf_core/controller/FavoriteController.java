@@ -27,6 +27,7 @@ public class FavoriteController {
             String token = authorizationHeader.substring(7);  // Supprime "Bearer " (7 caractères)
             String email = jwtUtil.getEmailFromToken(token);  // Appel de votre méthode getEmailFromToken
             System.out.println("Email extrait du token : " + email);
+            System.out.println(favorite.getFavoriteable_id());
             favorite.setEmail(email);
             favoriteDao.save(favorite);
             return ResponseEntity.ok(favorite);

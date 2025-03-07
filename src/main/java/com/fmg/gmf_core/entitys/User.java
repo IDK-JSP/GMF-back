@@ -45,9 +45,11 @@ public class User {
         this.create_time = create_time;
         this.update_time = update_time;
     }
-    public User(String email, String password){
+    public User(String email, String password, String pseudo, String image){
         this.email = email;
         this.password = password;
+        this.pseudo = pseudo;
+        this.image = image;
     }
 
     public String getEmail() {
