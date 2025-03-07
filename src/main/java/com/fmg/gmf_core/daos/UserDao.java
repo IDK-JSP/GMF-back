@@ -49,8 +49,8 @@ public class UserDao {
     public boolean save(User user) {
         //Verifie si l'email n'existe pas déjà en base
         globalHelper.notExist(emailExists(user.getEmail()),"Email");
-        String sql = "INSERT INTO user (email, password, create_time, update_time) VALUES (?, ?, ?, ?)";
-        int rowsAffected = jdbcTemplate.update(sql, user.getEmail(), user.getPassword(), dateTimeService.getCurrentDateTime(), dateTimeService.getCurrentDateTime());
+        String sql = "INSERT INTO user (email, password, pseudo, image, create_time, update_time) VALUES (?, ?, ?, ?, ?, ?)";
+        int rowsAffected = jdbcTemplate.update(sql, user.getEmail(), user.getPassword(),user.getPseudo(),user.getImage(), dateTimeService.getCurrentDateTime(), dateTimeService.getCurrentDateTime());
         return rowsAffected >0;
     }
 

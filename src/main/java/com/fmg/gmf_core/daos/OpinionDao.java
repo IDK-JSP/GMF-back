@@ -46,7 +46,7 @@ public class OpinionDao {
     }
     //Utilitaire
     public boolean opinionExist(Opinion opinion) {
-        String checkSql = "SELECT COUNT(*) FROM recipe WHERE id_recipe = ? and email = ?";
+        String checkSql = "SELECT COUNT(*) FROM opinion WHERE id_recipe = ? and email = ?";
         int count = jdbcTemplate.queryForObject(checkSql, Integer.class, opinion.getId_recipe(), opinion.getEmail());
         return count > 0;
     }

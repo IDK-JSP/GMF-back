@@ -54,8 +54,8 @@ public class RecipeDao {
     public int save(Recipe recipe) {
         globalHelper.notExist(recipeExist(recipe.getTitle()),"Recette");
         userHelper.emailExist(recipe.getEmail());
-        String sql = "INSERT INTO recipe (email, title, person, create_time, update_time) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(),recipe.getPerson(),dateTimeService.getCurrentDateTime(), dateTimeService.getCurrentDateTime());
+        String sql = "INSERT INTO recipe (email, title, content ,image , person, create_time, update_time) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(),recipe.getContent(),recipe.getImage(),recipe.getPerson(),dateTimeService.getCurrentDateTime(), dateTimeService.getCurrentDateTime());
         return findRecipeIdByName(recipe.getTitle());
     }
     public List<Recipe> findRecipesByIngredientsAndName(List<Integer> ingredientIds, String search) {
