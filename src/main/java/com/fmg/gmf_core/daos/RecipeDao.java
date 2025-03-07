@@ -113,7 +113,7 @@ public class RecipeDao {
         }
 
         // Ajout du GROUP BY et ORDER BY
-        sql.append("GROUP BY r.id_recipe ORDER BY matching_ingredients DESC");
+        sql.append("GROUP BY r.id_recipe ORDER BY matching_ingredients DESC, r.rate DESC");
 
         try {
             // Exécution de la requête avec les paramètres
