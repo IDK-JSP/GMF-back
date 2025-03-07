@@ -33,7 +33,7 @@ public class SearchController {
 //    }
     @PostMapping
     public Search filterRecipe(@RequestBody List<Integer> ingredients, @RequestParam String title) {
-        if (title == null) {
+        if (title != "") {
             search.setIngredients(ingredientDao.findIngredientByName(title));
         }
         search.setRecipes(recipeDao.findRecipesByIngredientsAndName(ingredients, title));
