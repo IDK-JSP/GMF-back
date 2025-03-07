@@ -1,13 +1,11 @@
-package com.fmg.gmf_core.entitys;
+package com.fmg.gmf_core.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-public class Recipe {
-
+public class SearchResultRecipeDto {
     private int id_recipe;
 
     private String email;
@@ -30,9 +28,9 @@ public class Recipe {
 
     private LocalDateTime update_time;
 
+    private int matching_results;
 
-
-    public Recipe(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nb_rate, LocalDateTime create_time, LocalDateTime update_time) {
+    public SearchResultRecipeDto(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nb_rate, LocalDateTime create_time, LocalDateTime update_time, int match) {
         this.id_recipe = id_recipe;
         this.email = email;
         this.title = title;
@@ -44,8 +42,8 @@ public class Recipe {
         this.nb_rate = nb_rate;
         this.create_time = create_time;
         this.update_time = update_time;
+        this.matching_results = match;
     }
-
 
     public int getId_recipe() {
         return id_recipe;
@@ -133,5 +131,13 @@ public class Recipe {
 
     public void setUpdate_time(LocalDateTime update_time) {
         this.update_time = update_time;
+    }
+
+    public int getMatching_results() {
+        return matching_results;
+    }
+
+    public void setMatching_results(int matching_results) {
+        this.matching_results = matching_results;
     }
 }

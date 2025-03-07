@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `bddgmf`.`recipe` (
   `id_recipe` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(255) NOT NULL,
   `title` VARCHAR(64) NOT NULL,
+  `search_title` VARCHAR(64) NULL,
   `content` TEXT(10000) NULL,
   `image` VARCHAR(255) NULL,
   `person` INT NULL,
