@@ -34,7 +34,7 @@ public class IngredientDao {
         return ingredients;
     }
     public List<Ingredient> findIngredientByName(String research){
-        String sql = "SELECT * FROM ingredient WHERE name LIKE ?";
+        String sql = "SELECT i.id_ingredient, i.name, i.content, i.create_time, i.update_time, COUNT(ri.id_ingredient) AS popularity FROM  ingredient AS i JOIN  recipe_ingredient ri ON i.id_ingredient = ri.id_ingredient where i.name like ? GROUP BY  i.id_ingredient, i.name   order by  popularity DESC";
         List<Ingredient> ingredients = jdbcTemplate.query(sql, ingredientRowMapper, "%" + research + "%");
         return ingredients;
     }
