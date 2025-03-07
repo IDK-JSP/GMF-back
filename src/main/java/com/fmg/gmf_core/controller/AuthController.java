@@ -43,7 +43,9 @@ public class AuthController {
     private User getUser(User user) {
         return new User(
                 user.getEmail(),
-                encoder.encode(user.getPassword())
+                encoder.encode(user.getPassword()),
+                user.getPseudo(),
+                user.getImage()
         );
     }
 

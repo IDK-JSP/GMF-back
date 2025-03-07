@@ -152,6 +152,7 @@ CREATE TABLE IF NOT EXISTS `bddgmf`.`opinion` (
   `email` VARCHAR(255) NOT NULL,
   `rate` int NOT NULL,
   `comment` TEXT(10000) NULL,
+  `create_time` DATETIME NOT NULL,
   PRIMARY KEY (`id_recipe`, `email`),
   INDEX `fk_user_idx` (`email` ASC) VISIBLE,
   CONSTRAINT `fk_opinion_recipe`

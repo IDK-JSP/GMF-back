@@ -1,6 +1,7 @@
 package com.fmg.gmf_core.entitys;
 
 import com.fmg.gmf_core.annotation.ValidFavoriteType;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -12,7 +13,7 @@ public class Favorite {
     @NotBlank(message = "Un type est requis (recipe, ingredient)")
     @ValidFavoriteType
     private String favoriteable_type;
-    @NotNull(message = "Un id d'ingrédient ou de recette est requis")
+    @Min(value = 1, message = "Id invalide")
     private int favoriteable_id;
     private LocalDateTime create_time;
 

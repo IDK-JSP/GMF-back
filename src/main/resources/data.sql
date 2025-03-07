@@ -328,25 +328,25 @@ INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (5, 10, 'Enfournez pendant 15 minutes jusqu’à ce que la pizza soit dorée.');
 
 TRUNCATE TABLE opinion;
-INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment) VALUES
-(2, 'eva10@example.com', 2, 'Pas terrible, manque de saveur.'),
-(3, 'charlie93@hotmail.com', 2, 'Moyen, mais peut être amélioré.'),
-(5, 'frank80@hotmail.com', 1, 'Vraiment pas bon, je ne referai pas.'),
-(2, 'alice52@yahoo.com', 2, 'Assez fade, déçu du résultat.'),
-(5, 'david10@hotmail.com', 1, 'Horrible expérience, goût désagréable.'),
-(1, 'bob25@gmail.com', 5, 'Fantastique, je recommande vivement !'),
-(4, 'grace12@example.com', 4, "Très bon, j'ai bien aimé."),
-(3, 'henry99@yahoo.com', 3, 'Bon, mais pourrait être meilleur.'),
-(1, 'irene45@gmail.com', 5, 'Incroyable, un vrai délice !'),
-(2, 'jack33@hotmail.com', 4, 'Un plat savoureux, je le referai.'),
-(3, 'alice88@example.com', 3, "Correct, mais rien d'exceptionnel."),
-(4, 'charlie77@yahoo.com', 5, 'Un pur régal, bravo pour la recette !'),
-(1, 'david60@gmail.com', 4, 'Excellente recette, presque parfaite.'),
-(5, 'eva99@example.com', 1, 'Très décevant, je ne recommande pas.'),
-(2, 'frank45@yahoo.com', 2, 'Moyen, mais peut être amélioré.'),
-(4, 'grace78@hotmail.com', 3, 'Une recette sympa mais sans plus.'),
-(3, 'henry21@example.com', 5, 'Fantastique, je recommande vivement !'),
-(5, 'irene67@yahoo.com', 1, 'Horrible expérience, goût désagréable.'),
-(1, 'jack50@hotmail.com', 5, 'Un pur régal, bravo pour la recette !'),
-(2, 'bob75@gmail.com', 4, "Très bon, j'ai bien aimé.");
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
+(2, 'eva10@example.com', 2, 'Pas terrible, manque de saveur.',NOW()),
+(3, 'charlie93@hotmail.com', 2, 'Moyen, mais peut être amélioré.',NOW()),
+(5, 'frank80@hotmail.com', 1, 'Vraiment pas bon, je ne referai pas.',NOW()),
+(2, 'alice52@yahoo.com', 2, 'Assez fade, déçu du résultat.',NOW()),
+(5, 'david10@hotmail.com', 1, 'Horrible expérience, goût désagréable.',NOW()),
+(1, 'bob25@gmail.com', 5, 'Fantastique, je recommande vivement !',NOW()),
+(4, 'grace12@example.com', 4, "Très bon, j'ai bien aimé.",NOW()),
+(3, 'henry99@yahoo.com', 3, 'Bon, mais pourrait être meilleur.',NOW()),
+(1, 'irene45@gmail.com', 5, 'Incroyable, un vrai délice !',NOW()),
+(2, 'jack33@hotmail.com', 4, 'Un plat savoureux, je le referai.',NOW()),
+(3, 'alice88@example.com', 3, "Correct, mais rien d'exceptionnel.",NOW()),
+(4, 'charlie77@yahoo.com', 5, 'Un pur régal, bravo pour la recette !',NOW()),
+(1, 'david60@gmail.com', 4, 'Excellente recette, presque parfaite.',NOW()),
+(5, 'eva99@example.com', 1, 'Très décevant, je ne recommande pas.',NOW()),
+(2, 'frank45@yahoo.com', 2, 'Moyen, mais peut être amélioré.',NOW()),
+(4, 'grace78@hotmail.com', 3, 'Une recette sympa mais sans plus.',NOW()),
+(3, 'henry21@example.com', 5, 'Fantastique, je recommande vivement !',NOW()),
+(5, 'irene67@yahoo.com', 1, 'Horrible expérience, goût désagréable.',NOW()),
+(1, 'jack50@hotmail.com', 5, 'Un pur régal, bravo pour la recette !',NOW()),
+(2, 'bob75@gmail.com', 4, "Très bon, j'ai bien aimé.",NOW());
 SET FOREIGN_KEY_CHECKS = 1;
