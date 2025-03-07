@@ -28,7 +28,7 @@ public class SearchResultRecipeDto {
 
     private LocalDateTime update_time;
 
-    private int matching_results;
+    private int matching_ingredients;
 
     public SearchResultRecipeDto(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nb_rate, LocalDateTime create_time, LocalDateTime update_time, int match) {
         this.id_recipe = id_recipe;
@@ -42,7 +42,7 @@ public class SearchResultRecipeDto {
         this.nb_rate = nb_rate;
         this.create_time = create_time;
         this.update_time = update_time;
-        this.matching_results = match;
+        this.matching_ingredients = match;
     }
 
     public int getId_recipe() {
@@ -133,11 +133,11 @@ public class SearchResultRecipeDto {
         this.update_time = update_time;
     }
 
-    public int getMatching_results() {
-        return matching_results;
+    public int getMatching_ingredients() {
+        return matching_ingredients;
     }
 
-    public void setMatching_results(int matching_results) {
-        this.matching_results = matching_results;
+    public void setMatching_ingredients(int matching_ingredients) {
+        this.matching_ingredients = matching_ingredients;
     }
 }

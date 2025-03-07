@@ -21,7 +21,8 @@ public class SearchController {
         this.recipeDao = recipeDao;
         this.search = search;
     }
-//    @GetMapping
+
+    //    @GetMapping
 //    public Search search(@RequestParam String name) {
 //        search.setIngredients(ingredientDao.findIngredientByName(name));
 //        search.setRecipes(recipeDao.findRecipeByName(name));
@@ -31,10 +32,12 @@ public class SearchController {
 //        return search;
 //    }
     @PostMapping
-    public Search filterRecipe(@RequestBody List<Integer> ingredients, @RequestParam String title){
-        search.setIngredients(ingredientDao.findIngredientByName(title));
+    public Search filterRecipe(@RequestBody List<Integer> ingredients, @RequestParam String title) {
+        if (title == null) {
+            search.setIngredients(ingredientDao.findIngredientByName(title));
+        }
         search.setRecipes(recipeDao.findRecipesByIngredientsAndName(ingredients, title));
-        if (search.getRecipes().isEmpty() && search.getIngredients().isEmpty()){
+        if (search.getRecipes().isEmpty() && search.getIngredients().isEmpty()) {
             throw new ResourceNotFoundException("Aucun résultat de recherche");
         }
         return search;
