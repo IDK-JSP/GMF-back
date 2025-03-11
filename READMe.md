@@ -244,6 +244,12 @@
 }
 ```
 
+### 🔹 Supprimer une recette favorite (`/favorite/delete/recipe/{id_recipe}`)
+> **Méthode :** `DELETE`
+
+### 🔹 Supprimer un ingrédient favoris (`/favorite/delete/ingredient/{id_ingredient}`)
+> **Méthode :** `DELETE`
+
 ## 🛠️ Endpoints avis
 
 ### 🔹 Créer un avis avec une note sur une recette (`opinion/new`)

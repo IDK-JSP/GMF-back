@@ -78,6 +78,11 @@ public class FavoriteDao {
         jdbcTemplate.update(sql, favorite.getEmail(),favorite.getFavoriteable_type(),favorite.getFavoriteable_id(), dateTimeService.getCurrentDateTime());
         return favorite;
     }
+    public void deleteFavorite(int recipeId, String email,String type) {
+        String sql = "DELETE FROM favorite WHERE favoriteable_id = ? AND email = ? AND favoriteable_type = '"+type+"'";
+        jdbcTemplate.update(sql, recipeId, email);
+    }
+
     //Utilitaire
     public boolean favoriteExist(String email, String favoriteable_type, int favoriteable_id) {
         String checkSql = "SELECT COUNT(*) FROM favorite WHERE email = ? and favoriteable_type = ? and favoriteable_id= ?";
