@@ -305,6 +305,8 @@
 ```
 
 ## 🛠️ Endpoints collection de recette
+> **Description :** Récuperer une collections de recettes de ton choix, si tu mets un token dans le header tu pourras connâitre si une recette appartient au favoris de l'utilisateur.
+
 ```json
 [
   {
@@ -319,6 +321,7 @@
     nbRate: number;
     createTime: string;
     updateTime: string;
+    matching_ingredients: int;
     diet: string;
     is_favorite: string //true ou false
   }

@@ -59,7 +59,9 @@ public class RecipeDao {
             rs.getInt("nb_rate"),
             rs.getTimestamp("create_time").toLocalDateTime(),
             rs.getTimestamp("update_time").toLocalDateTime(),
-            rs.getInt("matching_ingredients")
+            rs.getInt("matching_ingredients"),
+            rs.getString("diet"),
+            rs.getString("is_favorite")
 
     );
 
@@ -78,14 +80,28 @@ public class RecipeDao {
         jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(),searchTitle,recipe.getContent(),recipe.getImage(),recipe.getPerson(),dateTimeService.getCurrentDateTime(), dateTimeService.getCurrentDateTime());
         return findRecipeIdByName(recipe.getTitle());
     }
-    public List<SearchResultRecipeDto> findRecipesByIngredientsAndName(List<Integer> ingredientIds, String search) {
+    public List<SearchResultRecipeDto> findRecipesByIngredientsAndName(List<Integer> ingredientIds, String search, String email) {
         // Base de la requête SQL
         StringBuilder sql = new StringBuilder(
                 "SELECT r.id_recipe, r.email, r.title, r.content, r.image, r.person, " +
                         "r.state, r.rate, r.nb_rate, r.create_time, r.update_time, " +
-                        "COUNT(ri.id_ingredient) AS matching_ingredients " +
+                        "COUNT(ri.id_ingredient) AS matching_ingredients, " +
+                        "CASE " +
+                        " WHEN COUNT(DISTINCT d.id_diet) = 0 THEN 'Non classé' " +
+                        " WHEN SUM(CASE WHEN d.name = 'Végan' THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient) " +
+                        " THEN 'Végan' " +
+                        " WHEN SUM(CASE WHEN d.name IN ('Végétarien') THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient) " +
+                        " THEN 'Végétarien' " +
+                        " ELSE 'Non végétarien' " +
+                        "END AS diet, " +
+                        "CASE WHEN COUNT(f.favoriteable_id) > 0 THEN 'true' ELSE 'false' END AS is_favorite " +
                         "FROM recipe r " +
-                        "LEFT JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe "
+                        "LEFT JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe " +
+                        "JOIN ingredient i ON ri.id_ingredient = i.id_ingredient " +
+                        "LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient " +
+                        "LEFT JOIN diet d ON di.id_diet = d.id_diet " +
+                        "LEFT JOIN opinion o ON r.id_recipe = o.id_recipe " +
+                        "LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id " // NE PAS FILTRER SUR f.email ICI
         );
 
         // Liste pour stocker les paramètres SQL
@@ -110,6 +126,12 @@ public class RecipeDao {
             }
             sql.append("r.search_title LIKE ? ");
             params.add("%" + search + "%");
+        }
+
+        // Ajout de la condition sur email uniquement dans la sélection des favoris
+        if (email != null) {
+            sql.append("AND (f.email = ? OR f.email IS NULL) "); // Inclut aussi les non-favoris
+            params.add(email);
         }
 
         // Ajout du GROUP BY et ORDER BY

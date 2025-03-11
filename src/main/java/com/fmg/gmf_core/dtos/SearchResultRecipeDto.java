@@ -30,8 +30,11 @@ public class SearchResultRecipeDto {
 
     private int matching_ingredients;
 
+    private String diet;
 
-    public SearchResultRecipeDto(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nb_rate, LocalDateTime create_time, LocalDateTime update_time, int match) {
+    private String is_favorite;
+
+    public SearchResultRecipeDto(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nb_rate, LocalDateTime create_time, LocalDateTime update_time, int match, String diet, String isFavorite) {
         this.id_recipe = id_recipe;
         this.email = email;
         this.title = title;
@@ -44,6 +47,8 @@ public class SearchResultRecipeDto {
         this.create_time = create_time;
         this.update_time = update_time;
         this.matching_ingredients = match;
+        this.diet = diet;
+        is_favorite = isFavorite;
     }
 
     public int getId_recipe() {
@@ -140,5 +145,21 @@ public class SearchResultRecipeDto {
 
     public void setMatching_ingredients(int matching_ingredients) {
         this.matching_ingredients = matching_ingredients;
+    }
+
+    public String getIs_favorite() {
+        return is_favorite;
+    }
+
+    public void setIs_favorite(String is_favorite) {
+        this.is_favorite = is_favorite;
+    }
+
+    public String getDiet() {
+        return diet;
+    }
+
+    public void setDiet(String diet) {
+        this.diet = diet;
     }
 }

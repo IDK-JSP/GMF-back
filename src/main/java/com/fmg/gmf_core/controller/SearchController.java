@@ -17,23 +17,32 @@ public class SearchController {
     private final IngredientDao ingredientDao;
     private final RecipeDao recipeDao;
     private final Search search;
+    private final JwtUtil jwtUtil;
 
 
-    public SearchController(IngredientDao ingredientDao, RecipeDao recipeDao, Search search) {
+    public SearchController(IngredientDao ingredientDao, RecipeDao recipeDao, Search search, JwtUtil jwtUtil) {
         this.ingredientDao = ingredientDao;
         this.recipeDao = recipeDao;
         this.search = search;
+        this.jwtUtil = jwtUtil;
     }
 
 
 
 
     @PostMapping
-    public Search filterRecipe(@RequestBody List<Integer> ingredients, @RequestParam String title) {
+    public Search filterRecipe(@RequestBody List<Integer> ingredients, @RequestParam String title,@RequestHeader(value = "Authorization", required = false) String authorizationHeader) {
+        String email;
+        if (authorizationHeader != null) {
+            String token = authorizationHeader.substring(7);  // Supprime "Bearer " (7 caractères)
+            email = jwtUtil.getEmailFromToken(token);
+        }else {
+            email = null;
+        }
         if (title != "") {
             search.setIngredients(ingredientDao.findIngredientByName(title));
         }
-        search.setRecipes(recipeDao.findRecipesByIngredientsAndName(ingredients, title));
+        search.setRecipes(recipeDao.findRecipesByIngredientsAndName(ingredients, title, email));
         if (search.getRecipes().isEmpty() && search.getIngredients().isEmpty()) {
             throw new ResourceNotFoundException("Aucun résultat de recherche");
         }
