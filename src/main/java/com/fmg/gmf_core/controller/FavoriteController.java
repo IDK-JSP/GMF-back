@@ -42,4 +42,26 @@ public class FavoriteController {
        userFavoriteDto.setRecipes(favoriteDao.findUserAllFavoriteRecipe(email));
        return userFavoriteDto;
     }
+    @DeleteMapping("/delete/recipe/{recipeId}")
+    public ResponseEntity<String> deleteFavoriteRecipe(@PathVariable int recipeId,@RequestHeader("Authorization") String authorizationHeader) {
+        String token = authorizationHeader.substring(7);  // Supprime "Bearer " (7 caractères)
+        String email = jwtUtil.getEmailFromToken(token);  // Appel de votre méthode getEmailFromToken
+        try {
+            favoriteDao.deleteFavorite(recipeId, email,"recipe");
+            return ResponseEntity.ok("Favori supprimé avec succès.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la suppression du favori.");
+        }
+    }
+    @DeleteMapping("/delete/ingredient/{ingredientId}")
+    public ResponseEntity<String> deleteFavoriteIngredient(@PathVariable int recipeId,@RequestHeader("Authorization") String authorizationHeader) {
+        String token = authorizationHeader.substring(7);  // Supprime "Bearer " (7 caractères)
+        String email = jwtUtil.getEmailFromToken(token);  // Appel de votre méthode getEmailFromToken
+        try {
+            favoriteDao.deleteFavorite(recipeId, email,"ingredient");
+            return ResponseEntity.ok("Favori supprimé avec succès.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la suppression du favori.");
+        }
+    }
 }
