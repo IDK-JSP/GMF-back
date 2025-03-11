@@ -30,6 +30,7 @@ public class SearchResultRecipeDto {
 
     private int matching_ingredients;
 
+
     public SearchResultRecipeDto(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nb_rate, LocalDateTime create_time, LocalDateTime update_time, int match) {
         this.id_recipe = id_recipe;
         this.email = email;

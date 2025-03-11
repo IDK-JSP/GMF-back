@@ -1,10 +1,12 @@
 package com.fmg.gmf_core.dtos;
 
 import com.fmg.gmf_core.entitys.Diet;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Component
 public class RecipeDietsDto {
     private int id_recipe;
     private String email;
@@ -18,10 +20,12 @@ public class RecipeDietsDto {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private String diet;
+    private String favorite;
 
-    public RecipeDietsDto() {}
+    public RecipeDietsDto() {
+    }
 
-    public RecipeDietsDto(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nbRate, LocalDateTime createTime, LocalDateTime updateTime, String diet) {
+    public RecipeDietsDto(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nbRate, LocalDateTime createTime, LocalDateTime updateTime, String diet, String favorite) {
         this.id_recipe = id_recipe;
         this.email = email;
         this.title = title;
@@ -34,6 +38,7 @@ public class RecipeDietsDto {
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.diet = diet;
+        this.favorite = favorite;
     }
 
     public int getId_recipe() {
@@ -130,5 +135,13 @@ public class RecipeDietsDto {
 
     public void setDiet(String diet) {
         this.diet = diet;
+    }
+
+    public String getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(String favorite) {
+        this.favorite = favorite;
     }
 }

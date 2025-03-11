@@ -33,7 +33,8 @@ public class RecipeDietsDao {
             rs.getInt("nb_rate"),
             rs.getTimestamp("create_time").toLocalDateTime(),
             rs.getTimestamp("update_time").toLocalDateTime(),
-            rs.getString("diet")
+            rs.getString("diet"),
+            rs.getString("is_favorite")
     );
 
     public List<RecipeDietsDto> findAll() {
