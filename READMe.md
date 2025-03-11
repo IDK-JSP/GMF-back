@@ -30,22 +30,24 @@
 > **Méthode :** `GET`  
 > **Description :** Récuperer toute les recettes sans filtre.  
 > **Réponse :**
+
 ```json
 [
-    {
-        id_recipe: number;
-        email: string;
-        title: string;
-        content: string;
-        image: string;
-        person: number;
-        state: string;
-        rate: number;
-        nbRate: number;
-        createTime: string;
-        updateTime: string;
-        diet: string
-    }
+  {
+    id_recipe: number;
+    email: string;
+    title: string;
+    content: string;
+    image: string;
+    person: number;
+    state: string;
+    rate: number;
+    nbRate: number;
+    createTime: string;
+    updateTime: string;
+    diet: string;
+    is_favorite: string //true ou false
+  }
 ]
 ```
 ### 🔹 Recherche d'une recette avec son id (`/recipe/{id}`)
@@ -301,3 +303,41 @@
     updateTime: string
 }
 ```
+
+## 🛠️ Endpoints collection de recette
+```json
+[
+  {
+    id_recipe: number;
+    email: string;
+    title: string;
+    content: string;
+    image: string;
+    person: number;
+    state: string;
+    rate: number;
+    nbRate: number;
+    createTime: string;
+    updateTime: string;
+    diet: string;
+    is_favorite: string //true ou false
+  }
+]
+```
+### 🔹 Récupérer les meilleurs recette (`collection/top`)
+> **Méthode :** `GET`
+
+### 🔹 Récupérer les recettes les plus notés (`collection/nbRate`)
+> **Méthode :** `GET`  
+
+### 🔹 Récupérer les recettes faites récemment (`collection/recent`)
+> **Méthode :** `GET`  
+
+### 🔹 Récupérer les recettes vege (`collection/vege`)
+> **Méthode :** `GET`  
+
+### 🔹 Récupérer les recettes vegan (`collection/vegan`)
+> **Méthode :** `GET`  
+
+### 🔹 Récupérer les recettes validés (`collection/validate`)
+> **Méthode :** `GET`  
