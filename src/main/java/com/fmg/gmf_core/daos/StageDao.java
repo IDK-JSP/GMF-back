@@ -1,6 +1,5 @@
 package com.fmg.gmf_core.daos;
 
-import com.fmg.gmf_core.entitys.Recipe;
 import com.fmg.gmf_core.entitys.Stage;
 import com.fmg.gmf_core.helpers.GlobalHelper;
 import com.fmg.gmf_core.helpers.RecipeHelper;
@@ -52,6 +51,10 @@ public class StageDao {
         String sql = "UPDATE recipe set content = ? where id_recipe = ?;";
         int rowsAffected = jdbcTemplate.update(sql,  stage.getContent(), stage.getId_recipe());
         return rowsAffected > 0;
+    }
+    public void deleteStage(int recipeId, int stage) {
+        String sql = "DELETE FROM stage WHERE id_recipe = ? AND stage = ?";
+        jdbcTemplate.update(sql, recipeId, stage);
     }
 
     //Utilitaire

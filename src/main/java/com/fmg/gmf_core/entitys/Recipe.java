@@ -2,7 +2,6 @@ package com.fmg.gmf_core.entitys;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 

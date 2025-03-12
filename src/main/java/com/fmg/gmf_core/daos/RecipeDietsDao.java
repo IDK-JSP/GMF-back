@@ -2,7 +2,6 @@ package com.fmg.gmf_core.daos;
 
 
 import com.fmg.gmf_core.dtos.RecipeDietsDto;
-import com.fmg.gmf_core.entitys.Diet;
 import com.fmg.gmf_core.helpers.GlobalHelper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

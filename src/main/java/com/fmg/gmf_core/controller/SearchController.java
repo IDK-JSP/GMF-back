@@ -2,8 +2,6 @@ package com.fmg.gmf_core.controller;
 
 import com.fmg.gmf_core.daos.IngredientDao;
 import com.fmg.gmf_core.daos.RecipeDao;
-import com.fmg.gmf_core.daos.SearchDao;
-import com.fmg.gmf_core.dtos.RecipeDietsDto;
 import com.fmg.gmf_core.dtos.Search;
 import com.fmg.gmf_core.exceptions.ResourceNotFoundException;
 import com.fmg.gmf_core.security.JwtUtil;

@@ -1,7 +1,6 @@
 package com.fmg.gmf_core.controller;
 
 import com.fmg.gmf_core.daos.MeasurementDao;
-import com.fmg.gmf_core.entitys.Ingredient;
 import com.fmg.gmf_core.entitys.Measurement;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

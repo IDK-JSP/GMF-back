@@ -1,6 +1,5 @@
 package com.fmg.gmf_core.daos;
 
-import com.fmg.gmf_core.entitys.Favorite;
 import com.fmg.gmf_core.entitys.Opinion;
 import com.fmg.gmf_core.helpers.GlobalHelper;
 import com.fmg.gmf_core.helpers.RecipeHelper;
@@ -47,6 +46,10 @@ public class OpinionDao {
         String sql = "INSERT INTO opinion (id_recipe, email, rate, comment, create_time) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, opinion.getId_recipe(),opinion.getEmail(),opinion.getRate(),opinion.getComment(),dateTimeService.getCurrentDateTime());
         return opinion;
+    }
+    public void deleteOpinion(int recipeId, String email) {
+        String sql = "DELETE FROM opinion WHERE id_recipe = ? AND email = ?";
+        jdbcTemplate.update(sql, recipeId, email);
     }
     //Utilitaire
     public boolean opinionExist(Opinion opinion) {

@@ -44,6 +44,12 @@ public class IngredientDao {
         jdbcTemplate.update(sql, ingredient.getName(), dateTimeService.getCurrentDateTime(), dateTimeService.getCurrentDateTime());
         return ingredient;
     }
+    public Ingredient findIngredientIdByName(String name){
+        globalHelper.exist(!ingredientNameExist(name),name); ;
+        System.out.println(name);
+        String sql = "SELECT * from ingredient where name = ?";
+        return jdbcTemplate.queryForObject(sql,ingredientRowMapper,name);
+    }
 
     //Utilitaire
     public Boolean ingredientNameExist(String name){
