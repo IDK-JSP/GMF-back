@@ -2,7 +2,6 @@ package com.fmg.gmf_core.controller;
 
 import com.fmg.gmf_core.daos.OpinionDao;
 import com.fmg.gmf_core.daos.RecipeDao;
-import com.fmg.gmf_core.entitys.Favorite;
 import com.fmg.gmf_core.entitys.Opinion;
 import com.fmg.gmf_core.entitys.Recipe;
 import com.fmg.gmf_core.security.JwtUtil;

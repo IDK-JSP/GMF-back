@@ -38,6 +38,10 @@ public class RecipeIngredientDao {
         jdbcTemplate.update(sql, recipeIngredient.getId_recipe(), recipeIngredient.getId_ingredient(), recipeIngredient.getQuantity(),recipeIngredient.getId_measurement());
         return  recipeIngredient;
     }
+    public void deleteRecipeIngredient(int recipeId, int id_ingredient) {
+        String sql = "DELETE FROM recipe_ingredient WHERE id_recipe = ? AND id_ingredient = ?";
+        jdbcTemplate.update(sql, recipeId, id_ingredient);
+    }
     //Utilitaire
     public Boolean recipeIngredientExist(int id_recipe, int id_ingredient){
         recipeHelper.recipeExist(id_recipe);

@@ -160,6 +160,10 @@ public class RecipeDao {
         jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(), recipe.getContent(), recipe.getImage(), recipe.getPerson(), recipe.getState(), recipe.getRate(), recipe.getNb_rate(), recipe.getId_recipe());
         return recipe.getId_recipe();
     }
+    public void deleteRecipe(int recipeId, String email) {
+        String sql = "DELETE FROM recipe WHERE id_recipe = ? AND email = ?";
+        jdbcTemplate.update(sql, recipeId, email);
+    }
 
 
 

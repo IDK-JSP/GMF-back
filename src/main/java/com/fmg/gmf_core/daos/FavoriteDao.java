@@ -71,6 +71,12 @@ public class FavoriteDao {
                 "and f.email = ?;";
         return  jdbcTemplate.query(sql, recipeRowMapper, email);
     }
+    public List<Favorite> findRecipeFavorite(int id){
+        recipeHelper.recipeExist(id);
+        String sql = "SELECT * FROM favorite where favoriteable_type = 'recipe' and favoriteable_id = ?";
+        List<Favorite> favorites = jdbcTemplate.query(sql, favoriteRowMapper, id);
+        return favorites;
+    }
     public Favorite save(Favorite favorite) {
         userHelper.emailExist(favorite.getEmail());
         globalHelper.notExist(favoriteExist(favorite.getEmail(),favorite.getFavoriteable_type(),favorite.getFavoriteable_id()), "Favoris");

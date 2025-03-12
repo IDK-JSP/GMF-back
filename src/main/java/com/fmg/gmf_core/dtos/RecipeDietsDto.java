@@ -1,10 +1,9 @@
 package com.fmg.gmf_core.dtos;
 
-import com.fmg.gmf_core.entitys.Diet;
+
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Component
 public class RecipeDietsDto {

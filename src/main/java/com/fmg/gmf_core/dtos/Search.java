@@ -1,7 +1,6 @@
 package com.fmg.gmf_core.dtos;
 
 import com.fmg.gmf_core.entitys.Ingredient;
-import com.fmg.gmf_core.entitys.Recipe;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

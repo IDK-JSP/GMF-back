@@ -132,7 +132,10 @@
   ]
 }
 ```
-
+### 🔹 Supprimer une recette  (`/recipe/delete/{id_recipe}`)
+> **Méthode :** `DELETE`
+> 
+> 
 ## 🛠️ Endpoints ingrédients
 
 ### 🔹 Tout les ingrédients (`/ingredient/all`)
