@@ -81,7 +81,6 @@ public class RecipeDao {
         return findRecipeIdByName(recipe.getTitle());
     }
     public List<SearchResultRecipeDto> findRecipesByIngredientsAndName(List<Integer> ingredientIds, String search, String email) {
-        // Base de la requête SQL
         StringBuilder sql = new StringBuilder(
                 "SELECT r.id_recipe, r.email, r.title, r.content, r.image, r.person, " +
                         "r.state, r.rate, r.nb_rate, r.create_time, r.update_time, " +
@@ -101,49 +100,46 @@ public class RecipeDao {
                         "LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient " +
                         "LEFT JOIN diet d ON di.id_diet = d.id_diet " +
                         "LEFT JOIN opinion o ON r.id_recipe = o.id_recipe " +
-                        "LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id " // NE PAS FILTRER SUR f.email ICI
+                        "LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id AND f.favoriteable_type = 'recipe' " // Correction ici
         );
 
-        // Liste pour stocker les paramètres SQL
         List<Object> params = new ArrayList<>();
+        boolean hasWhere = false; // Flag pour savoir si un WHERE existe déjà
 
-        // Ajout de la condition sur les ingrédients uniquement si la liste n'est pas vide
+        // Filtre sur les ingrédients
         if (ingredientIds != null && !ingredientIds.isEmpty()) {
-            for (int i = 0; i < ingredientIds.size(); i++) {
-                ingredientHelper.ingredientExist(ingredientIds.get(i)); // Vérifie l'existence de l'ingrédient
+            for (Integer ingredientId : ingredientIds) {
+                ingredientHelper.ingredientExist(ingredientId); // Vérifie si l'ingrédient existe
             }
             String placeholders = String.join(",", Collections.nCopies(ingredientIds.size(), "?"));
-            sql.append("WHERE ri.id_ingredient IN (").append(placeholders).append(") ");
+            sql.append(" WHERE ri.id_ingredient IN (").append(placeholders).append(") ");
             params.addAll(ingredientIds);
+            hasWhere = true;
         }
 
-        // Ajout de la condition sur le titre (si une condition WHERE existe déjà, on utilise AND)
+        // Filtre sur le titre
         if (search != null && !search.isBlank()) {
-            if (params.isEmpty()) {
-                sql.append("WHERE ");
-            } else {
-                sql.append("AND ");
-            }
+            sql.append(hasWhere ? "AND " : " WHERE ");
             sql.append("r.search_title LIKE ? ");
             params.add("%" + search + "%");
+            hasWhere = true;
         }
 
-        // Ajout de la condition sur email uniquement dans la sélection des favoris
+        // Filtre sur les favoris (optionnel)
         if (email != null) {
-            sql.append("AND (f.email = ? OR f.email IS NULL and f.favoriteable_type = 'recipe' ) "); // Inclut aussi les non-favoris
+            sql.append(hasWhere ? "AND " : " WHERE ");
+            sql.append("(f.email = ? OR f.email IS NULL) ");
             params.add(email);
         }
 
         // Ajout du GROUP BY et ORDER BY
-        sql.append("GROUP BY r.id_recipe ORDER BY matching_ingredients DESC, r.rate DESC");
+        sql.append(" GROUP BY r.id_recipe ORDER BY matching_ingredients DESC, r.rate DESC");
 
         try {
-            // Exécution de la requête avec les paramètres
             return jdbcTemplate.query(sql.toString(), searchResultRecipeDtoRowMapper, params.toArray());
         } catch (Exception e) {
-            // Log de l'erreur pour déboguer
             System.out.println("Erreur lors de l'exécution de la requête : " + e.getMessage());
-            throw e;  // Relever l'exception pour propagation
+            throw e;
         }
     }
 
