@@ -130,7 +130,7 @@ public class RecipeDao {
 
         // Ajout de la condition sur email uniquement dans la sélection des favoris
         if (email != null) {
-            sql.append("AND (f.email = ? OR f.email IS NULL and f.favoriteable_type = recipe ) "); // Inclut aussi les non-favoris
+            sql.append("AND (f.email = ? OR f.email IS NULL and f.favoriteable_type = 'recipe' ) "); // Inclut aussi les non-favoris
             params.add(email);
         }
 
