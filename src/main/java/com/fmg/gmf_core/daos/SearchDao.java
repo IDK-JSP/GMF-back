@@ -34,57 +34,106 @@ public class SearchDao {
             rs.getString("is_favorite")
     );
 
-    // 🔥 Requête SQL commune pour toutes les méthodes
-    private static final String BASE_SQL = """
-        SELECT 
-            r.id_recipe, r.email, r.title, r.content, r.image, r.person, 
-            r.state, r.rate, r.nb_rate, r.create_time, r.update_time, 
-            CASE  
-                WHEN COUNT(DISTINCT d.id_diet) = 0 THEN 'Non classé'  
-                WHEN SUM(CASE WHEN d.name = 'Végan' THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient)  
-                    THEN 'Végan'  
-                WHEN SUM(CASE WHEN d.name IN ('Végétarien') THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient)  
-                    THEN 'Végétarien'  
-                ELSE 'Non végétarien'  
-            END AS diet,  
-            CASE  
-                WHEN COUNT(f.favoriteable_id) > 0 THEN 'true'  
-                ELSE 'false'  
-            END AS is_favorite  
-        FROM recipe AS r  
-        JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe  
-        JOIN ingredient i ON ri.id_ingredient = i.id_ingredient  
-        LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient  
-        LEFT JOIN diet d ON di.id_diet = d.id_diet  
-        LEFT JOIN opinion o ON r.id_recipe = o.id_recipe  
-        LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id  
-            AND f.email = ?  
-            AND f.favoriteable_type = 'recipe'  
-        GROUP BY 
-            r.id_recipe, r.email, r.title, r.content, r.image, r.person, 
-            r.state, r.rate, r.nb_rate, r.create_time, r.update_time  
-    """;
-
-    // 🔥 Méthode générique pour exécuter une requête SQL personnalisée
-    private List<RecipeDietsDto> executeQuery(String additionalClause, Object... params) {
-        String sql = BASE_SQL + " " + additionalClause;
-        List<RecipeDietsDto> recipes = jdbcTemplate.query(sql, recipeRowMapper, params);
-        globalHelper.isEmpty(recipes, "recette");
+    public List<RecipeDietsDto> orderBy(String email, String order) {
+        String sql = """
+                SELECT\s
+                        r.id_recipe, r.email, r.title, r.content, r.image, r.person,\s
+                        r.state, r.rate, r.nb_rate, r.create_time, r.update_time,\s
+                        CASE \s
+                            WHEN COUNT(DISTINCT d.id_diet) = 0 THEN 'Non classé' \s
+                            WHEN SUM(CASE WHEN d.name = 'Végan' THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient) \s
+                                THEN 'Végan' \s
+                            WHEN SUM(CASE WHEN d.name IN ('Végétarien') THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient) \s
+                                THEN 'Végétarien' \s
+                            ELSE 'Non végétarien' \s
+                        END AS diet, \s
+                        CASE \s
+                            WHEN COUNT(CASE WHEN f.email = ? THEN 1 ELSE NULL END) > 0 THEN 'true' \s
+                            ELSE 'false' \s
+                        END AS is_favorite \s
+                    FROM recipe AS r \s
+                    JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe \s
+                    JOIN ingredient i ON ri.id_ingredient = i.id_ingredient \s
+                    LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient \s
+                    LEFT JOIN diet d ON di.id_diet = d.id_diet \s
+                    LEFT JOIN opinion o ON r.id_recipe = o.id_recipe \s
+                    LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id \s
+                        AND f.favoriteable_type = 'recipe' \s
+                    GROUP BY\s
+                        r.id_recipe, r.email, r.title, r.content, r.image, r.person,\s
+                        r.state, r.rate, r.nb_rate, r.create_time, r.update_time \s
+                        order by """+order+ """ 
+                DESC
+                """;
+        List<RecipeDietsDto> recipes = jdbcTemplate.query(sql, recipeRowMapper, email);
         return recipes;
+
+    }
+    public List<RecipeDietsDto> where(String email, String condition) {
+        String sql = """
+                SELECT\s
+                    r.id_recipe, r.email, r.title, r.content, r.image, r.person,\s
+                    r.state, r.rate, r.nb_rate, r.create_time, r.update_time,\s
+                    CASE \s
+                        WHEN COUNT(DISTINCT d.id_diet) = 0 THEN 'Non classé' \s
+                        WHEN SUM(CASE WHEN d.name = 'Végan' THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient) \s
+                            THEN 'Végan' \s
+                        WHEN SUM(CASE WHEN d.name IN ('Végétarien') THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient) \s
+                            THEN 'Végétarien' \s
+                        ELSE 'Non végétarien' \s
+                    END AS diet, \s
+                    CASE \s
+                        WHEN COUNT(CASE WHEN f.email = ? THEN 1 ELSE NULL END) > 0 THEN 'true' \s
+                        ELSE 'false' \s
+                    END AS is_favorite \s
+                FROM recipe AS r \s
+                JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe \s
+                JOIN ingredient i ON ri.id_ingredient = i.id_ingredient \s
+                LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient \s
+                LEFT JOIN diet d ON di.id_diet = d.id_diet \s
+                LEFT JOIN opinion o ON r.id_recipe = o.id_recipe \s
+                LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id \s
+                    AND f.favoriteable_type = 'recipe' \s
+                where """+condition+ """
+                GROUP BY\s
+                    r.id_recipe, r.email, r.title, r.content, r.image, r.person,\s
+                    r.state, r.rate, r.nb_rate, r.create_time, r.update_time \s
+                """;
+        List<RecipeDietsDto> recipes = jdbcTemplate.query(sql, recipeRowMapper, email);
+        return recipes;
+
     }
 
-    // 🔹 Trier par un critère donné (ex: "rate", "create_time")
-    public List<RecipeDietsDto> orderBy(String order, String email) {
-        return executeQuery("ORDER BY " + order + " DESC", email);
-    }
-
-    // 🔹 Filtrer par un régime alimentaire (ex: "Végétarien", "Végan")
-    public List<RecipeDietsDto> having(String diet, String email) {
-        return executeQuery("HAVING SUM(CASE WHEN d.name IN (?) THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient)", email, diet);
-    }
-
-    // 🔹 Ajouter une condition personnalisée (ex: "state = 'published'")
-    public List<RecipeDietsDto> where(String condition, String email) {
-        return executeQuery("WHERE " + condition, email);
+    public List<RecipeDietsDto> having(String email, String diet) {
+        String sql = """
+                    SELECT 
+                        r.id_recipe, r.email, r.title, r.content, r.image, r.person, 
+                        r.state, r.rate, r.nb_rate, r.create_time, r.update_time, 
+                        CASE  
+                            WHEN COUNT(DISTINCT d.id_diet) = 0 THEN 'Non classé'  
+                            WHEN SUM(CASE WHEN d.name = 'Végan' THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient)  
+                                THEN 'Végan'  
+                            WHEN SUM(CASE WHEN d.name IN ('Végétarien') THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient)  
+                                THEN 'Végétarien'  
+                            ELSE 'Non végétarien'  
+                        END AS diet,  
+                        CASE  
+                            WHEN COUNT(CASE WHEN f.email = ? THEN 1 ELSE NULL END) > 0 THEN 'true'  
+                            ELSE 'false'  
+                        END AS is_favorite  
+                    FROM recipe AS r  
+                    JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe  
+                    JOIN ingredient i ON ri.id_ingredient = i.id_ingredient  
+                    LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient  
+                    LEFT JOIN diet d ON di.id_diet = d.id_diet  
+                    LEFT JOIN opinion o ON r.id_recipe = o.id_recipe  
+                    LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id  
+                        AND f.favoriteable_type = 'recipe'  
+                    GROUP BY 
+                        r.id_recipe, r.email, r.title, r.content, r.image, r.person, 
+                        r.state, r.rate, r.nb_rate, r.create_time, r.update_time  
+                    HAVING diet = '""" +diet+"'";
+        List<RecipeDietsDto> recipes = jdbcTemplate.query(sql, recipeRowMapper, email);
+        return recipes;
     }
 }

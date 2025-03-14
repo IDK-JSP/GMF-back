@@ -31,7 +31,7 @@ public class CollectionController {
         }else {
             email = null;
         }
-        return ResponseEntity.ok(searchDao.orderBy("rate", email));
+        return ResponseEntity.ok(searchDao.orderBy(email," r.rate "));
     }
 
     @GetMapping("/nbRate")
@@ -43,7 +43,7 @@ public class CollectionController {
         }else {
             email = null;
         }
-        return ResponseEntity.ok(searchDao.orderBy("nb_rate", email));
+        return ResponseEntity.ok(searchDao.orderBy(email, " r.nb_rate " ));
     }
 
     @GetMapping("/recent")
@@ -55,7 +55,7 @@ public class CollectionController {
         }else {
             email = null;
         }
-        return ResponseEntity.ok(searchDao.orderBy("MAX(o.create_time)", email));
+        return ResponseEntity.ok(searchDao.orderBy(email," MAX(o.create_time) "));
     }
 
     @GetMapping("/vege")
@@ -67,7 +67,7 @@ public class CollectionController {
         }else {
             email = null;
         }
-        return ResponseEntity.ok(searchDao.having("'Végétarien'", email));
+        return ResponseEntity.ok(searchDao.having( email,"Végétarien"));
     }
 
     @GetMapping("/vegan")
@@ -78,7 +78,8 @@ public class CollectionController {
             email = jwtUtil.getEmailFromToken(token);
         }else {
             email = null;
-        }return ResponseEntity.ok(searchDao.having("'Végan'", email));
+        }
+        return ResponseEntity.ok(searchDao.having(email,"Végan"));
     }
 
     @GetMapping("/validate")
@@ -89,6 +90,6 @@ public class CollectionController {
             email = jwtUtil.getEmailFromToken(token);
         }else {
             email = null;
-        }return ResponseEntity.ok(searchDao.where("r.state = 'validate'", email));
+        }return ResponseEntity.ok(searchDao.where(email," r.state = 'validate' " ));
     }
 }
