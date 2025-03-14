@@ -2,9 +2,11 @@ package com.fmg.gmf_core.controller;
 
 import com.fmg.gmf_core.daos.IngredientDao;
 import com.fmg.gmf_core.daos.RecipeDao;
+import com.fmg.gmf_core.daos.SearchDao;
 import com.fmg.gmf_core.dtos.Search;
 import com.fmg.gmf_core.exceptions.ResourceNotFoundException;
 import com.fmg.gmf_core.security.JwtUtil;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +31,7 @@ public class SearchController {
 
 
     @PostMapping
-    public Search filterRecipe(@RequestBody List<Integer> ingredients, @RequestParam String title,@RequestHeader(value = "Authorization", required = false) String authorizationHeader) {
+    public ResponseEntity<Search> filterRecipe(@RequestBody List<Integer> ingredients, @RequestParam String title, @RequestHeader(value = "Authorization", required = false) String authorizationHeader) {
         String email;
         if (authorizationHeader != null) {
             String token = authorizationHeader.substring(7);  // Supprime "Bearer " (7 caractères)
@@ -44,6 +46,6 @@ public class SearchController {
         if (search.getRecipes().isEmpty() && search.getIngredients().isEmpty()) {
             throw new ResourceNotFoundException("Aucun résultat de recherche");
         }
-        return search;
+        return ResponseEntity.ok(search);
     }
 }

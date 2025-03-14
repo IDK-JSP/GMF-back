@@ -264,7 +264,8 @@
 ```json
 {
   id_recipe: int,
-  rate: int
+  rate: int,
+  comment: string
 }
 ```
 
