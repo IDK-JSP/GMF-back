@@ -84,36 +84,33 @@ public class RecipeDao {
         StringBuilder sql = new StringBuilder(
                 "SELECT r.id_recipe, r.email, r.title, r.content, r.image, r.person, " +
                         "r.state, r.rate, r.nb_rate, r.create_time, r.update_time, " +
-                        "COUNT(ri.id_ingredient) AS matching_ingredients, " +
+                        "COUNT(DISTINCT ri.id_ingredient) AS matching_ingredients, " + // Fix de COUNT
                         """
-                        CASE\s
-                                -- Si tous les ingrédients de la recette sont Végan
-                                WHEN COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)\s
+                        CASE 
+                                WHEN COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient) 
                                     THEN 'Végan'
-                                -- Si tous les ingrédients de la recette sont soit Végan soit Végétarien
-                                WHEN COUNT(DISTINCT CASE WHEN d.name IN ('Végan', 'Végétarien') THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)\s
+                                WHEN COUNT(DISTINCT CASE WHEN d.name IN ('Végan', 'Végétarien') THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient) 
                                     THEN 'Végétarien'
-                                -- Si au moins un ingrédient n'a pas de régime alimentaire spécifié
                                 ELSE 'Non renseigné'
                         END AS diet,
-                                """+
+                        """+
                         "CASE WHEN COUNT(f.favoriteable_id) > 0 THEN 'true' ELSE 'false' END AS is_favorite " +
                         "FROM recipe r " +
                         "LEFT JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe " +
-                        "JOIN ingredient i ON ri.id_ingredient = i.id_ingredient " +
+                        "LEFT JOIN ingredient i ON ri.id_ingredient = i.id_ingredient " +
                         "LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient " +
                         "LEFT JOIN diet d ON di.id_diet = d.id_diet " +
                         "LEFT JOIN opinion o ON r.id_recipe = o.id_recipe " +
-                        "LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id AND f.favoriteable_type = 'recipe' " // Correction ici
+                        "LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id AND f.favoriteable_type = 'recipe' "
         );
 
         List<Object> params = new ArrayList<>();
-        boolean hasWhere = false; // Flag pour savoir si un WHERE existe déjà
+        boolean hasWhere = false;
 
-        // Filtre sur les ingrédients
+        // Filtre sur les ingrédients (correction)
         if (ingredientIds != null && !ingredientIds.isEmpty()) {
             for (Integer ingredientId : ingredientIds) {
-                ingredientHelper.ingredientExist(ingredientId); // Vérifie si l'ingrédient existe
+                ingredientHelper.ingredientExist(ingredientId);
             }
             String placeholders = String.join(",", Collections.nCopies(ingredientIds.size(), "?"));
             sql.append(" WHERE ri.id_ingredient IN (").append(placeholders).append(") ");
