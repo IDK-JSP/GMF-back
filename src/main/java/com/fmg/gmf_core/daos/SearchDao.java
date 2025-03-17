@@ -37,14 +37,16 @@ public class SearchDao {
             SELECT\s
                         r.id_recipe, r.email, r.title, r.content, r.image, r.person,\s
                         r.state, r.rate, r.nb_rate, r.create_time, r.update_time,\s
-                        CASE \s
-                            WHEN COUNT(DISTINCT d.id_diet) = 0 THEN 'Non classé' \s
-                            WHEN SUM(CASE WHEN d.name = 'Végan' THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient) \s
-                                THEN 'Végan' \s
-                            WHEN SUM(CASE WHEN d.name IN ('Végétarien') THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient) \s
-                                THEN 'Végétarien' \s
-                            ELSE 'Non végétarien' \s
-                        END AS diet, \s
+                        CASE\s
+                            -- Si tous les ingrédients de la recette sont Végan
+                            WHEN COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)\s
+                                THEN 'Végan'
+                            -- Si tous les ingrédients de la recette sont soit Végan soit Végétarien
+                            WHEN COUNT(DISTINCT CASE WHEN d.name IN ('Végan', 'Végétarien') THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)\s
+                                THEN 'Végétarien'
+                            -- Si au moins un ingrédient n'a pas de régime alimentaire spécifié
+                            ELSE 'Non renseigné'
+                        END AS diet,
                         CASE \s
                             WHEN COUNT(CASE WHEN f.email = ? THEN 1 ELSE NULL END) > 0 THEN 'true' \s
                             ELSE 'false' \s

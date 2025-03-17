@@ -77,7 +77,8 @@ INSERT INTO `ingredient` (`name`, `content`, `create_time`, `update_time`) VALUE
 ('Curcuma', 'Épice jaune aux propriétés antioxydantes.', NOW(), NOW()),
 ('Cannelle', 'Épice sucrée et parfumée utilisée en pâtisserie et cuisine.', NOW(), NOW()),
 ('Piment', 'Épice forte utilisée pour relever les plats.', NOW(), NOW()),
-('Vanille', 'Épice aromatique extraite de gousses utilisées en pâtisserie.', NOW(), NOW());
+('Vanille', 'Épice aromatique extraite de gousses utilisées en pâtisserie.', NOW(), NOW()),
+('Lardon', 'Un truc moins bien que le bacon.', NOW(), NOW());
 
 INSERT INTO `diet` (`name`, `content`) VALUES
 ('Végan', 'Régime excluant tous les produits d’origine animale, y compris viande, poisson, œufs, produits laitiers et miel.'),
@@ -97,9 +98,7 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (1, 13), -- Carotte
 (1, 14), -- Pomme de terre
 (1, 15), -- Riz
-(1, 16), -- Pâtes
-(1, 23), -- Pain
-(1, 25), -- Chocolat
+(1, 23), --
 (1, 26), -- Noix
 (1, 27), -- Lentilles
 (1, 28), -- Pois chiches
@@ -132,27 +131,29 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (2, 14), -- Pomme de terre
 (2, 15), -- Riz
 (2, 16), -- Pâtes
-(2, 22), -- Fromage
-(2, 23), -- Pain
-(2, 24), -- Miel
-(2, 25), -- Chocolat
-(2, 26), -- Noix
-(2, 27), -- Lentilles
-(2, 28), -- Pois chiches
-(2, 29), -- Champignon
-(2, 30), -- Épinard
-(2, 31), -- Basilic
-(2, 32), -- Thym
-(2, 33), -- Coriandre
-(2, 34), -- Persil
-(2, 35), -- Curcuma
-(2, 36), -- Cannelle
-(2, 37), -- Piment
+(2, 20), -- Fromage
+(2, 21), -- Pain
+(2, 22), -- Miel
+(2, 23), -- Chocolat
+(2, 24), -- Noix
+(2, 25), -- Lentilles
+(2, 26), -- Pois chiches
+(2, 27), -- Champignon
+(2, 28), -- Épinard
+(2, 29), -- Basilic
+(2, 30), -- Thym
+(2, 31), -- Coriandre
+(2, 32), -- Persil
+(2, 33), -- Curcuma
+(2, 34), -- Cannelle
+(2, 35), -- Piment
+(2, 36), -- Vanille
+(2, 37), -- Vanille
 (2, 38); -- Vanille
 
 INSERT INTO `recipe` (`email`, `title`, `search_title`, `content`, `image`, `person`, `state`, `rate`, `nb_rate`, `create_time`, `update_time`) VALUES
 ('root.@', 'Pâtes à la Carbonara','pates a la carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('root.@', 'Salade César miam miam miam miam Salade César miam miam mia','salade cesar miam miam miam miam salade cesar miam miam mia', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse.  miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam miam', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW()),
+('root.@', 'Salade César','salade cesar', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse. ', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW()),
 ('root.@', 'Ratatouille','ratatouille', 'Un plat provençal à base de légumes mijotés : tomates, courgettes, aubergines et poivrons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
 ('root.@', 'Quiche Lorraine','quiche lorraine', 'Tarte salée garnie de crème, lardons et fromage.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
 ('root.@', 'Tarte aux Pommes','tarte aux pommes', 'Pâte sablée croustillante garnie de pommes caramélisées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
@@ -166,9 +167,9 @@ INSERT INTO `recipe` (`email`, `title`, `search_title`, `content`, `image`, `per
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (1, 16, 200, 1), -- Pâtes (g)
 (1, 7, 2, 19),  -- Œufs (pièce)
-(1, 22, 100, 1), -- Fromage (g)
 (1, 2, 50, 1),  -- Beurre (g)
-(1, 5, 1, 18),  -- Sel (pincée)
+(1, 5, 1, 18),-- Sel (pincée)
+(1,39,200,1),
 (1, 6, 1, 18);  -- Poivre (pincée)
 
 -- Salade César (id_recipe = 2)

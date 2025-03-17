@@ -85,14 +85,18 @@ public class RecipeDao {
                 "SELECT r.id_recipe, r.email, r.title, r.content, r.image, r.person, " +
                         "r.state, r.rate, r.nb_rate, r.create_time, r.update_time, " +
                         "COUNT(ri.id_ingredient) AS matching_ingredients, " +
-                        "CASE " +
-                        " WHEN COUNT(DISTINCT d.id_diet) = 0 THEN 'Non classé' " +
-                        " WHEN SUM(CASE WHEN d.name = 'Végan' THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient) " +
-                        " THEN 'Végan' " +
-                        " WHEN SUM(CASE WHEN d.name IN ('Végétarien') THEN 1 ELSE 0 END) = COUNT(DISTINCT i.id_ingredient) " +
-                        " THEN 'Végétarien' " +
-                        " ELSE 'Non végétarien' " +
-                        "END AS diet, " +
+                        """
+                        CASE\s
+                                -- Si tous les ingrédients de la recette sont Végan
+                                WHEN COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)\s
+                                    THEN 'Végan'
+                                -- Si tous les ingrédients de la recette sont soit Végan soit Végétarien
+                                WHEN COUNT(DISTINCT CASE WHEN d.name IN ('Végan', 'Végétarien') THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)\s
+                                    THEN 'Végétarien'
+                                -- Si au moins un ingrédient n'a pas de régime alimentaire spécifié
+                                ELSE 'Non renseigné'
+                        END AS diet,
+                                """+
                         "CASE WHEN COUNT(f.favoriteable_id) > 0 THEN 'true' ELSE 'false' END AS is_favorite " +
                         "FROM recipe r " +
                         "LEFT JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe " +
