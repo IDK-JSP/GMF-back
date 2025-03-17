@@ -30,7 +30,28 @@ public class IngredientDetailsDao {
 
     public List<IngredientDetailsDto> findRecipeIngredients(int id_recipe) {
         recipeHelper.recipeExist(id_recipe);
-        String sql = "SELECT i.name AS ingredient_name, ri.quantity, m.name AS measurement, CASE WHEN GROUP_CONCAT(DISTINCT d.name ORDER BY d.name SEPARATOR ', ') LIKE '%Végan%' THEN 'Végan' ELSE GROUP_CONCAT(DISTINCT d.name ORDER BY d.name SEPARATOR ', ') END AS diet FROM recipe_ingredient ri  JOIN ingredient i ON ri.id_ingredient = i.id_ingredient  JOIN recipe r ON ri.id_recipe = r.id_recipe  JOIN measurement m ON ri.id_measurement = m.id_measurement  JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient JOIN diet d ON di.id_diet = d.id_diet WHERE r.id_recipe = ? GROUP BY i.name, ri.quantity, m.name;";
+        String sql = """
+                SELECT\s
+                    i.name AS ingredient_name,\s
+                    ri.quantity,\s
+                    m.name AS measurement,\s
+                    COALESCE(
+                        CASE\s
+                            WHEN GROUP_CONCAT(DISTINCT d.name ORDER BY d.name SEPARATOR ', ') LIKE '%Végan%' THEN 'Végan'\s
+                            WHEN GROUP_CONCAT(DISTINCT d.name ORDER BY d.name SEPARATOR ', ') IS NOT NULL THEN GROUP_CONCAT(DISTINCT d.name ORDER BY d.name SEPARATOR ', ')
+                            ELSE 'Non renseigné'\s
+                        END, 'Non renseigné'
+                    ) AS diet\s
+                FROM recipe_ingredient ri \s
+                JOIN ingredient i ON ri.id_ingredient = i.id_ingredient \s
+                JOIN recipe r ON ri.id_recipe = r.id_recipe \s
+                JOIN measurement m ON ri.id_measurement = m.id_measurement \s
+                LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient\s
+                LEFT JOIN diet d ON di.id_diet = d.id_diet \s
+                WHERE r.id_recipe = ?\s
+                GROUP BY i.name, ri.quantity, m.name;
+                
+                """;
         List<IngredientDetailsDto> ingredientDetailDtos = jdbcTemplate.query(sql, recipeDetailsRowMapper, id_recipe);
         globalHelper.isEmpty(ingredientDetailDtos, "détails d'ingrédient");
         return ingredientDetailDtos;
