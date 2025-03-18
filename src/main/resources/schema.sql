@@ -29,7 +29,52 @@ CREATE TABLE IF NOT EXISTS `bddgmf`.`user` (
   UNIQUE INDEX `pseudo_UNIQUE` (`pseudo` ASC) VISIBLE)
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `bddgmf`.`duel` (
+  `id_duel` INT NOT NULL AUTO_INCREMENT,
+  `id_recipe_right` INT NOT NULL,
+  `id_recipe_left` INT NOT NULL,
+  `email` VARCHAR(255),
+  `create_time` DATETIME NULL,
+  PRIMARY KEY (`id_duel`,`id_recipe_right`,`id_recipe_left`),
+  CONSTRAINT `fk_duel_recipe_right`
+              FOREIGN KEY (`id_recipe_right`)
+              REFERENCES `bddgmf`.`recipe` (`id_recipe`)
+              ON DELETE CASCADE
+              ON UPDATE CASCADE,
+  CONSTRAINT `fk_duel_recipe_left`
+              FOREIGN KEY (`id_recipe_left`)
+              REFERENCES `bddgmf`.`recipe` (`id_recipe`)
+              ON DELETE CASCADE
+              ON UPDATE CASCADE,
+  CONSTRAINT `fk_duel_user`
+      FOREIGN KEY (`email`)
+      REFERENCES `bddgmf`.`user` (`email`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE)
+ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `bddgmf`.`vote` (
+  `id_duel` INT NOT NULL ,
+  `email` VARCHAR(255),
+  `id_recipe` INT NOT NULL,
+  `create_time` DATETIME NULL,
+  PRIMARY KEY (`id_duel`,`email`),
+  CONSTRAINT `fk_vote_user`
+      FOREIGN KEY (`email`)
+      REFERENCES `bddgmf`.`user` (`email`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `fk_vote_duel`
+        FOREIGN KEY (`id_duel`)
+        REFERENCES `bddgmf`.`duel` (`id_duel`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    CONSTRAINT `fk_vote_recipe`
+            FOREIGN KEY (`id_recipe`)
+            REFERENCES `bddgmf`.`recipe` (`id_recipe`)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE)
+ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bddgmf`.`recipe`
 -- -----------------------------------------------------
