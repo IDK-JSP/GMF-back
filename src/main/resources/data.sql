@@ -8,6 +8,10 @@ TRUNCATE TABLE `recipe_ingredient`;
 TRUNCATE TABLE `stage`;
 TRUNCATE TABLE `opinion`;
 TRUNCATE TABLE `favorite`;
+TRUNCATE TABLE `user`;
+INSERT INTO `user` (`email`,`password`,`role`) VALUES
+('admin@gmail.com','$2a$10$11DN7XvJEu9ri3UmtS7wm.mzbXZsy.rjCHF5Potnfjy7mXRhNlvpa','ADMIN'),
+('root@gmail.com','$2a$10$11DN7XvJEu9ri3UmtS7wm.mzbXZsy.rjCHF5Potnfjy7mXRhNlvpa','USER');
 
 INSERT INTO `measurement` (`name`, `type`) VALUES
 ('cl', 'volume'),

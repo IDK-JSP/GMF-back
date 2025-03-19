@@ -53,7 +53,6 @@ public class IngredientDetailsDao {
                 
                 """;
         List<IngredientDetailsDto> ingredientDetailDtos = jdbcTemplate.query(sql, recipeDetailsRowMapper, id_recipe);
-        globalHelper.isEmpty(ingredientDetailDtos, "détails d'ingrédient");
         return ingredientDetailDtos;
     }
 

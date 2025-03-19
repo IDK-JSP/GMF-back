@@ -50,6 +50,11 @@
   }
 ]
 ```
+
+### 🔹 Récupérer les recettes d'un user (`/recipe/user`)
+> **Méthode :** `GET`
+> **Description :** Un token est requis.
+
 ### 🔹 Recherche d'une recette avec son id (`/recipe/{id}`)
 
 > **Méthode :** `GET`  

@@ -29,8 +29,9 @@ public class RecipeController {
     private final RecipeHelper recipeHelper;
     private final IngredientDao ingredientDao;
     private final FavoriteDao favoriteDao;
+    private final DuelDao duelDao;
 
-    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDietsDao recipeDietsDao1, RecipeDetailsDto recipeDetailsDto, StageDao stageDao, RecipeIngredientDao recipeIngredientDao, JwtUtil jwtUtil, OpinionDao opinionDao, RecipeHelper recipeHelper, IngredientDao ingredientDao, FavoriteDao favoriteDao) {
+    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDietsDao recipeDietsDao1, RecipeDetailsDto recipeDetailsDto, StageDao stageDao, RecipeIngredientDao recipeIngredientDao, JwtUtil jwtUtil, OpinionDao opinionDao, RecipeHelper recipeHelper, IngredientDao ingredientDao, FavoriteDao favoriteDao, DuelDao duelDao) {
         this.recipeDao = recipeDao;
         this.ingredientDetailsDao = ingredientDetailsDao;
         this.recipeDietsDao = recipeDietsDao1;
@@ -42,6 +43,7 @@ public class RecipeController {
         this.recipeHelper = recipeHelper;
         this.ingredientDao = ingredientDao;
         this.favoriteDao = favoriteDao;
+        this.duelDao = duelDao;
     }
 
 
@@ -53,6 +55,13 @@ public class RecipeController {
     @GetMapping("/{id}")
     public ResponseEntity<Recipe> getRecipeFromId(@PathVariable int id) {
         return ResponseEntity.ok(recipeDao.findRecipeById(id));
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<List<RecipeDietsDto>> getUserRecipe(@RequestHeader("Authorization") String authorizationHeader){
+        String token = authorizationHeader.substring(7);  // Supprime "Bearer " (7 caractères)
+        String email = jwtUtil.getEmailFromToken(token);
+        return ResponseEntity.ok(recipeDao.findUserRecipe(email));
     }
 
     @GetMapping("/details/{id}")
@@ -96,7 +105,7 @@ public class RecipeController {
         }
         System.out.println("test");
         List<Stage> stages = stageDao.findRecipeStage(recipeId);
-        for (int i = 0; i < stages.size(); i++) {
+        for (int i = 1; i < stages.size()+1; i++) {
             stageDao.deleteStage(recipeId, i);
         }
         List<Opinion> opinions = opinionDao.findRecipeOpinion(recipeId);
@@ -104,10 +113,14 @@ public class RecipeController {
             opinionDao.deleteOpinion(recipeId, opinions.get(i).getEmail());
         }
         List<Favorite> favorites = favoriteDao.findRecipeFavorite(recipeId);
-        for (int i = 0; i < favorites.size(); i++) {
+        for (int i = 1; i < favorites.size(); i++) {
             favoriteDao.deleteFavorite(recipeId,favorites.get(i).getEmail(),"recipe");
         }
-        recipeDao.deleteRecipe(recipeId, email);
+        List<Duel> duels = duelDao.findRecipeDuel(recipeId);
+        for (int i = 0; i<duels.size();i++){
+            duelDao.deletedDuel(recipeId);
+        }
+        recipeDao.deleteRecipe(recipeId);
         return ResponseEntity.ok("Recette supprimé avec succès.");
 
     }

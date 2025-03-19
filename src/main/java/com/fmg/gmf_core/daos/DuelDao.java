@@ -1,5 +1,6 @@
 package com.fmg.gmf_core.daos;
 
+import com.fmg.gmf_core.dtos.DuelDto;
 import com.fmg.gmf_core.entitys.Duel;
 import com.fmg.gmf_core.helpers.GlobalHelper;
 import com.fmg.gmf_core.helpers.RecipeHelper;
@@ -25,16 +26,31 @@ public class DuelDao {
         this.recipeHelper = recipeHelper;
         this.dateTimeService = dateTimeService;
     }
-    private final RowMapper<Duel> duelRowMapper = (rs,_) -> new Duel(
+    private final RowMapper<DuelDto> duelDtoRowMapper = (rs,_) -> new DuelDto(
+            rs.getInt("id_duel"),
+            rs.getString("email"),
+            rs.getInt("id_recipe_left"),
+            rs.getInt("id_recipe_right"),
+            rs.getTimestamp("create_time").toLocalDateTime(),
+            rs.getInt("total_vote"),
+            rs.getInt("total_votes_right")
+    );
+    private final RowMapper<Duel>duelRowMapper = (rs,_)-> new Duel(
             rs.getInt("id_duel"),
             rs.getInt("id_recipe_right"),
             rs.getInt("id_recipe_left"),
             rs.getString("email"),
             rs.getTimestamp("create_time").toLocalDateTime()
     );
-    public List<Duel> findAllDuel(){
-        String sql = "SELECT * FROM duel";
-        List<Duel> duels = jdbcTemplate.query(sql,duelRowMapper);
+    public List<DuelDto> findAllDuel(){
+        String sql = """
+                SELECT d.id_duel,d.email,d.id_recipe_left,d.id_recipe_right,d.create_time,count(*)as total_vote,
+                COUNT(CASE WHEN v.id_recipe = d.id_recipe_right THEN 1 END) AS total_votes_right
+                FROM vote as v\s
+                join duel d on v.id_duel = d.id_duel
+                GROUP BY d.id_duel, d.email, d.id_recipe_left, d.id_recipe_right, d.create_time;
+                """;
+        List<DuelDto> duels = jdbcTemplate.query(sql,duelDtoRowMapper);
         globalHelper.isEmpty(duels,"duel");
         return duels;
     }
@@ -49,6 +65,14 @@ public class DuelDao {
     public Duel findDuelById(int id_duel){
         String sql = "SELECT * FROM duel WHERE id_duel = ?";
         return jdbcTemplate.queryForObject(sql,duelRowMapper,id_duel);
+    }
+    public List<Duel> findRecipeDuel(int id_recipe){
+        String sql = "SELECT * FROM duel WHERE id_recipe_left = ? or id_recipe_right = ?";
+        return jdbcTemplate.query(sql,duelRowMapper,id_recipe, id_recipe);
+    }
+    public void deletedDuel(int recipeId) {
+        String sql = "DELETE FROM duel WHERE id_recipe_left = ? or id_recipe_right = ?";
+        jdbcTemplate.update(sql, recipeId, recipeId);
     }
     //Utilitaire
     public List<Duel> findDuel(String email, int recipeLeft, int recipeRight){
