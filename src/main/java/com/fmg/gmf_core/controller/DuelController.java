@@ -21,10 +21,10 @@ public class DuelController {
         this.voteDao = voteDao;
     }
     @GetMapping("/all")
-    public ResponseEntity<List<Duel>> getAllDuel(){
+    public ResponseEntity<List<DuelDto>> getAllDuel(){
         return ResponseEntity.ok(duelDao.findAllDuel());
     }
-    @GetMapping("/details/{id_duel}")
+    /*@GetMapping("/details/{id_duel}")
     public ResponseEntity<DuelDto> getDuelDetails(@PathVariable("id_duel") int id){
         // Créer une nouvelle instance de DuelDto
         Duel duel = duelDao.findDuelById(id);
@@ -35,9 +35,13 @@ public class DuelController {
         // Créer le DTO et le retourner
         DuelDto duelDto = new DuelDto(duel, votes, totalVote, totalRightVote);
         return ResponseEntity.ok(duelDto);
-    }
+    }*/
     @PostMapping("/new")
     public ResponseEntity<Duel> saveDuel(@RequestBody Duel duel){
         return ResponseEntity.ok(duelDao.save(duel));
+    }
+    @PostMapping("/vote")
+    public ResponseEntity<Vote> saveVote(@RequestBody Vote vote){
+        return ResponseEntity.ok(voteDao.save(vote));
     }
 }

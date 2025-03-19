@@ -52,8 +52,8 @@ public class SearchDao {
                             ELSE 'false' \s
                         END AS is_favorite \s
                     FROM recipe AS r \s
-                    JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe \s
-                    JOIN ingredient i ON ri.id_ingredient = i.id_ingredient \s
+                    LEFT JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe \s
+                    LEFT JOIN ingredient i ON ri.id_ingredient = i.id_ingredient \s
                     LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient \s
                     LEFT JOIN diet d ON di.id_diet = d.id_diet \s
                     LEFT JOIN opinion o ON r.id_recipe = o.id_recipe \s

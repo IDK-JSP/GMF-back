@@ -59,7 +59,9 @@ public class AuthController {
                     )
             );
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String token = jwtUtils.generateToken(userDetails.getUsername());
+            String role = userDetails.getAuthorities().stream().toList().getFirst().getAuthority();
+            System.out.println(role.substring(5));
+            String token = jwtUtils.generateToken(userDetails.getUsername(),role);
             return ResponseEntity.ok(token); // Retourne le token si l'authentification est réussie
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Erreur : Identifiants invalides");
