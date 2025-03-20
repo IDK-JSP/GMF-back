@@ -20,10 +20,7 @@ public class IngredientController {
     public ResponseEntity<List<Ingredient>> getAllIngredient() {
         return ResponseEntity.ok(ingredientDao.findAll());
     }
-    /*@GetMapping("/search")
-    public List<Ingredient> searchIngredient(@RequestParam String name) {
-        return ingredientDao.findIngredientByName(name);
-    }*/
+
     @PostMapping("/new")
     public ResponseEntity<Ingredient> newIngredient(@Valid @RequestBody Ingredient ingredient, @RequestHeader("Authorization") String authorizationHeader){
         ingredientDao.save(ingredient);

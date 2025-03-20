@@ -43,9 +43,9 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/auth/**","/recipe/all","/recipe/{id}","/recipe/details/{id}","/ingredient/all","/measurement/all", "/search/**","/collection/**","/duel/**").permitAll()
-                                .requestMatchers("/users/**","/opinion/new","/favorite/**","/recipe/new","/ingredient/new","/measurement/new","/request/**" ).hasRole("USER")
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/auth/**","/recipe/all","/recipe/{id}","/recipe/details/{id}","/ingredient/all","/measurement/all", "/search/**","/collection/**").permitAll()
+                                .requestMatchers("/users/**","/opinion/new","/favorite/**","/recipe/new","/recipe/user","/duel/all","/duel/vote").hasRole("USER")
+                                .requestMatchers("/admin/**","/stage/**","/request/**","/recipe/delete/**","/measurement/new","/ingredient/new","/duel/new").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 ).cors(Customizer.withDefaults());
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
