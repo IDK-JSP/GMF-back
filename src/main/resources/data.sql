@@ -156,11 +156,11 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (2, 38); -- Vanille
 
 INSERT INTO `recipe` (`email`, `title`, `search_title`, `content`, `image`, `person`, `state`, `rate`, `nb_rate`, `create_time`, `update_time`) VALUES
-('admin@gmail.com', 'Pâtes à la Carbonara','pates a la carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('admin@gmail.com', 'Salade César','salade cesar', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse. ', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW()),
-('admin@gmail.com', 'Ratatouille','ratatouille', 'Un plat provençal à base de légumes mijotés : tomates, courgettes, aubergines et poivrons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('admin@gmail.com', 'Quiche Lorraine','quiche lorraine', 'Tarte salée garnie de crème, lardons et fromage.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
-('admin@gmail.com', 'Tarte aux Pommes','tarte aux pommes', 'Pâte sablée croustillante garnie de pommes caramélisées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
+('admin@gmail.com', 'Pâtes à la Carbonara','pates a la carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 4.8, 4, NOW(), NOW()),
+('admin@gmail.com', 'Salade César','salade cesar', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse. ', NULL, 2, 'tovalidation', 2.8, 5, NOW(), NOW()),
+('admin@gmail.com', 'Ratatouille','ratatouille', 'Un plat provençal à base de légumes mijotés : tomates, courgettes, aubergines et poivrons.', NULL, 4, 'tovalidation', 3.3, 4, NOW(), NOW()),
+('admin@gmail.com', 'Quiche Lorraine','quiche lorraine', 'Tarte salée garnie de crème, lardons et fromage.', NULL, 6, 'tovalidation', 4, 3, NOW(), NOW()),
+('admin@gmail.com', 'Tarte aux Pommes','tarte aux pommes', 'Pâte sablée croustillante garnie de pommes caramélisées.', NULL, 6, 'tovalidation', 1, 4, NOW(), NOW()),
 ('admin@gmail.com', 'Soupe de légumes','soupe de legumes', 'Un mélange de légumes mijotés pour une soupe savoureuse et réconfortante.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
 ('admin@gmail.com', 'Couscous Royal','couscous royal', 'Plat traditionnel nord-africain avec semoule, légumes et viandes variées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
 ('admin@gmail.com', 'Poulet au curry','poulet au curry', 'Poulet mijoté dans une sauce crémeuse au curry et lait de coco.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
