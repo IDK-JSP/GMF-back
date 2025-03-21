@@ -156,45 +156,45 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (2, 38); -- Vanille
 
 INSERT INTO `recipe` (`email`, `title`, `search_title`, `content`, `image`, `person`, `state`, `rate`, `nb_rate`, `create_time`, `update_time`) VALUES
-('root.@', 'Pâtes à la Carbonara','pates a la carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('root.@', 'Salade César','salade cesar', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse. ', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW()),
-('root.@', 'Ratatouille','ratatouille', 'Un plat provençal à base de légumes mijotés : tomates, courgettes, aubergines et poivrons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('root.@', 'Quiche Lorraine','quiche lorraine', 'Tarte salée garnie de crème, lardons et fromage.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
-('root.@', 'Tarte aux Pommes','tarte aux pommes', 'Pâte sablée croustillante garnie de pommes caramélisées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
-('root.@', 'Soupe de légumes','soupe de legumes', 'Un mélange de légumes mijotés pour une soupe savoureuse et réconfortante.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('root.@', 'Couscous Royal','couscous royal', 'Plat traditionnel nord-africain avec semoule, légumes et viandes variées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
-('root.@', 'Poulet au curry','poulet au curry', 'Poulet mijoté dans une sauce crémeuse au curry et lait de coco.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('root.@', 'Mousse au chocolat','mousse au chocolat', 'Dessert aérien et fondant à base de chocolat noir et œufs.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('root.@', 'Pizza Margherita', 'pizza margherita', 'Une pizza classique avec une sauce tomate, mozzarella et basilic.', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW());
+('admin@gmail.com', 'Pâtes à la Carbonara','pates a la carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('admin@gmail.com', 'Salade César','salade cesar', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse. ', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW()),
+('admin@gmail.com', 'Ratatouille','ratatouille', 'Un plat provençal à base de légumes mijotés : tomates, courgettes, aubergines et poivrons.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('admin@gmail.com', 'Quiche Lorraine','quiche lorraine', 'Tarte salée garnie de crème, lardons et fromage.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
+('admin@gmail.com', 'Tarte aux Pommes','tarte aux pommes', 'Pâte sablée croustillante garnie de pommes caramélisées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
+('admin@gmail.com', 'Soupe de légumes','soupe de legumes', 'Un mélange de légumes mijotés pour une soupe savoureuse et réconfortante.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('admin@gmail.com', 'Couscous Royal','couscous royal', 'Plat traditionnel nord-africain avec semoule, légumes et viandes variées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
+('admin@gmail.com', 'Poulet au curry','poulet au curry', 'Poulet mijoté dans une sauce crémeuse au curry et lait de coco.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('admin@gmail.com', 'Mousse au chocolat','mousse au chocolat', 'Dessert aérien et fondant à base de chocolat noir et œufs.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
+('admin@gmail.com', 'Pizza Margherita', 'pizza margherita', 'Une pizza classique avec une sauce tomate, mozzarella et basilic.', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW());
 
 -- Pâtes à la Carbonara (id_recipe = 1)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(1, 16, 200, 1), -- Pâtes (g)
-(1, 7, 2, 19),  -- Œufs (pièce)
-(1, 2, 50, 1),  -- Beurre (g)
-(1, 5, 1, 18),-- Sel (pincée)
-(1,39,200,1),
-(1, 6, 1, 18);  -- Poivre (pincée)
+(1, 16, 200, 11), -- Pâtes (g)
+(1, 7, 2, 16),  -- Œufs (pièce)
+(1, 2, 50, 11),  -- Beurre (g)
+(1, 5, 1, 19),-- Sel (pincée)
+(1,39,200,11),
+(1, 6, 1, 19);  -- Poivre (pincée)
 
 -- Salade César (id_recipe = 2)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(2, 21, 200, 1), -- Poulet (g)
-(2, 10, 2, 19),  -- Tomates (pièce)
-(2, 11, 1, 19),  -- Oignon (pièce)
-(2, 5, 1, 18),   -- Sel (pincée)
-(2, 6, 1, 18),   -- Poivre (pincée)
+(2, 18, 200, 11), -- Poulet (g)
+(2, 10, 2, 17),  -- Tomates (pièce)
+(2, 11, 1, 17),  -- Oignon (pièce)
+(2, 5, 1, 19),   -- Sel (pincée)
+(2, 6, 1, 19),   -- Poivre (pincée)
 (2, 8, 20, 2);   -- Huile d'olive (ml)
 
 -- Ratatouille (id_recipe = 3)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(3, 10, 3, 19), -- Tomates (pièce)
-(3, 13, 1, 19), -- Carotte (pièce)
-(3, 29, 100, 1), -- Champignons (g)
-(3, 11, 1, 19), -- Oignon (pièce)
-(3, 12, 1, 19), -- Ail (pièce)
+(3, 10, 3, 17), -- Tomates (pièce)
+(3, 13, 1, 17), -- Carotte (pièce)
+(3, 29, 100, 11), -- Champignons (g)
+(3, 11, 1, 17), -- Oignon (pièce)
+(3, 12, 1, 17), -- Ail (pièce)
 (3, 8, 30, 2),  -- Huile d’olive (ml)
-(3, 5, 1, 18),  -- Sel (pincée)
-(3, 6, 1, 18);  -- Poivre (pincée)
+(3, 5, 1, 19),  -- Sel (pincée)
+(3, 6, 1, 19);  -- Poivre (pincée)
 
 -- Quiche Lorraine (id_recipe = 4)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
@@ -207,32 +207,32 @@ INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_m
 
 -- Tarte aux Pommes (id_recipe = 5)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(5, 3, 250, 1), -- Farine (g)
-(5, 2, 100, 1), -- Beurre (g)
-(5, 4, 100, 1), -- Sucre (g)
-(5, 10, 3, 19); -- Pommes (pièce)
+(5, 3, 250, 11), -- Farine (g)
+(5, 2, 100, 11), -- Beurre (g)
+(5, 4, 100, 11), -- Sucre (g)
+(5, 10, 3, 17); -- Pommes (pièce)
 
 -- Soupe de légumes (id_recipe = 6)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(6, 13, 2, 19), -- Carotte (pièce)
-(6, 14, 2, 19), -- Pomme de terre (pièce)
-(6, 29, 100, 1), -- Champignons (g)
-(6, 11, 1, 19), -- Oignon (pièce)
+(6, 13, 2, 17), -- Carotte (pièce)
+(6, 14, 2, 17), -- Pomme de terre (pièce)
+(6, 29, 100, 11), -- Champignons (g)
+(6, 11, 1, 17), -- Oignon (pièce)
 (6, 8, 30, 2),  -- Huile d'olive (ml)
-(6, 5, 1, 18);  -- Sel (pincée)
+(6, 5, 1, 19);  -- Sel (pincée)
 
 -- Couscous Royal (id_recipe = 7)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(7, 15, 250, 1), -- Semoule (g)
-(7, 18, 300, 1), -- Viande de boeuf (g)
-(7, 21, 300, 1), -- Poulet (g)
-(7, 13, 2, 19),  -- Carotte (pièce)
-(7, 14, 2, 19),  -- Pomme de terre (pièce)
-(7, 5, 1, 18);   -- Sel (pincée)
+(7, 15, 250, 11), -- Semoule (g)
+(7, 18, 300, 11), -- Viande de boeuf (g)
+(7, 21, 300, 11), -- Poulet (g)
+(7, 13, 2, 17),  -- Carotte (pièce)
+(7, 14, 2, 17),  -- Pomme de terre (pièce)
+(7, 5, 1, 19);   -- Sel (pincée)
 
 -- Poulet au curry (id_recipe = 8)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(8, 21, 300, 1), -- Poulet (g)
+(8, 21, 300, 11), -- Poulet (g)
 (8, 35, 10, 2),  -- Curcuma (ml)
 (8, 5, 1, 18),   -- Sel (pincée)
 (8, 6, 1, 18);   -- Poivre (pincée)
