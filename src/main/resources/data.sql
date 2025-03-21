@@ -234,23 +234,23 @@ INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_m
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (8, 21, 300, 11), -- Poulet (g)
 (8, 35, 10, 2),  -- Curcuma (ml)
-(8, 5, 1, 18),   -- Sel (pincée)
-(8, 6, 1, 18);   -- Poivre (pincée)
+(8, 5, 1, 19),   -- Sel (pincée)
+(8, 6, 1, 19);   -- Poivre (pincée)
 
 -- Mousse au Chocolat (id_recipe = 9)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(9, 25, 200, 1), -- Chocolat (g)
-(9, 7, 3, 19),   -- Œufs (pièce)
-(9, 4, 50, 1);   -- Sucre (g)
+(9, 25, 200, 11), -- Chocolat (g)
+(9, 7, 3, 17),   -- Œufs (pièce)
+(9, 4, 50, 11);   -- Sucre (g)
 
 -- Pizza Margherita (id_recipe = 10)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(10, 3, 250, 1), -- Farine (g)
+(10, 3, 250, 11), -- Farine (g)
 (10, 8, 20, 2),  -- Huile d'olive (ml)
-(10, 10, 3, 19), -- Tomates (pièce)
-(10, 22, 200, 1), -- Fromage (g)
-(10, 5, 1, 18),  -- Sel (pincée)
-(10, 6, 1, 18);  -- Poivre (pincée)
+(10, 10, 3, 17), -- Tomates (pièce)
+(10, 22, 200, 11), -- Fromage (g)
+(10, 5, 1, 19),  -- Sel (pincée)
+(10, 6, 1, 19);  -- Poivre (pincée)
 
 -- Pâtes à la Carbonara (id_recipe = 1)
 INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
