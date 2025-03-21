@@ -84,4 +84,9 @@ public class DuelDao {
         int count = jdbcTemplate.queryForObject(sql,Integer.class,id_duel);
         return count > 0;
     }
+    public boolean recipeExistInDuel (int id_duel, int id_recipe){
+        String sql = "SELECT count(*) from duel where id_duel = ? and id_recipe_right = ? or id_recipe_left = ?";
+        int count = jdbcTemplate.queryForObject(sql,Integer.class,id_duel, id_recipe, id_recipe);
+        return count >0;
+    }
 }

@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/auth/**","/recipe/all","/recipe/{id}","/recipe/details/{id}","/ingredient/all","/measurement/all", "/search/**","/collection/**").permitAll()
-                                .requestMatchers("/users/**","/opinion/new","/favorite/**","/recipe/new","/recipe/user","/duel/all","/duel/vote").hasRole("USER")
+                                .requestMatchers("/duel/vote","/users/**","/opinion/new","/favorite/**","/recipe/new","/recipe/user","/duel/all","/duel/vote").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("/admin/**","/stage/**","/request/**","/recipe/delete/**","/measurement/new","/ingredient/new","/duel/new").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 ).cors(Customizer.withDefaults());
@@ -71,7 +71,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of("http://localhost:3000"));
+        configuration.setAllowedOriginPatterns(List.of("http://localhost:3001"));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
