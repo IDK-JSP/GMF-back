@@ -30,6 +30,7 @@ public class RecipeDietsDao {
             rs.getString("state"),
             rs.getDouble("rate"),
             rs.getInt("nb_rate"),
+            rs.getInt("cooking_time"),
             rs.getTimestamp("create_time").toLocalDateTime(),
             rs.getTimestamp("update_time").toLocalDateTime(),
             rs.getString("diet"),

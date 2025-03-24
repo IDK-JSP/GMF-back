@@ -43,6 +43,7 @@
     state: string;
     rate: number;
     nbRate: number;
+    cooking_time: number; 
     createTime: string;
     updateTime: string;
     diet: string;
@@ -71,6 +72,7 @@
     state: string;
     rate: number;
     nbRate: number;
+    cooking_time: number;
     createTime: string;
     updateTime: string
 }
@@ -92,7 +94,8 @@
     state: string,
     rate: number,
     nbRate: number,
-    createTime: string,
+    cooking_time: number;
+    createTime: string,8
     updateTime: string,
     diet: string,
     favorite: string // false ou true
@@ -240,6 +243,7 @@
             state: string;
             rate: number;
             nbRate: number;
+            cooking_time: number;
             createTime: string;
             updateTime: string;
             diet: string;
@@ -309,6 +313,7 @@
         state: string;
         rate: number;
         nbRate: number;
+        cooking_time: number;
         createTime: string;
         updateTime: string
     }
@@ -331,6 +336,7 @@
     state: string,
     rate: int,
     nbRate: int,
+    cooking_time: number;
     createTime: string,
     updateTime: string
 }
@@ -351,6 +357,7 @@
     state: string;
     rate: number;
     nbRate: number;
+    cooking_time: number;
     createTime: string;
     updateTime: string;
     matching_ingredients: int;

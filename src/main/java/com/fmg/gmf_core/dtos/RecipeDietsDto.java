@@ -16,6 +16,7 @@ public class RecipeDietsDto {
     private String state;
     private Double rate;
     private int nbRate;
+    private int cooking_time;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private String diet;
@@ -24,7 +25,7 @@ public class RecipeDietsDto {
     public RecipeDietsDto() {
     }
 
-    public RecipeDietsDto(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nbRate, LocalDateTime createTime, LocalDateTime updateTime, String diet, String favorite) {
+    public RecipeDietsDto(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nbRate, int cooking_time, LocalDateTime createTime, LocalDateTime updateTime, String diet, String favorite) {
         this.id_recipe = id_recipe;
         this.email = email;
         this.title = title;
@@ -34,6 +35,7 @@ public class RecipeDietsDto {
         this.state = state;
         this.rate = rate;
         this.nbRate = nbRate;
+        this.cooking_time = cooking_time;
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.diet = diet;
@@ -110,6 +112,14 @@ public class RecipeDietsDto {
 
     public void setNbRate(int nbRate) {
         this.nbRate = nbRate;
+    }
+
+    public int getCooking_time() {
+        return cooking_time;
+    }
+
+    public void setCooking_time(int cooking_time) {
+        this.cooking_time = cooking_time;
     }
 
     public LocalDateTime getCreateTime() {

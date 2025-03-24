@@ -155,17 +155,17 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (2, 37), -- Vanille
 (2, 38); -- Vanille
 
-INSERT INTO `recipe` (`email`, `title`, `search_title`, `content`, `image`, `person`, `state`, `rate`, `nb_rate`, `create_time`, `update_time`) VALUES
-('admin@gmail.com', 'Pâtes à la Carbonara','pates a la carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 4.8, 4, NOW(), NOW()),
-('admin@gmail.com', 'Salade César','salade cesar', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse. ', NULL, 2, 'tovalidation', 2.8, 5, NOW(), NOW()),
-('admin@gmail.com', 'Ratatouille','ratatouille', 'Un plat provençal à base de légumes mijotés : tomates, courgettes, aubergines et poivrons.', NULL, 4, 'tovalidation', 3.3, 4, NOW(), NOW()),
-('admin@gmail.com', 'Quiche Lorraine','quiche lorraine', 'Tarte salée garnie de crème, lardons et fromage.', NULL, 6, 'tovalidation', 4, 3, NOW(), NOW()),
-('admin@gmail.com', 'Tarte aux Pommes','tarte aux pommes', 'Pâte sablée croustillante garnie de pommes caramélisées.', NULL, 6, 'tovalidation', 1, 4, NOW(), NOW()),
-('admin@gmail.com', 'Soupe de légumes','soupe de legumes', 'Un mélange de légumes mijotés pour une soupe savoureuse et réconfortante.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('admin@gmail.com', 'Couscous Royal','couscous royal', 'Plat traditionnel nord-africain avec semoule, légumes et viandes variées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW()),
-('admin@gmail.com', 'Poulet au curry','poulet au curry', 'Poulet mijoté dans une sauce crémeuse au curry et lait de coco.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('admin@gmail.com', 'Mousse au chocolat','mousse au chocolat', 'Dessert aérien et fondant à base de chocolat noir et œufs.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW()),
-('admin@gmail.com', 'Pizza Margherita', 'pizza margherita', 'Une pizza classique avec une sauce tomate, mozzarella et basilic.', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW());
+INSERT INTO `recipe` (`email`, `title`, `search_title`, `content`, `image`, `person`, `state`, `rate`, `nb_rate`, `create_time`, `update_time`, `cooking_time`) VALUES
+('admin@gmail.com', 'Pâtes à la Carbonara','pates a la carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 4.8, 4, NOW(), NOW(), 30),
+('admin@gmail.com', 'Salade César','salade cesar', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse. ', NULL, 2, 'tovalidation', 2.8, 5, NOW(), NOW(),40),
+('admin@gmail.com', 'Ratatouille','ratatouille', 'Un plat provençal à base de légumes mijotés : tomates, courgettes, aubergines et poivrons.', NULL, 4, 'tovalidation', 3.3, 4, NOW(), NOW(),115),
+('admin@gmail.com', 'Quiche Lorraine','quiche lorraine', 'Tarte salée garnie de crème, lardons et fromage.', NULL, 6, 'tovalidation', 4, 3, NOW(), NOW(), 40),
+('admin@gmail.com', 'Tarte aux Pommes','tarte aux pommes', 'Pâte sablée croustillante garnie de pommes caramélisées.', NULL, 6, 'tovalidation', 1, 4, NOW(), NOW(),50),
+('admin@gmail.com', 'Soupe de légumes','soupe de legumes', 'Un mélange de légumes mijotés pour une soupe savoureuse et réconfortante.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW(),45),
+('admin@gmail.com', 'Couscous Royal','couscous royal', 'Plat traditionnel nord-africain avec semoule, légumes et viandes variées.', NULL, 6, 'tovalidation', 0, 0, NOW(), NOW(),120),
+('admin@gmail.com', 'Poulet au curry','poulet au curry', 'Poulet mijoté dans une sauce crémeuse au curry et lait de coco.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW(),55),
+('admin@gmail.com', 'Mousse au chocolat','mousse au chocolat', 'Dessert aérien et fondant à base de chocolat noir et œufs.', NULL, 4, 'tovalidation', 0, 0, NOW(), NOW(),60),
+('admin@gmail.com', 'Pizza Margherita', 'pizza margherita', 'Une pizza classique avec une sauce tomate, mozzarella et basilic.', NULL, 2, 'tovalidation', 0, 0, NOW(), NOW(),1);
 
 -- Pâtes à la Carbonara (id_recipe = 1)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
