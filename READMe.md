@@ -82,6 +82,21 @@
 > **Réponse :**
 ```json
 {
+  recipeDietsDto: {
+    id_recipe: 1,
+    email: string,
+    title: string,
+    content: string,
+    image: string,
+    person: number,
+    state: string,
+    rate: number,
+    nbRate: number,
+    createTime: string,
+    updateTime: string,
+    diet: string,
+    favorite: string // false ou true
+  },
     ingredientDetailDtos: [
         {
             ingredient_name: string;
