@@ -196,7 +196,41 @@ public class RecipeDao {
             throw e;
         }
     }
-
+    public RecipeDietsDto findRecipeDetailsById(String email, int id){
+        String sql = """
+                SELECT
+                                        r.id_recipe, r.email, r.title, r.content, r.image, r.person,
+                                        r.state, r.rate, r.nb_rate, r.create_time, r.update_time,
+                                        CASE
+                                            -- Si tous les ingrédients de la recette sont Végan
+                                            WHEN COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)
+                                                THEN 'Végan'
+                                            -- Si tous les ingrédients de la recette sont soit Végan soit Végétarien
+                                            WHEN COUNT(DISTINCT CASE WHEN d.name IN ('Végan', 'Végétarien') THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)
+                                                THEN 'Végétarien'
+                                            -- Si au moins un ingrédient n'a pas de régime alimentaire spécifié
+                                            ELSE 'Non renseigné'
+                                        END AS diet,
+                                        CASE\s
+                                            WHEN COUNT(CASE WHEN f.email = ? THEN 1 ELSE NULL END) > 0 THEN 'true'\s
+                                            ELSE 'false'\s
+                                        END AS is_favorite\s
+                                    FROM recipe AS r\s
+                                    LEFT JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe\s
+                                    LEFT JOIN ingredient i ON ri.id_ingredient = i.id_ingredient\s
+                                    LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient\s
+                                    LEFT JOIN diet d ON di.id_diet = d.id_diet\s
+                                    LEFT JOIN opinion o ON r.id_recipe = o.id_recipe\s
+                                    LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id\s
+                                        AND f.favoriteable_type = 'recipe'\s
+                                    where r.id_recipe = ?
+                                    GROUP BY
+                                        r.id_recipe, r.email, r.title, r.content, r.image, r.person,
+                                        r.state, r.rate, r.nb_rate, r.create_time, r.update_time\s
+                """;
+        globalHelper.exist(!recipeIdExist(id), "Recette");
+        return jdbcTemplate.queryForObject(sql, recipeDietsDtoRowMapper, email ,id);
+    }
 
     public Recipe findRecipeById (int id){
         String sql = "SELECT * from recipe where id_recipe = ?";

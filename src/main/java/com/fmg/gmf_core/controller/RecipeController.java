@@ -65,7 +65,15 @@ public class RecipeController {
     }
 
     @GetMapping("/details/{id}")
-    public ResponseEntity<RecipeDetailsDto> getRecipeDetails(@PathVariable int id) {
+    public ResponseEntity<RecipeDetailsDto> getRecipeDetails(@PathVariable int id,@RequestHeader(value = "Authorization", required = false) String authorizationHeader) {
+        String email;
+        if (authorizationHeader != null) {
+            String token = authorizationHeader.substring(7);  // Supprime "Bearer " (7 caractères)
+            email = jwtUtil.getEmailFromToken(token);
+        }else {
+            email = null;
+        }
+        recipeDetailsDto.setRecipeDietsDto(recipeDao.findRecipeDetailsById(email,id));
         recipeDetailsDto.setIngredientDetailDtos(ingredientDetailsDao.findRecipeIngredients(id));
         recipeDetailsDto.setStages(stageDao.findRecipeStage(id));
         recipeDetailsDto.setOpinions(opinionDao.findRecipeOpinion(id));
