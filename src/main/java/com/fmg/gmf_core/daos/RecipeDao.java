@@ -243,7 +243,7 @@ public class RecipeDao {
         //userHelper.emailExist(recipe.getEmail());
         globalHelper.exist(!recipeIdExist(recipe.getId_recipe()), "Recette");
         String sql = "UPDATE recipe set email = ?, title = ?, content = ?, image = ?, person = ?, state = ?, rate = ?, nb_rate = ? where id_recipe = ?;";
-        jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(), recipe.getContent(), recipe.getImage(), recipe.getPerson(), recipe.getState(), recipe.getRate(), recipe.getNb_rate(), recipe.getId_recipe());
+        jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(), recipe.getContent(), recipe.getImage(), recipe.getPerson(), recipe.getState(), recipe.getRate(), recipe.getNbRate(), recipe.getId_recipe());
         return recipe.getId_recipe();
     }
     public void deleteRecipe(int recipeId) {
