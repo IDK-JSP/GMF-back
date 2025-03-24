@@ -241,7 +241,9 @@
             rate: number;
             nbRate: number;
             createTime: string;
-            updateTime: string
+            updateTime: string;
+            diet: string;
+            favorite: string //true ou false
         }
     ],
     [

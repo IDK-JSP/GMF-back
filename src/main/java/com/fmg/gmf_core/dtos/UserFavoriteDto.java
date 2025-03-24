@@ -9,11 +9,11 @@ import java.util.List;
 @Component
 public class UserFavoriteDto {
     private List<Ingredient> ingredients;
-    private List<Recipe> recipes;
+    private List<RecipeDietsDto> recipes;
 
-    public UserFavoriteDto(List<Recipe> recipes, List<Ingredient> ingredients) {
-        this.recipes = recipes;
+    public UserFavoriteDto(List<Ingredient> ingredients, List<RecipeDietsDto> recipes) {
         this.ingredients = ingredients;
+        this.recipes = recipes;
     }
 
     public List<Ingredient> getIngredients() {
@@ -24,11 +24,11 @@ public class UserFavoriteDto {
         this.ingredients = ingredients;
     }
 
-    public List<Recipe> getRecipes() {
+    public List<RecipeDietsDto> getRecipes() {
         return recipes;
     }
 
-    public void setRecipes(List<Recipe> recipes) {
+    public void setRecipes(List<RecipeDietsDto> recipes) {
         this.recipes = recipes;
     }
 }

@@ -1,5 +1,6 @@
 package com.fmg.gmf_core.daos;
 
+import com.fmg.gmf_core.dtos.RecipeDietsDto;
 import com.fmg.gmf_core.entitys.Favorite;
 import com.fmg.gmf_core.entitys.Ingredient;
 import com.fmg.gmf_core.entitys.Recipe;
@@ -54,6 +55,21 @@ public class FavoriteDao {
             rs.getTimestamp("update_time").toLocalDateTime()
 
     );
+    private final RowMapper<RecipeDietsDto> recipeDietsDtoRowMapper = (rs, rowNum) -> new RecipeDietsDto(
+            rs.getInt("id_recipe"),
+            rs.getString("email"),
+            rs.getString("title"),
+            rs.getString("content"),
+            rs.getString("image"),
+            rs.getInt("person"),
+            rs.getString("state"),
+            rs.getDouble("rate"),
+            rs.getInt("nb_rate"),
+            rs.getTimestamp("create_time").toLocalDateTime(),
+            rs.getTimestamp("update_time").toLocalDateTime(),
+            rs.getString("diet"),
+            rs.getString("is_favorite")
+    );
 
     public List<Ingredient> findUserAllFavoriteIngredient(String email){
         userHelper.emailExist(email);
@@ -63,13 +79,41 @@ public class FavoriteDao {
                 "and f.email = ?";
         return  jdbcTemplate.query(sql, ingredientRowMapper, email);
     }
-    public List<Recipe> findUserAllFavoriteRecipe(String email){
+    public List<RecipeDietsDto> findUserAllFavoriteRecipe(String email){
         userHelper.emailExist(email);
-        String sql = "SELECT r.* FROM favorite as f " +
-                "join recipe r on f.favoriteable_id = r.id_recipe " +
-                "where f.favoriteable_type = 'recipe' " +
-                "and f.email = ?;";
-        return  jdbcTemplate.query(sql, recipeRowMapper, email);
+        String sql = """
+                SELECT
+                	r.id_recipe, r.email, r.title, r.content, r.image, r.person,
+                	r.state, r.rate, r.nb_rate, r.create_time, r.update_time,
+                	CASE
+                		-- Si tous les ingrédients de la recette sont Végan
+                		WHEN COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)
+                		THEN 'Végan'
+                		-- Si tous les ingrédients de la recette sont soit Végan soit Végétarien
+                		WHEN COUNT(DISTINCT CASE WHEN d.name IN ('Végan', 'Végétarien') THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)
+                		THEN 'Végétarien'
+                		-- Si au moins un ingrédient n'a pas de régime alimentaire spécifié
+                		ELSE 'Non renseigné'
+                		END AS diet,
+                	CASE
+                	WHEN COUNT(CASE WHEN f.email = ? THEN 1 ELSE NULL END) > 0 THEN 'true'
+                	ELSE 'false'
+                	END AS is_favorite
+                	FROM recipe AS r
+                	LEFT JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe
+                	LEFT JOIN ingredient i ON ri.id_ingredient = i.id_ingredient
+                	LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient
+                	LEFT JOIN diet d ON di.id_diet = d.id_diet
+                	LEFT JOIN opinion o ON r.id_recipe = o.id_recipe
+                	LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id
+                	where f.favoriteable_type = 'recipe'\s
+                	and f.email = ?
+                	GROUP BY
+                	r.id_recipe, r.email, r.title, r.content, r.image, r.person,
+                	r.state, r.rate, r.nb_rate, r.create_time, r.update_time
+                
+                """;
+        return  jdbcTemplate.query(sql, recipeDietsDtoRowMapper, email, email);
     }
     public List<Favorite> findRecipeFavorite(int id){
         recipeHelper.recipeExist(id);
