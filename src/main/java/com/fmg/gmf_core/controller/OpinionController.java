@@ -37,7 +37,7 @@ public class OpinionController {
             recipe.setRate(ratingService.rate(recipe.getRate(), recipe.getNb_rate(), opinion.getRate()));
             recipe.setNb_rate(recipe.getNb_rate() + 1);
             recipeDao.updateRecipe(recipe);
-            return ResponseEntity.ok(opinion);
+            return ResponseEntity.ok(newOpinion);
         }else {
             return (ResponseEntity<Opinion>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
