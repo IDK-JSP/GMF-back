@@ -17,7 +17,7 @@ public class Recipe {
 
     private String image;
     @NotNull(message = "Un nombre de personne est requis")
-    private int person;
+    private Integer person;
 
     private String state;
 

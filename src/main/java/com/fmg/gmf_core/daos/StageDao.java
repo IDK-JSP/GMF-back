@@ -35,7 +35,7 @@ public class StageDao {
         recipeHelper.recipeExist(id);
         String sql = "SELECT * FROM stage where id_recipe = ?";
         List<Stage> stages = jdbcTemplate.query(sql, stageRowMapper, id);
-        globalHelper.isEmpty(stages, "étape");
+        //globalHelper.isEmpty(stages, "étape");
         return stages;
     }
     public boolean save(Stage stage) {

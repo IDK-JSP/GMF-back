@@ -230,7 +230,7 @@ public class RecipeDao {
                                         r.id_recipe, r.email, r.title, r.content, r.image, r.person,
                                         r.state, r.rate, r.nb_rate, r.create_time, r.update_time\s
                 """;
-        globalHelper.exist(!recipeIdExist(id), "Recette");
+        //globalHelper.exist(!recipeIdExist(id), "Recette");
         return jdbcTemplate.queryForObject(sql, recipeDietsDtoRowMapper, email ,id);
     }
 
