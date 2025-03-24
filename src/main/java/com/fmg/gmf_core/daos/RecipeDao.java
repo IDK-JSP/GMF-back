@@ -131,8 +131,8 @@ public class RecipeDao {
         globalHelper.notExist(recipeExist(recipe.getTitle()),"Recette");
         userHelper.emailExist(recipe.getEmail());
         String searchTitle = removeAccentService.removeAccent(recipe.getTitle());
-        String sql = "INSERT INTO recipe (email, title, search_title, content ,image , person, create_time, update_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(),searchTitle,recipe.getContent(),recipe.getImage(),recipe.getPerson(),dateTimeService.getCurrentDateTime(), dateTimeService.getCurrentDateTime());
+        String sql = "INSERT INTO recipe (email, title, search_title, content ,image , person, cooking_time ,create_time, update_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(),searchTitle,recipe.getContent(),recipe.getImage(),recipe.getPerson(),recipe.getCooking_time(), dateTimeService.getCurrentDateTime(), dateTimeService.getCurrentDateTime());
         return findRecipeIdByName(recipe.getTitle());
     }
     public List<SearchResultRecipeDto> findRecipesByIngredientsAndName(List<Integer> ingredientIds, String search, String email) {

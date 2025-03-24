@@ -25,7 +25,7 @@ public class Recipe {
 
     private int nb_rate;
 
-    @NotBlank(message = "Un temps de préparation est requis")
+    @NotNull(message = "Un temps de préparation est requis")
     private int cooking_time;
 
     private LocalDateTime create_time;
