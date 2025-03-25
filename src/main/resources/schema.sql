@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `bddgmf`.`recipe` (
   `title` VARCHAR(64) NOT NULL,
   `search_title` VARCHAR(64) NULL,
   `content` TEXT(10000) NULL,
-  `image` VARCHAR(255) NULL,
+  `image` VARCHAR(255) NULL DEFAULT 'recipe_0',
   `person` INT NULL,
   `state` VARCHAR(45) NULL DEFAULT 'tovalidation',
   `rate` DECIMAL(10,2) NULL DEFAULT 0,
