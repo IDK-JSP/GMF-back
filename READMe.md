@@ -43,6 +43,7 @@
     state: string;
     rate: number;
     nbRate: number;
+    cooking_time: number; 
     createTime: string;
     updateTime: string;
     diet: string;
@@ -71,6 +72,7 @@
     state: string;
     rate: number;
     nbRate: number;
+    cooking_time: number;
     createTime: string;
     updateTime: string
 }
@@ -82,6 +84,22 @@
 > **Réponse :**
 ```json
 {
+  recipeDietsDto: {
+    id_recipe: 1,
+    email: string,
+    title: string,
+    content: string,
+    image: string,
+    person: number,
+    state: string,
+    rate: number,
+    nbRate: number,
+    cooking_time: number;
+    createTime: string,8
+    updateTime: string,
+    diet: string,
+    favorite: string // false ou true
+  },
     ingredientDetailDtos: [
         {
             ingredient_name: string;
@@ -225,8 +243,11 @@
             state: string;
             rate: number;
             nbRate: number;
+            cooking_time: number;
             createTime: string;
-            updateTime: string
+            updateTime: string;
+            diet: string;
+            favorite: string //true ou false
         }
     ],
     [
@@ -292,6 +313,7 @@
         state: string;
         rate: number;
         nbRate: number;
+        cooking_time: number;
         createTime: string;
         updateTime: string
     }
@@ -314,6 +336,7 @@
     state: string,
     rate: int,
     nbRate: int,
+    cooking_time: number;
     createTime: string,
     updateTime: string
 }
@@ -334,6 +357,7 @@
     state: string;
     rate: number;
     nbRate: number;
+    cooking_time: number;
     createTime: string;
     updateTime: string;
     matching_ingredients: int;

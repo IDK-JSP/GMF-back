@@ -1,12 +1,18 @@
 package com.fmg.gmf_core.entitys;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 
 
 public class Duel {
 
     private int id_duel;
+    @Min(value = 1, message = "Il vous faut un id")
     private int id_recipe_right;
+    @Min(value = 1, message = "Il vous faut un id")
     private int id_recipe_left;
     private String email;
     private LocalDateTime create_time;

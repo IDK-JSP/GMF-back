@@ -34,10 +34,10 @@ public class OpinionController {
             opinion.setEmail(email);
             Opinion newOpinion = opinionDao.save(opinion);
             Recipe recipe = recipeDao.findRecipeById(opinion.getId_recipe());
-            recipe.setRate(ratingService.rate(recipe.getRate(), recipe.getNb_rate(), opinion.getRate()));
-            recipe.setNb_rate(recipe.getNb_rate() + 1);
+            recipe.setRate(ratingService.rate(recipe.getRate(), recipe.getNbRate(), opinion.getRate()));
+            recipe.setNbRate(recipe.getNbRate() + 1);
             recipeDao.updateRecipe(recipe);
-            return ResponseEntity.ok(opinion);
+            return ResponseEntity.ok(newOpinion);
         }else {
             return (ResponseEntity<Opinion>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }

@@ -44,6 +44,7 @@ public class RecipeDao {
             rs.getString("state"),
             rs.getDouble("rate"),
             rs.getInt("nb_rate"),
+            rs.getInt("cooking_time"),
             rs.getTimestamp("create_time").toLocalDateTime(),
             rs.getTimestamp("update_time").toLocalDateTime()
 
@@ -58,6 +59,7 @@ public class RecipeDao {
             rs.getString("state"),
             rs.getDouble("rate"),
             rs.getInt("nb_rate"),
+            rs.getInt("cooking_time"),
             rs.getTimestamp("create_time").toLocalDateTime(),
             rs.getTimestamp("update_time").toLocalDateTime(),
             rs.getInt("matching_ingredients"),
@@ -75,6 +77,7 @@ public class RecipeDao {
             rs.getString("state"),
             rs.getDouble("rate"),
             rs.getInt("nb_rate"),
+            rs.getInt("cooking_time"),
             rs.getTimestamp("create_time").toLocalDateTime(),
             rs.getTimestamp("update_time").toLocalDateTime(),
             rs.getString("diet"),
@@ -91,7 +94,7 @@ public class RecipeDao {
         String sql = """
                 SELECT\s
                         r.id_recipe, r.email, r.title, r.content, r.image, r.person,\s
-                        r.state, r.rate, r.nb_rate, r.create_time, r.update_time,\s
+                        r.state, r.rate, r.nb_rate, r.cooking_time, r.create_time, r.update_time,\s
                         CASE\s
                             -- Si tous les ingrédients de la recette sont Végan
                             WHEN COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)\s
@@ -129,74 +132,92 @@ public class RecipeDao {
         globalHelper.notExist(recipeExist(recipe.getTitle()),"Recette");
         userHelper.emailExist(recipe.getEmail());
         String searchTitle = removeAccentService.removeAccent(recipe.getTitle());
-        String sql = "INSERT INTO recipe (email, title, search_title, content ,image , person, create_time, update_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(),searchTitle,recipe.getContent(),recipe.getImage(),recipe.getPerson(),dateTimeService.getCurrentDateTime(), dateTimeService.getCurrentDateTime());
+        String sql = "INSERT INTO recipe (email, title, search_title, content ,image , person, cooking_time ,create_time, update_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(),searchTitle,recipe.getContent(),recipe.getImage(),recipe.getPerson(),recipe.getCooking_time(), dateTimeService.getCurrentDateTime(), dateTimeService.getCurrentDateTime());
         return findRecipeIdByName(recipe.getTitle());
     }
     public List<SearchResultRecipeDto> findRecipesByIngredientsAndName(List<Integer> ingredientIds, String search, String email) {
+        List<Object> params = new ArrayList<>();
         StringBuilder sql = new StringBuilder(
-                "SELECT r.id_recipe, r.email, r.title, r.content, r.image, r.person, " +
-                        "r.state, r.rate, r.nb_rate, r.create_time, r.update_time, " +
-                        "COUNT(DISTINCT ri.id_ingredient) AS matching_ingredients, " + // Fix de COUNT
-                        """
-                        CASE 
-                                WHEN COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient) 
-                                    THEN 'Végan'
-                                WHEN COUNT(DISTINCT CASE WHEN d.name IN ('Végan', 'Végétarien') THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient) 
-                                    THEN 'Végétarien'
-                                ELSE 'Non renseigné'
-                        END AS diet,
-                        """+
-                        "CASE WHEN COUNT(f.favoriteable_id) > 0 THEN 'true' ELSE 'false' END AS is_favorite " +
-                        "FROM recipe r " +
-                        "LEFT JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe " +
-                        "LEFT JOIN ingredient i ON ri.id_ingredient = i.id_ingredient " +
-                        "LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient " +
-                        "LEFT JOIN diet d ON di.id_diet = d.id_diet " +
-                        "LEFT JOIN opinion o ON r.id_recipe = o.id_recipe " +
-                        "LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id AND f.favoriteable_type = 'recipe' "
+                "SELECT "
+                        + "    r.id_recipe, r.email, r.title, r.content, r.image, r.person, r.state, r.rate, r.nb_rate,r.cooking_time, r.create_time, r.update_time, "
+                        + "    agg.matching_ingredients, "
+                        + "    CASE "
+                        + "         WHEN agg.totalVegan = agg.totalIngredients THEN 'Végan' "
+                        + "         WHEN agg.totalVeganOrVege = agg.totalIngredients THEN 'Végétarien' "
+                        + "         ELSE 'Non renseigné' "
+                        + "    END AS diet, "
+                        + "    CASE WHEN COUNT(f.favoriteable_id) > 0 THEN 'true' ELSE 'false' END AS is_favorite "
+                        + "FROM recipe r "
+                        + "JOIN ( "
+                        + "    SELECT "
+                        + "        ri.id_recipe, "
+                        + "        COUNT(DISTINCT ri.id_ingredient) AS totalIngredients, "
+                        + "        COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN ri.id_ingredient END) AS totalVegan, "
+                        + "        COUNT(DISTINCT CASE WHEN d.name IN ('Végan', 'Végétarien') THEN ri.id_ingredient END) AS totalVeganOrVege, "
+                        + (ingredientIds != null && !ingredientIds.isEmpty() ?
+                        "        COUNT(DISTINCT CASE WHEN ri.id_ingredient IN (" + String.join(",", Collections.nCopies(ingredientIds.size(), "?")) + ") THEN ri.id_ingredient END) AS matching_ingredients "
+                        : "        0 AS matching_ingredients ")
+                        + "    FROM recipe_ingredient ri "
+                        + "    LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient "
+                        + "    LEFT JOIN diet d ON di.id_diet = d.id_diet "
+                        + "    GROUP BY ri.id_recipe "
+                        + ") agg ON r.id_recipe = agg.id_recipe "
+                        + "LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id AND f.favoriteable_type = 'recipe' "
+                        + "WHERE 1=1 " // Pour permettre l'ajout dynamique des conditions
         );
 
-        List<Object> params = new ArrayList<>();
-        boolean hasWhere = false;
-
-        // Filtre sur les ingrédients (correction)
         if (ingredientIds != null && !ingredientIds.isEmpty()) {
-            for (Integer ingredientId : ingredientIds) {
-                ingredientHelper.ingredientExist(ingredientId);
-            }
-            String placeholders = String.join(",", Collections.nCopies(ingredientIds.size(), "?"));
-            sql.append(" WHERE ri.id_ingredient IN (").append(placeholders).append(") ");
             params.addAll(ingredientIds);
-            hasWhere = true;
         }
-
-        // Filtre sur le titre
         if (search != null && !search.isBlank()) {
-            sql.append(hasWhere ? "AND " : " WHERE ");
-            sql.append("r.search_title LIKE ? ");
+            sql.append(" AND r.search_title LIKE ? ");
             params.add("%" + search + "%");
-            hasWhere = true;
         }
-
-        // Filtre sur les favoris (optionnel)
         if (email != null) {
-            sql.append(hasWhere ? "AND " : " WHERE ");
-            sql.append("(f.email = ? OR f.email IS NULL) ");
+            sql.append(" AND (f.email = ? OR f.email IS NULL) ");
             params.add(email);
         }
 
-        // Ajout du GROUP BY et ORDER BY
-        sql.append(" GROUP BY r.id_recipe ORDER BY matching_ingredients DESC, r.rate DESC");
+        sql.append(" GROUP BY r.id_recipe ORDER BY agg.matching_ingredients DESC, r.rate DESC");
 
-        try {
-            return jdbcTemplate.query(sql.toString(), searchResultRecipeDtoRowMapper, params.toArray());
-        } catch (Exception e) {
-            System.out.println("Erreur lors de l'exécution de la requête : " + e.getMessage());
-            throw e;
-        }
+        return jdbcTemplate.query(sql.toString(), searchResultRecipeDtoRowMapper, params.toArray());
     }
-
+    public RecipeDietsDto findRecipeDetailsById(String email, int id){
+        String sql = """
+                SELECT
+                                        r.id_recipe, r.email, r.title, r.content, r.image, r.person,
+                                        r.state, r.rate, r.nb_rate, r.cooking_time, r.create_time, r.update_time,
+                                        CASE
+                                            -- Si tous les ingrédients de la recette sont Végan
+                                            WHEN COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)
+                                                THEN 'Végan'
+                                            -- Si tous les ingrédients de la recette sont soit Végan soit Végétarien
+                                            WHEN COUNT(DISTINCT CASE WHEN d.name IN ('Végan', 'Végétarien') THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)
+                                                THEN 'Végétarien'
+                                            -- Si au moins un ingrédient n'a pas de régime alimentaire spécifié
+                                            ELSE 'Non renseigné'
+                                        END AS diet,
+                                        CASE\s
+                                            WHEN COUNT(CASE WHEN f.email = ? THEN 1 ELSE NULL END) > 0 THEN 'true'\s
+                                            ELSE 'false'\s
+                                        END AS is_favorite\s
+                                    FROM recipe AS r\s
+                                    LEFT JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe\s
+                                    LEFT JOIN ingredient i ON ri.id_ingredient = i.id_ingredient\s
+                                    LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient\s
+                                    LEFT JOIN diet d ON di.id_diet = d.id_diet\s
+                                    LEFT JOIN opinion o ON r.id_recipe = o.id_recipe\s
+                                    LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id\s
+                                        AND f.favoriteable_type = 'recipe'\s
+                                    where r.id_recipe = ?
+                                    GROUP BY
+                                        r.id_recipe, r.email, r.title, r.content, r.image, r.person,
+                                        r.state, r.rate, r.nb_rate, r.create_time, r.update_time\s
+                """;
+        //globalHelper.exist(!recipeIdExist(id), "Recette");
+        return jdbcTemplate.queryForObject(sql, recipeDietsDtoRowMapper, email ,id);
+    }
 
     public Recipe findRecipeById (int id){
         String sql = "SELECT * from recipe where id_recipe = ?";
@@ -207,7 +228,7 @@ public class RecipeDao {
         //userHelper.emailExist(recipe.getEmail());
         globalHelper.exist(!recipeIdExist(recipe.getId_recipe()), "Recette");
         String sql = "UPDATE recipe set email = ?, title = ?, content = ?, image = ?, person = ?, state = ?, rate = ?, nb_rate = ? where id_recipe = ?;";
-        jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(), recipe.getContent(), recipe.getImage(), recipe.getPerson(), recipe.getState(), recipe.getRate(), recipe.getNb_rate(), recipe.getId_recipe());
+        jdbcTemplate.update(sql, recipe.getEmail(), recipe.getTitle(), recipe.getContent(), recipe.getImage(), recipe.getPerson(), recipe.getState(), recipe.getRate(), recipe.getNbRate(), recipe.getId_recipe());
         return recipe.getId_recipe();
     }
     public void deleteRecipe(int recipeId) {

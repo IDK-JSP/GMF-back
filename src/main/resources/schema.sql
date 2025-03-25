@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `bddgmf`.`recipe` (
   `state` VARCHAR(45) NULL DEFAULT 'tovalidation',
   `rate` DECIMAL(10,2) NULL DEFAULT 0,
   `nb_rate` INT NULL DEFAULT 0,
+  `cooking_time` INT NOT NULL,
   `create_time` DATETIME NULL,
   `update_time` DATETIME NULL,
   PRIMARY KEY (`id_recipe`),

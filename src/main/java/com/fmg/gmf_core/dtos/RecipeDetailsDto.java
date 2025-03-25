@@ -9,13 +9,16 @@ import java.util.List;
 
 @Component
 public class RecipeDetailsDto {
+    private RecipeDietsDto recipeDietsDto;
+
     private List<IngredientDetailsDto> ingredientDetailDtos;
 
     private List<Stage> stages;
 
     private List<Opinion> opinions;
 
-    public RecipeDetailsDto(List<IngredientDetailsDto> ingredientDetailDtos, List<Stage> stages, List<Opinion> opinions) {
+    public RecipeDetailsDto(RecipeDietsDto recipeDietsDto, List<IngredientDetailsDto> ingredientDetailDtos, List<Stage> stages, List<Opinion> opinions) {
+        this.recipeDietsDto = recipeDietsDto;
         this.ingredientDetailDtos = ingredientDetailDtos;
         this.stages = stages;
         this.opinions = opinions;
@@ -43,5 +46,13 @@ public class RecipeDetailsDto {
 
     public void setOpinions(List<Opinion> opinions) {
         this.opinions = opinions;
+    }
+
+    public RecipeDietsDto getRecipeDietsDto() {
+        return recipeDietsDto;
+    }
+
+    public void setRecipeDietsDto(RecipeDietsDto recipeDietsDto) {
+        this.recipeDietsDto = recipeDietsDto;
     }
 }

@@ -17,21 +17,22 @@ public class Recipe {
 
     private String image;
     @NotNull(message = "Un nombre de personne est requis")
-    private int person;
+    private Integer person;
 
     private String state;
 
     private Double rate;
 
-    private int nb_rate;
+    private int nbRate;
+
+    @NotNull(message = "Un temps de préparation est requis")
+    private int cooking_time;
 
     private LocalDateTime create_time;
 
     private LocalDateTime update_time;
 
-
-
-    public Recipe(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nb_rate, LocalDateTime create_time, LocalDateTime update_time) {
+    public Recipe(int id_recipe, String email, String title, String content, String image, int person, String state, Double rate, int nbRate, int cooking_time, LocalDateTime create_time, LocalDateTime update_time) {
         this.id_recipe = id_recipe;
         this.email = email;
         this.title = title;
@@ -40,11 +41,11 @@ public class Recipe {
         this.person = person;
         this.state = state;
         this.rate = rate;
-        this.nb_rate = nb_rate;
+        this.nbRate = nbRate;
+        this.cooking_time = cooking_time;
         this.create_time = create_time;
         this.update_time = update_time;
     }
-
 
     public int getId_recipe() {
         return id_recipe;
@@ -110,12 +111,20 @@ public class Recipe {
         this.rate = rate;
     }
 
-    public int getNb_rate() {
-        return nb_rate;
+    public int getNbRate() {
+        return nbRate;
     }
 
-    public void setNb_rate(int nb_rate) {
-        this.nb_rate = nb_rate;
+    public void setNbRate(int nbRate) {
+        this.nbRate = nbRate;
+    }
+
+    public int getCooking_time() {
+        return cooking_time;
+    }
+
+    public void setCooking_time(int cooking_time) {
+        this.cooking_time = cooking_time;
     }
 
     public LocalDateTime getCreate_time() {

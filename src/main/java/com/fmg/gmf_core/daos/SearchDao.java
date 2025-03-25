@@ -28,6 +28,7 @@ public class SearchDao {
             rs.getString("state"),
             rs.getDouble("rate"),
             rs.getInt("nb_rate"),
+            rs.getInt("cooking_time"),
             rs.getTimestamp("create_time").toLocalDateTime(),
             rs.getTimestamp("update_time").toLocalDateTime(),
             rs.getString("diet"),
@@ -36,7 +37,7 @@ public class SearchDao {
     String basesql = """
             SELECT\s
                         r.id_recipe, r.email, r.title, r.content, r.image, r.person,\s
-                        r.state, r.rate, r.nb_rate, r.create_time, r.update_time,\s
+                        r.state, r.rate, r.nb_rate, r.cooking_time, r.create_time, r.update_time,\s
                         CASE\s
                             -- Si tous les ingrédients de la recette sont Végan
                             WHEN COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient)\s

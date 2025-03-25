@@ -46,6 +46,7 @@ public class VoteDao {
         duelHelper.duelExist(vote.getId_duel());
         recipeHelper.recipeExist(vote.getId_recipe());
         userHelper.emailExist(vote.getEmail());
+        duelHelper.recipeExistInDuel(vote.getId_duel(),vote.getId_recipe());
         String sql = "INSERT INTO vote (id_duel, email, id_recipe, create_time) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(sql,vote.getId_duel(),vote.getEmail(),vote.getId_recipe(),dateTimeService.getCurrentDateTime());
         return vote;

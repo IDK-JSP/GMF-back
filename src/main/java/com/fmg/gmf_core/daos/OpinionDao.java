@@ -45,7 +45,7 @@ public class OpinionDao {
         globalHelper.notExist(opinionExist(opinion),"L'avis");
         String sql = "INSERT INTO opinion (id_recipe, email, rate, comment, create_time) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, opinion.getId_recipe(),opinion.getEmail(),opinion.getRate(),opinion.getComment(),dateTimeService.getCurrentDateTime());
-        return opinion;
+        return findOpinion(opinion.getId_recipe(), opinion.getEmail());
     }
     public void deleteOpinion(int recipeId, String email) {
         String sql = "DELETE FROM opinion WHERE id_recipe = ? AND email = ?";
@@ -56,5 +56,9 @@ public class OpinionDao {
         String checkSql = "SELECT COUNT(*) FROM opinion WHERE id_recipe = ? and email = ?";
         int count = jdbcTemplate.queryForObject(checkSql, Integer.class, opinion.getId_recipe(), opinion.getEmail());
         return count > 0;
+    }
+    public Opinion findOpinion(int recipeId, String email){
+        String sql = "SELECT * FROM opinion where id_recipe = ? and email = ?";
+        return jdbcTemplate.queryForObject(sql, opinionRowMapper, recipeId, email);
     }
 }
