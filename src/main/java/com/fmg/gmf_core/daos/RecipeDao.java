@@ -137,67 +137,51 @@ public class RecipeDao {
         return findRecipeIdByName(recipe.getTitle());
     }
     public List<SearchResultRecipeDto> findRecipesByIngredientsAndName(List<Integer> ingredientIds, String search, String email) {
+        List<Object> params = new ArrayList<>();
         StringBuilder sql = new StringBuilder(
-                "SELECT r.id_recipe, r.email, r.title, r.content, r.image, r.person, " +
-                        "r.state, r.rate, r.nb_rate, r.cooking_time, r.create_time, r.update_time, " +
-                        "COUNT(DISTINCT ri.id_ingredient) AS matching_ingredients, " + // Fix de COUNT
-                        """
-                        CASE 
-                                WHEN COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient) 
-                                    THEN 'Végan'
-                                WHEN COUNT(DISTINCT CASE WHEN d.name IN ('Végan', 'Végétarien') THEN i.id_ingredient END) = COUNT(DISTINCT ri.id_ingredient) 
-                                    THEN 'Végétarien'
-                                ELSE 'Non renseigné'
-                        END AS diet,
-                        """+
-                        "CASE WHEN COUNT(f.favoriteable_id) > 0 THEN 'true' ELSE 'false' END AS is_favorite " +
-                        "FROM recipe r " +
-                        "LEFT JOIN recipe_ingredient ri ON r.id_recipe = ri.id_recipe " +
-                        "LEFT JOIN ingredient i ON ri.id_ingredient = i.id_ingredient " +
-                        "LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient " +
-                        "LEFT JOIN diet d ON di.id_diet = d.id_diet " +
-                        "LEFT JOIN opinion o ON r.id_recipe = o.id_recipe " +
-                        "LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id AND f.favoriteable_type = 'recipe' "
+                "SELECT "
+                        + "    r.id_recipe, r.email, r.title, r.content, r.image, r.person, r.state, r.rate, r.nb_rate,r.cooking_time, r.create_time, r.update_time, "
+                        + "    agg.matching_ingredients, "
+                        + "    CASE "
+                        + "         WHEN agg.totalVegan = agg.totalIngredients THEN 'Végan' "
+                        + "         WHEN agg.totalVeganOrVege = agg.totalIngredients THEN 'Végétarien' "
+                        + "         ELSE 'Non renseigné' "
+                        + "    END AS diet, "
+                        + "    CASE WHEN COUNT(f.favoriteable_id) > 0 THEN 'true' ELSE 'false' END AS is_favorite "
+                        + "FROM recipe r "
+                        + "JOIN ( "
+                        + "    SELECT "
+                        + "        ri.id_recipe, "
+                        + "        COUNT(DISTINCT ri.id_ingredient) AS totalIngredients, "
+                        + "        COUNT(DISTINCT CASE WHEN d.name = 'Végan' THEN ri.id_ingredient END) AS totalVegan, "
+                        + "        COUNT(DISTINCT CASE WHEN d.name IN ('Végan', 'Végétarien') THEN ri.id_ingredient END) AS totalVeganOrVege, "
+                        + (ingredientIds != null && !ingredientIds.isEmpty() ?
+                        "        COUNT(DISTINCT CASE WHEN ri.id_ingredient IN (" + String.join(",", Collections.nCopies(ingredientIds.size(), "?")) + ") THEN ri.id_ingredient END) AS matching_ingredients "
+                        : "        0 AS matching_ingredients ")
+                        + "    FROM recipe_ingredient ri "
+                        + "    LEFT JOIN diet_ingredient di ON ri.id_ingredient = di.id_ingredient "
+                        + "    LEFT JOIN diet d ON di.id_diet = d.id_diet "
+                        + "    GROUP BY ri.id_recipe "
+                        + ") agg ON r.id_recipe = agg.id_recipe "
+                        + "LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id AND f.favoriteable_type = 'recipe' "
+                        + "WHERE 1=1 " // Pour permettre l'ajout dynamique des conditions
         );
 
-        List<Object> params = new ArrayList<>();
-        boolean hasWhere = false;
-
-        // Filtre sur les ingrédients (correction)
         if (ingredientIds != null && !ingredientIds.isEmpty()) {
-            for (Integer ingredientId : ingredientIds) {
-                ingredientHelper.ingredientExist(ingredientId);
-            }
-            String placeholders = String.join(",", Collections.nCopies(ingredientIds.size(), "?"));
-            sql.append(" WHERE ri.id_ingredient IN (").append(placeholders).append(") ");
             params.addAll(ingredientIds);
-            hasWhere = true;
         }
-
-        // Filtre sur le titre
         if (search != null && !search.isBlank()) {
-            sql.append(hasWhere ? "AND " : " WHERE ");
-            sql.append("r.search_title LIKE ? ");
+            sql.append(" AND r.search_title LIKE ? ");
             params.add("%" + search + "%");
-            hasWhere = true;
         }
-
-        // Filtre sur les favoris (optionnel)
         if (email != null) {
-            sql.append(hasWhere ? "AND " : " WHERE ");
-            sql.append("(f.email = ? OR f.email IS NULL) ");
+            sql.append(" AND (f.email = ? OR f.email IS NULL) ");
             params.add(email);
         }
 
-        // Ajout du GROUP BY et ORDER BY
-        sql.append(" GROUP BY r.id_recipe ORDER BY matching_ingredients DESC, r.rate DESC");
+        sql.append(" GROUP BY r.id_recipe ORDER BY agg.matching_ingredients DESC, r.rate DESC");
 
-        try {
-            return jdbcTemplate.query(sql.toString(), searchResultRecipeDtoRowMapper, params.toArray());
-        } catch (Exception e) {
-            System.out.println("Erreur lors de l'exécution de la requête : " + e.getMessage());
-            throw e;
-        }
+        return jdbcTemplate.query(sql.toString(), searchResultRecipeDtoRowMapper, params.toArray());
     }
     public RecipeDietsDto findRecipeDetailsById(String email, int id){
         String sql = """
