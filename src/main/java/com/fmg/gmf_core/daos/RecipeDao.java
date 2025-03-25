@@ -138,7 +138,7 @@ public class RecipeDao {
     public List<SearchResultRecipeDto> findRecipesByIngredientsAndName(List<Integer> ingredientIds, String search, String email) {
         StringBuilder sql = new StringBuilder(
                 "SELECT r.id_recipe, r.email, r.title, r.content, r.image, r.person, " +
-                        "r.state, r.rate, r.nb_rate, r.create_time, r.update_time, " +
+                        "r.state, r.rate, r.nb_rate, cooking_time, r.create_time, r.update_time, " +
                         "COUNT(DISTINCT ri.id_ingredient) AS matching_ingredients, " + // Fix de COUNT
                         """
                         CASE 

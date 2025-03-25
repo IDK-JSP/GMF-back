@@ -127,8 +127,16 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (1, 35), -- Curcuma
 (1, 36), -- Cannelle
 (1, 37), -- Piment
-(1, 38); -- Vanille
-
+(1, 38), -- Vanille
+(1,40),
+(1,42),
+(1,43),
+(1,46),
+(1,47),
+(1,48),
+(1,49),
+(1,50),
+(1,51);
 -- Association pour le régime Végétarien (id_diet = 2)
 INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (2, 1),  -- Lait
@@ -165,7 +173,18 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (2, 35), -- Piment
 (2, 36), -- Vanille
 (2, 37), -- Vanille
-(2, 38); -- Vanille
+(2, 38),
+(2,40),
+(2,41),
+(2,42),
+(2,43),
+(2,44),
+(2,46),
+(2,47),
+(2,48),
+(2,49),
+(2,50),
+(2,51); -- Vanille
 
 INSERT INTO `recipe` (`email`, `title`, `search_title`, `content`, `image`, `person`, `state`, `rate`, `nb_rate`, `create_time`, `update_time`, `cooking_time`) VALUES
 ('admin@gmail.com', 'Pâtes à la Carbonara','pates a la carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', NULL, 4, 'tovalidation', 4.8, 4, NOW(), NOW(), 30),

@@ -43,9 +43,6 @@ public class SearchController {
             search.setIngredients(ingredientDao.findIngredientByName(title));
         }
         search.setRecipes(recipeDao.findRecipesByIngredientsAndName(ingredients, title, email));
-        if (search.getRecipes().isEmpty() && search.getIngredients().isEmpty()) {
-            throw new ResourceNotFoundException("Aucun résultat de recherche");
-        }
         return ResponseEntity.ok(search);
     }
 }
