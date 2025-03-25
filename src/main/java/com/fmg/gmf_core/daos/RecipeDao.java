@@ -59,6 +59,7 @@ public class RecipeDao {
             rs.getString("state"),
             rs.getDouble("rate"),
             rs.getInt("nb_rate"),
+            rs.getInt("cooking_time"),
             rs.getTimestamp("create_time").toLocalDateTime(),
             rs.getTimestamp("update_time").toLocalDateTime(),
             rs.getInt("matching_ingredients"),
@@ -138,7 +139,7 @@ public class RecipeDao {
     public List<SearchResultRecipeDto> findRecipesByIngredientsAndName(List<Integer> ingredientIds, String search, String email) {
         StringBuilder sql = new StringBuilder(
                 "SELECT r.id_recipe, r.email, r.title, r.content, r.image, r.person, " +
-                        "r.state, r.rate, r.nb_rate, cooking_time, r.create_time, r.update_time, " +
+                        "r.state, r.rate, r.nb_rate, r.cooking_time, r.create_time, r.update_time, " +
                         "COUNT(DISTINCT ri.id_ingredient) AS matching_ingredients, " + // Fix de COUNT
                         """
                         CASE 
