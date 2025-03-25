@@ -164,7 +164,8 @@ public class RecipeDao {
                         + "    GROUP BY ri.id_recipe "
                         + ") agg ON r.id_recipe = agg.id_recipe "
                         + "LEFT JOIN favorite f ON r.id_recipe = f.favoriteable_id AND f.favoriteable_type = 'recipe' "
-                        + "WHERE 1=1 " // Pour permettre l'ajout dynamique des conditions
+                        + (ingredientIds != null && !ingredientIds.isEmpty() ?  "WHERE 1=1  and matching_ingredients > 0"
+                : "WHERE 1=1")
         );
 
         if (ingredientIds != null && !ingredientIds.isEmpty()) {
