@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.time.DateTimeException;
 import java.util.List;
 @Repository
 public class DuelDao {
@@ -62,13 +61,13 @@ public class DuelDao {
         jdbcTemplate.update(sql,duel.getId_recipe_right(),duel.getId_recipe_left(),duel.getEmail(),dateTimeService.getCurrentDateTime());
         return findDuel(duel.getEmail(), duel.getId_recipe_left(), duel.getId_recipe_right()).getFirst();
     }
-    public Duel findDuelById(int id_duel){
+    public Duel findDuelById(int idDuel){
         String sql = "SELECT * FROM duel WHERE id_duel = ?";
-        return jdbcTemplate.queryForObject(sql,duelRowMapper,id_duel);
+        return jdbcTemplate.queryForObject(sql,duelRowMapper,idDuel);
     }
-    public List<Duel> findRecipeDuel(int id_recipe){
+    public List<Duel> findRecipeDuel(int idRecipe){
         String sql = "SELECT * FROM duel WHERE id_recipe_left = ? or id_recipe_right = ?";
-        return jdbcTemplate.query(sql,duelRowMapper,id_recipe, id_recipe);
+        return jdbcTemplate.query(sql,duelRowMapper, idRecipe, idRecipe);
     }
     public void deletedDuel(int recipeId) {
         String sql = "DELETE FROM duel WHERE id_recipe_left = ? or id_recipe_right = ?";
@@ -79,14 +78,14 @@ public class DuelDao {
         String sql = "SELECT * FROM duel WHERE email = ? and id_recipe_left = ? and id_recipe_right = ? order by create_time DESC";
         return jdbcTemplate.query(sql,duelRowMapper,email,recipeLeft,recipeRight);
     }
-    public boolean duelExist (int id_duel){
+    public boolean duelExist (int idDuel){
         String sql = "SELECT count(*) from duel where id_duel = ?" ;
-        int count = jdbcTemplate.queryForObject(sql,Integer.class,id_duel);
+        int count = jdbcTemplate.queryForObject(sql,Integer.class, idDuel);
         return count > 0;
     }
-    public boolean recipeExistInDuel (int id_duel, int id_recipe){
+    public boolean recipeExistInDuel (int idDuel, int idRecipe){
         String sql = "SELECT count(*) from duel where id_duel = ? and id_recipe_right = ? or id_recipe_left = ?";
-        int count = jdbcTemplate.queryForObject(sql,Integer.class,id_duel, id_recipe, id_recipe);
+        int count = jdbcTemplate.queryForObject(sql,Integer.class, idDuel, idRecipe, idRecipe);
         return count >0;
     }
 }

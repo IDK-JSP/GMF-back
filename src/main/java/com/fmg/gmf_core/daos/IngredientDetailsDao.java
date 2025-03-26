@@ -28,8 +28,8 @@ public class IngredientDetailsDao {
             rs.getString("diet")
     );
 
-    public List<IngredientDetailsDto> findRecipeIngredients(int id_recipe) {
-        recipeHelper.recipeExist(id_recipe);
+    public List<IngredientDetailsDto> findRecipeIngredients(int idRecipe) {
+        recipeHelper.recipeExist(idRecipe);
         String sql = """
                 SELECT\s
                     i.name AS ingredient_name,\s
@@ -52,7 +52,7 @@ public class IngredientDetailsDao {
                 GROUP BY i.name, ri.quantity, m.name;
                 
                 """;
-        List<IngredientDetailsDto> ingredientDetailDtos = jdbcTemplate.query(sql, recipeDetailsRowMapper, id_recipe);
+        List<IngredientDetailsDto> ingredientDetailDtos = jdbcTemplate.query(sql, recipeDetailsRowMapper, idRecipe);
         return ingredientDetailDtos;
     }
 

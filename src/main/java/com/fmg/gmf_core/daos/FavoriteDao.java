@@ -136,9 +136,9 @@ public class FavoriteDao {
     }
 
     //Utilitaire
-    public boolean favoriteExist(String email, String favoriteable_type, int favoriteable_id) {
+    public boolean favoriteExist(String email, String favoriteableType, int favoriteableId) {
         String checkSql = "SELECT COUNT(*) FROM favorite WHERE email = ? and favoriteable_type = ? and favoriteable_id= ?";
-        int count = jdbcTemplate.queryForObject(checkSql, Integer.class, email, favoriteable_type, favoriteable_id);
+        int count = jdbcTemplate.queryForObject(checkSql, Integer.class, email, favoriteableType, favoriteableId);
         return count > 0;
     }
 }

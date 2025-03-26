@@ -31,10 +31,10 @@ public class RecipeController {
     private final FavoriteDao favoriteDao;
     private final DuelDao duelDao;
 
-    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDietsDao recipeDietsDao1, RecipeDetailsDto recipeDetailsDto, StageDao stageDao, RecipeIngredientDao recipeIngredientDao, JwtUtil jwtUtil, OpinionDao opinionDao, RecipeHelper recipeHelper, IngredientDao ingredientDao, FavoriteDao favoriteDao, DuelDao duelDao) {
+    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDetailsDto recipeDetailsDto, StageDao stageDao, RecipeIngredientDao recipeIngredientDao, JwtUtil jwtUtil, OpinionDao opinionDao, RecipeHelper recipeHelper, IngredientDao ingredientDao, FavoriteDao favoriteDao, DuelDao duelDao) {
         this.recipeDao = recipeDao;
         this.ingredientDetailsDao = ingredientDetailsDao;
-        this.recipeDietsDao = recipeDietsDao1;
+        this.recipeDietsDao = recipeDietsDao;
         this.recipeDetailsDto = recipeDetailsDto;
         this.stageDao = stageDao;
         this.recipeIngredientDao = recipeIngredientDao;

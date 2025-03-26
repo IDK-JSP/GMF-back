@@ -17,9 +17,9 @@ public class DuelHelper {
         }
 
     }
-    public void recipeExistInDuel (int id_duel, int id_recipe){
-        if (!duelDao.recipeExistInDuel(id_duel,id_recipe)){
-            throw new ResourceNotFoundException("La recette " + id_recipe+" n'existe pas dans le duel " + id_duel);
+    public void recipeExistInDuel (int idDuel, int idRecipe){
+        if (!duelDao.recipeExistInDuel(idDuel, idRecipe)){
+            throw new ResourceNotFoundException("La recette " + idRecipe +" n'existe pas dans le duel " + idDuel);
         }
     }
 }
