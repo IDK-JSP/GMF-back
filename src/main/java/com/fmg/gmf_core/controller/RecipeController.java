@@ -81,7 +81,7 @@ public class RecipeController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<String> newRecipe(@Valid @RequestBody NewRecipeDto newRecipeDto, @RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<Object> newRecipe(@Valid @RequestBody NewRecipeDto newRecipeDto, @RequestHeader("Authorization") String authorizationHeader) {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             String token = authorizationHeader.substring(7);  // Supprime "Bearer " (7 caractères)
             String email = jwtUtil.getEmailFromToken(token);  // Appel de votre méthode getEmailFromToken
@@ -96,7 +96,7 @@ public class RecipeController {
                 newRecipeDto.getRecipeIngredients().get(i).setId_recipe(id_recipe);
                 recipeIngredientDao.save(newRecipeDto.getRecipeIngredients().get(i));
             }
-            return ResponseEntity.ok(newRecipeDto.getRecipe().getTitle());
+            return ResponseEntity.ok(id_recipe);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Authorization header");
         }
