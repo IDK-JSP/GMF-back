@@ -478,83 +478,83 @@ INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_m
 
 -- Curry de Pois Chiches (ID 31)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(31, 24, 400, 11), -- Pois chiches (g)
+(31, 28, 400, 11), -- Pois chiches (g)
 (31, 11, 1, 17), -- Oignon (pièce)
-(31, 29, 100, 11), -- Champignons (g)
-(31, 8, 20, 2), -- Huile d’olive (ml)
-(31, 35, 10, 2), -- Curcuma (ml)
-(31, 37, 200, 3); -- Lait de coco (ml)
+(31, 29, 150, 11), -- Champignons (g)
+(31, 8, 20, 2), -- Huile d'olive (ml)
+(31, 35, 5, 2), -- Curcuma (ml)
+(31, 53, 200, 3); -- Lait de coco (ml)
 
 -- Chili Sin Carne (ID 32)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(32, 25, 400, 11), -- Haricots rouges (g)
-(32, 26, 200, 11), -- Maïs (g)
+(32, 54, 400, 11), -- Haricots rouges (g)
+(32, 55, 150, 11), -- Maïs (g)
 (32, 11, 1, 17), -- Oignon (pièce)
 (32, 29, 150, 11), -- Champignons (g)
-(32, 35, 10, 2), -- Paprika (ml)
+(32, 35, 5, 2), -- Paprika (ml)
 (32, 37, 300, 3); -- Sauce tomate (ml)
 
 -- Tofu Sauté aux Légumes (ID 33)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(33, 31, 200, 11), -- Tofu (g)
-(33, 12, 1, 17), -- Carotte (pièce)
-(33, 13, 1, 17), -- Courgette (pièce)
+(33, 46, 200, 11), -- Tofu (g)
+(33, 13, 2, 17), -- Carotte (pièce)
+(33, 50, 1, 17), -- Poivron (pièce)
 (33, 11, 1, 17), -- Oignon (pièce)
-(33, 8, 20, 2); -- Huile d’olive (ml)
+(33, 8, 20, 2); -- Huile d'olive (ml)
 
 -- Buddha Bowl (ID 34)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(34, 28, 100, 11), -- Quinoa (g)
-(34, 12, 1, 34), -- Carotte (pièce)
-(34, 26, 100, 11), -- Maïs (g)
-(34, 32, 100, 11), -- Houmous (g)
-(34, 13, 1, 17); -- Courgette (pièce)
+(34, 58, 100, 11), -- Quinoa (g)
+(34, 13, 1, 17), -- Carotte (pièce)
+(34, 55, 100, 11), -- Maïs (g)
+(34, 56, 100, 11), -- Houmous (g)
+(34, 50, 1, 17); -- Poivron (pièce)
 
 -- Soupe Thaï au Lait de Coco (ID 35)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (35, 11, 1, 17), -- Oignon (pièce)
-(35, 30, 1, 17), -- Poivron (pièce)
-(35, 37, 400, 3), -- Lait de coco (ml)
-(35, 31, 150, 11), -- Tofu (g)
-(35, 35, 10, 2); -- Gingembre (ml)
+(35, 50, 1, 17), -- Poivron (pièce)
+(35, 53, 400, 3), -- Lait de coco (ml)
+(35, 46, 150, 11), -- Tofu (g)
+(35, 57, 10, 2); -- Gingembre (ml)
 
 -- Pâtes aux Champignons et Crème Végétale (ID 36)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(36, 34, 300, 11), -- Pâtes (g)
+(36, 16, 300, 11), -- Pâtes (g)
 (36, 29, 200, 11), -- Champignons (g)
-(36, 37, 200, 3), -- Crème végétale (ml)
+(36, 60, 200, 3), -- Crème végétale (ml)
 (36, 11, 1, 17), -- Oignon (pièce)
-(36, 8, 20, 2); -- Huile d’olive (ml)
+(36, 8, 20, 2); -- Huile d'olive (ml)
 
 -- Tarte aux Légumes Rôtis (ID 37)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(37, 33, 1, 17), -- Pâte brisée (pièce)
-(37, 30, 1, 17), -- Poivron (pièce)
-(37, 12, 1, 17), -- Carotte (pièce)
-(37, 13, 1, 17), -- Courgette (pièce)
-(37, 8, 20, 2); -- Huile d’olive (ml)
+(37, 59, 1, 17), -- Pâte brisée (pièce)
+(37, 50, 1, 17), -- Poivron (pièce)
+(37, 13, 2, 17), -- Carotte (pièce)
+(37, 29, 150, 11), -- Champignons (g)
+(37, 8, 20, 2); -- Huile d'olive (ml)
 
 -- Salade de Quinoa (ID 38)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(38, 28, 100, 11), -- Quinoa (g)
-(38, 12, 1, 17), -- Carotte (pièce)
-(38, 30, 1, 17), -- Poivron (pièce)
-(38, 26, 100, 11), -- Maïs (g)
-(38, 8, 10, 2); -- Vinaigrette (ml)
+(38, 58, 100, 11), -- Quinoa (g)
+(38, 13, 1, 17), -- Carotte (pièce)
+(38, 50, 1, 17), -- Poivron (pièce)
+(38, 55, 100, 11), -- Maïs (g)
+(38, 8, 10, 2); -- Huile d'olive (ml)
 
 -- Gratin de Courgettes Vegan (ID 39)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (39, 13, 3, 17), -- Courgette (pièce)
-(39, 37, 200, 3), -- Crème végétale (ml)
-(39, 31, 100, 11), -- Tofu (g)
-(39, 8, 20, 2); -- Huile d’olive (ml)
+(39, 60, 200, 3), -- Crème végétale (ml)
+(39, 46, 100, 11), -- Tofu (g)
+(39, 8, 20, 2); -- Huile d'olive (ml)
 
 -- Gâteau au Chocolat Vegan (ID 40)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
-(40, 36, 200, 11), -- Chocolat noir (g)
-(40, 27, 200, 11), -- Farine (g)
-(40, 8, 100, 2), -- Huile végétale (ml)
-(40, 37, 200, 3); -- Lait végétal (ml)
+(40, 61, 200, 11), -- Chocolat noir (g)
+(40, 3, 200, 11), -- Farine (g)
+(40, 8, 100, 2), -- Huile d'olive (ml)
+(40, 62, 200, 3); -- Lait végétal (ml)
 
 
 -- Pâtes à la Carbonara (id_recipe = 1)
@@ -799,61 +799,61 @@ INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (5, 30, 'Servir froid, garni de croutons ou de basilic frais.');
 
 -- Curry de Pois Chiches (ID 31)
-INSERT INTO stage (id_recipe, step, description) VALUES
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (1, 31, 'Faire revenir l’oignon émincé dans l’huile.'),
 (2, 31, 'Ajouter les pois chiches, champignons, curcuma.'),
 (3, 31, 'Incorporer le lait de coco et mijoter 30 min.');
 
 -- Chili Sin Carne (ID 32)
-INSERT INTO stage (id_recipe, step, description) VALUES
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (1, 32, 'Faire revenir l’oignon dans l’huile.'),
 (2, 32, 'Ajouter les champignons, haricots, maïs et épices.'),
 (3, 32, 'Verser la sauce tomate et laisser mijoter 40 min.');
 
 -- Tofu Sauté aux Légumes (ID 33)
-INSERT INTO stage (id_recipe, step, description) VALUES
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (1, 33, 'Couper tous les légumes en morceaux.'),
 (2, 33, 'Sauter le tofu dans l’huile puis ajouter les légumes.'),
 (3, 33, 'Cuire 15 min en remuant.');
 
 -- Buddha Bowl (ID 34)
-INSERT INTO stage (id_recipe, step, description) VALUES
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (1, 34, 'Cuire le quinoa et couper les légumes.'),
 (2, 34, 'Dresser les légumes et le quinoa dans un bol.'),
 (3, 34, 'Ajouter le houmous et servir.');
 
 -- Soupe Thaï au Lait de Coco (ID 35)
-INSERT INTO stage (id_recipe, step, description) VALUES
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (1, 35, 'Faire revenir l’oignon et le poivron.'),
 (2, 35, 'Ajouter le tofu, le gingembre et le lait de coco.'),
 (3, 35, 'Laisser mijoter 20 min.');
 
 -- Pâtes aux Champignons et Crème Végétale (ID 36)
-INSERT INTO stage (id_recipe, step, description) VALUES
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (1, 36, 'Cuire les pâtes.'),
 (2, 36, 'Faire revenir l’oignon et les champignons.'),
 (3, 36, 'Ajouter la crème végétale et mélanger aux pâtes.');
 
 -- Tarte aux Légumes Rôtis (ID 37)
-INSERT INTO stage (id_recipe, step, description) VALUES
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (1, 37, 'Préchauffer le four à 180°C.'),
 (2, 37, 'Découper et rôtir les légumes.'),
 (3, 37, 'Disposer sur la pâte et cuire 35 min.');
 
 -- Salade de Quinoa (ID 38)
-INSERT INTO stage (id_recipe, step, description) VALUES
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (1, 38, 'Cuire le quinoa.'),
 (2, 38, 'Couper les légumes et mélanger avec le quinoa.'),
 (3, 38, 'Ajouter la vinaigrette.');
 
 -- Gratin de Courgettes Vegan (ID 39)
-INSERT INTO stage (id_recipe, step, description) VALUES
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (1, 39, 'Préchauffer le four à 180°C.'),
 (2, 39, 'Couper les courgettes en rondelles.'),
 (3, 39, 'Mélanger avec la crème et le tofu, puis gratiner 40 min.');
 
 -- Gâteau au Chocolat Vegan (ID 40)
-INSERT INTO stage (id_recipe, step, description) VALUES
+INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (1, 40, 'Mélanger farine, huile, lait végétal et chocolat fondu.'),
 (2, 40, 'Verser dans un moule huilé.'),
 (3, 40, 'Cuire 40 min à 180°C.');
