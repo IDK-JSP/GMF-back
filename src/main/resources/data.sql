@@ -216,7 +216,18 @@ INSERT INTO `recipe` (`email`, `title`, `search_title`, `content`, `image`, `per
 ('admin@gmail.com', 'Riz cantonais', 'riz cantonais', 'Un riz sauté avec œufs, crevettes, petits pois et sauce soja.', 'recipe_0', 4, 'tovalidation', 4.3, 5, NOW(), NOW(), 25),
 ('admin@gmail.com', 'Crêpes sucrées', 'crepes sucrees', 'De délicieuses crêpes fines à garnir avec du sucre, chocolat ou confiture.', 'recipe_0', 6, 'tovalidation', 4.9, 9, NOW(), NOW(), 20),
 ('admin@gmail.com', 'Fondue savoyarde', 'fondue savoyarde', 'Un mélange de fromages fondus, parfait pour une soirée conviviale.', 'recipe_0', 4, 'tovalidation', 4.7, 6, NOW(), NOW(), 30),
-('admin@gmail.com', 'Gaspacho', 'gaspacho', 'Une soupe froide rafraîchissante à base de tomates et légumes mixés.', 'recipe_0', 4, 'tovalidation', 4.5, 5, NOW(), NOW(), 15);
+('admin@gmail.com', 'Gaspacho', 'gaspacho', 'Une soupe froide rafraîchissante à base de tomates et légumes mixés.', 'recipe_0', 4, 'tovalidation', 4.5, 5, NOW(), NOW(), 15),
+('admin@gmail.com', 'Curry de Pois Chiches', 'curry pois chiches', 'Curry vegan crémeux aux pois chiches et lait de coco.', 'recipe_0', 4, 'tovalidation', 4, 4, NOW(), NOW(), 40),
+('admin@gmail.com', 'Chili Sin Carne', 'chili sin carne', 'Chili savoureux à base de haricots rouges et légumes.', 'recipe_0', 6, 'tovalidation', 0, 0, NOW(), NOW(), 50),
+('admin@gmail.com', 'Tofu Sauté aux Légumes', 'tofu saute legumes', 'Tofu mariné sauté avec légumes croquants.', 'recipe_0', 2, 'tovalidation', 0, 0, NOW(), NOW(), 30),
+('admin@gmail.com', 'Buddha Bowl', 'buddha bowl', 'Bol complet avec quinoa, légumes rôtis et houmous.', 'recipe_0', 2, 'tovalidation', 0, 0, NOW(), NOW(), 25),
+('admin@gmail.com', 'Soupe Thaï au Lait de Coco', 'soupe thai coco', 'Soupe épicée et parfumée au lait de coco.', 'recipe_0', 4, 'tovalidation', 0, 0, NOW(), NOW(), 35),
+('admin@gmail.com', 'Pâtes aux Champignons et Crème Végétale', 'pates champignons creme', 'Pâtes nappées d’une sauce crémeuse aux champignons.', 'recipe_0', 4, 'tovalidation', 0, 0, NOW(), NOW(), 30),
+('admin@gmail.com', 'Tarte aux Légumes Rôtis', 'tarte legumes rotis', 'Tarte colorée garnie de légumes de saison.', 'recipe_0', 6, 'tovalidation', 0, 0, NOW(), NOW(), 45),
+('admin@gmail.com', 'Salade de Quinoa', 'salade quinoa', 'Salade fraîche et nourrissante à base de quinoa et légumes croquants.', 'recipe_0', 2, 'tovalidation', 0, 0, NOW(), NOW(), 20),
+('admin@gmail.com', 'Gratin de Courgettes Vegan', 'gratin courgettes vegan', 'Gratin fondant de courgettes sans produits animaux.', 'recipe_0', 4, 'tovalidation', 0, 0, NOW(), NOW(), 50),
+('admin@gmail.com', 'Gâteau au Chocolat Vegan', 'gateau chocolat vegan', 'Moelleux au chocolat sans œufs ni lait.', 'recipe_0', 6, 'tovalidation', 0, 0, NOW(), NOW(), 60),
+
 -- Pâtes à la Carbonara (id_recipe = 1)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
 (1, 16, 200, 11), -- Pâtes (g)
@@ -465,6 +476,87 @@ INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_m
 (30, 12, 1, 17), -- Ail, 1 gousse
 (30, 9, 1, 5); -- Vinaigre, 1 cuillère à soupe
 
+-- Curry de Pois Chiches (ID 31)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
+(31, 24, 400, 11), -- Pois chiches (g)
+(31, 11, 1, 17), -- Oignon (pièce)
+(31, 29, 100, 11), -- Champignons (g)
+(31, 8, 20, 2), -- Huile d’olive (ml)
+(31, 35, 10, 2), -- Curcuma (ml)
+(31, 37, 200, 3); -- Lait de coco (ml)
+
+-- Chili Sin Carne (ID 32)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
+(32, 25, 400, 11), -- Haricots rouges (g)
+(32, 26, 200, 11), -- Maïs (g)
+(32, 11, 1, 17), -- Oignon (pièce)
+(32, 29, 150, 11), -- Champignons (g)
+(32, 35, 10, 2), -- Paprika (ml)
+(32, 37, 300, 3); -- Sauce tomate (ml)
+
+-- Tofu Sauté aux Légumes (ID 33)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
+(33, 31, 200, 11), -- Tofu (g)
+(33, 12, 1, 17), -- Carotte (pièce)
+(33, 13, 1, 17), -- Courgette (pièce)
+(33, 11, 1, 17), -- Oignon (pièce)
+(33, 8, 20, 2); -- Huile d’olive (ml)
+
+-- Buddha Bowl (ID 34)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
+(34, 28, 100, 11), -- Quinoa (g)
+(34, 12, 1, 34), -- Carotte (pièce)
+(34, 26, 100, 11), -- Maïs (g)
+(34, 32, 100, 11), -- Houmous (g)
+(34, 13, 1, 17); -- Courgette (pièce)
+
+-- Soupe Thaï au Lait de Coco (ID 35)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
+(35, 11, 1, 17), -- Oignon (pièce)
+(35, 30, 1, 17), -- Poivron (pièce)
+(35, 37, 400, 3), -- Lait de coco (ml)
+(35, 31, 150, 11), -- Tofu (g)
+(35, 35, 10, 2); -- Gingembre (ml)
+
+-- Pâtes aux Champignons et Crème Végétale (ID 36)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
+(36, 34, 300, 11), -- Pâtes (g)
+(36, 29, 200, 11), -- Champignons (g)
+(36, 37, 200, 3), -- Crème végétale (ml)
+(36, 11, 1, 17), -- Oignon (pièce)
+(36, 8, 20, 2); -- Huile d’olive (ml)
+
+-- Tarte aux Légumes Rôtis (ID 37)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
+(37, 33, 1, 17), -- Pâte brisée (pièce)
+(37, 30, 1, 17), -- Poivron (pièce)
+(37, 12, 1, 17), -- Carotte (pièce)
+(37, 13, 1, 17), -- Courgette (pièce)
+(37, 8, 20, 2); -- Huile d’olive (ml)
+
+-- Salade de Quinoa (ID 38)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
+(38, 28, 100, 11), -- Quinoa (g)
+(38, 12, 1, 17), -- Carotte (pièce)
+(38, 30, 1, 17), -- Poivron (pièce)
+(38, 26, 100, 11), -- Maïs (g)
+(38, 8, 10, 2); -- Vinaigrette (ml)
+
+-- Gratin de Courgettes Vegan (ID 39)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
+(39, 13, 3, 17), -- Courgette (pièce)
+(39, 37, 200, 3), -- Crème végétale (ml)
+(39, 31, 100, 11), -- Tofu (g)
+(39, 8, 20, 2); -- Huile d’olive (ml)
+
+-- Gâteau au Chocolat Vegan (ID 40)
+INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
+(40, 36, 200, 11), -- Chocolat noir (g)
+(40, 27, 200, 11), -- Farine (g)
+(40, 8, 100, 2), -- Huile végétale (ml)
+(40, 37, 200, 3); -- Lait végétal (ml)
+
+
 -- Pâtes à la Carbonara (id_recipe = 1)
 INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (1, 1, 'Faites cuire les pâtes dans une grande casserole d’eau bouillante salée.'),
@@ -706,6 +798,67 @@ INSERT INTO `stage` (`stage`, `id_recipe`, `content`) VALUES
 (4, 30, 'Laisser reposer au réfrigérateur pendant 1 à 2 heures pour que les saveurs se mélangent.'),
 (5, 30, 'Servir froid, garni de croutons ou de basilic frais.');
 
+-- Curry de Pois Chiches (ID 31)
+INSERT INTO stage (id_recipe, step, description) VALUES
+(1, 31, 'Faire revenir l’oignon émincé dans l’huile.'),
+(2, 31, 'Ajouter les pois chiches, champignons, curcuma.'),
+(3, 31, 'Incorporer le lait de coco et mijoter 30 min.');
+
+-- Chili Sin Carne (ID 32)
+INSERT INTO stage (id_recipe, step, description) VALUES
+(1, 32, 'Faire revenir l’oignon dans l’huile.'),
+(2, 32, 'Ajouter les champignons, haricots, maïs et épices.'),
+(3, 32, 'Verser la sauce tomate et laisser mijoter 40 min.');
+
+-- Tofu Sauté aux Légumes (ID 33)
+INSERT INTO stage (id_recipe, step, description) VALUES
+(1, 33, 'Couper tous les légumes en morceaux.'),
+(2, 33, 'Sauter le tofu dans l’huile puis ajouter les légumes.'),
+(3, 33, 'Cuire 15 min en remuant.');
+
+-- Buddha Bowl (ID 34)
+INSERT INTO stage (id_recipe, step, description) VALUES
+(1, 34, 'Cuire le quinoa et couper les légumes.'),
+(2, 34, 'Dresser les légumes et le quinoa dans un bol.'),
+(3, 34, 'Ajouter le houmous et servir.');
+
+-- Soupe Thaï au Lait de Coco (ID 35)
+INSERT INTO stage (id_recipe, step, description) VALUES
+(1, 35, 'Faire revenir l’oignon et le poivron.'),
+(2, 35, 'Ajouter le tofu, le gingembre et le lait de coco.'),
+(3, 35, 'Laisser mijoter 20 min.');
+
+-- Pâtes aux Champignons et Crème Végétale (ID 36)
+INSERT INTO stage (id_recipe, step, description) VALUES
+(1, 36, 'Cuire les pâtes.'),
+(2, 36, 'Faire revenir l’oignon et les champignons.'),
+(3, 36, 'Ajouter la crème végétale et mélanger aux pâtes.');
+
+-- Tarte aux Légumes Rôtis (ID 37)
+INSERT INTO stage (id_recipe, step, description) VALUES
+(1, 37, 'Préchauffer le four à 180°C.'),
+(2, 37, 'Découper et rôtir les légumes.'),
+(3, 37, 'Disposer sur la pâte et cuire 35 min.');
+
+-- Salade de Quinoa (ID 38)
+INSERT INTO stage (id_recipe, step, description) VALUES
+(1, 38, 'Cuire le quinoa.'),
+(2, 38, 'Couper les légumes et mélanger avec le quinoa.'),
+(3, 38, 'Ajouter la vinaigrette.');
+
+-- Gratin de Courgettes Vegan (ID 39)
+INSERT INTO stage (id_recipe, step, description) VALUES
+(1, 39, 'Préchauffer le four à 180°C.'),
+(2, 39, 'Couper les courgettes en rondelles.'),
+(3, 39, 'Mélanger avec la crème et le tofu, puis gratiner 40 min.');
+
+-- Gâteau au Chocolat Vegan (ID 40)
+INSERT INTO stage (id_recipe, step, description) VALUES
+(1, 40, 'Mélanger farine, huile, lait végétal et chocolat fondu.'),
+(2, 40, 'Verser dans un moule huilé.'),
+(3, 40, 'Cuire 40 min à 180°C.');
+
+
 TRUNCATE TABLE opinion;
 INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
 (2, 'eva10@example.com', 2, 'Pas terrible, manque de saveur.',NOW()),
@@ -898,5 +1051,85 @@ INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
 (30, 'patrick22@example.com', 5, 'Excellent gaspacho, je l’ai servi avec des croûtons maison.', NOW()),
 (30, 'marc44@example.com', 5, 'Un gaspacho bien frais, j’ai adoré son goût léger et savoureux.', NOW()),
 (30, 'christine77@example.com', 4, 'Très bon, mais un peu trop de poivron pour moi.', NOW());
+
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
+(31, 'camille.vegan@example.com', 5, 'Un curry super savoureux et facile à faire, validé !', NOW()),
+(31, 'alexandre.bio@example.com', 4, 'Très bon, mais un peu trop relevé à mon goût.', NOW()),
+(31, 'marion.green@example.com', 5, 'Parfait avec du riz basmati, je referai.', NOW()),
+(31, 'julien.veggie@example.com', 4, 'Bon mais j’ai ajouté un peu de lait de coco en plus.', NOW()),
+(31, 'claire.simple@example.com', 5, 'J’adore ! Recette simple et délicieuse.', NOW()),
+(31, 'laura77@example.com', 5, 'Tout le monde a adoré à la maison.', NOW());
+
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
+(32, 'mathieu.vegan@example.com', 5, 'Super recette, très réconfortante.', NOW()),
+(32, 'julie.bio@example.com', 4, 'Très bon mais un peu trop de haricots à mon goût.', NOW()),
+(32, 'arnaud.green@example.com', 5, 'Parfait avec du riz complet.', NOW()),
+(32, 'lucie.veggie@example.com', 5, 'On ne sent même pas l’absence de viande !', NOW()),
+(32, 'vincent.simple@example.com', 4, 'J’ai adoré mais mes enfants un peu moins.', NOW()),
+(32, 'anne.veganlife@example.com', 5, 'Un classique indémodable.', NOW());
+
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
+(33, 'melanie.vegan@example.com', 5, 'Ces lasagnes sont incroyables !', NOW()),
+(33, 'florent.green@example.com', 4, 'Très bon mais la béchamel végétale manque un peu d’épaisseur.', NOW()),
+(33, 'emilie.veggie@example.com', 5, 'Ma recette préférée du moment.', NOW()),
+(33, 'jeremy.bio@example.com', 5, 'Tout le monde s’est régalé.', NOW()),
+(33, 'marie.vegan@example.com', 4, 'Excellent mais un peu long à préparer.', NOW()),
+(33, 'sebastien77@example.com', 5, 'Un plat familial parfait.', NOW());
+
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
+(34, 'lea.veggie@example.com', 5, 'Un bol plein de fraîcheur et de saveurs.', NOW()),
+(34, 'thomas.green@example.com', 4, 'Très bon mais je préfère avec du tofu grillé.', NOW()),
+(34, 'manon.vegan@example.com', 5, 'Parfait pour un déjeuner sain.', NOW()),
+(34, 'kevin.simple@example.com', 4, 'Un peu trop de crudités pour moi.', NOW()),
+(34, 'sophie.veganlife@example.com', 5, 'Une vraie explosion de couleurs.', NOW()),
+(34, 'antoine77@example.com', 5, 'Facile, rapide et délicieux.', NOW());
+
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
+(35, 'clara.vegan@example.com', 5, 'Très parfumée, on s’est régalé.', NOW()),
+(35, 'hugo.bio@example.com', 4, 'J’aurais mis un peu moins de gingembre.', NOW()),
+(35, 'audrey.green@example.com', 5, 'Super soupe, bien crémeuse.', NOW()),
+(35, 'vincent.veggie@example.com', 5, 'Parfaite avec un filet de citron vert.', NOW()),
+(35, 'julie.veganlife@example.com', 4, 'Très bonne mais un peu épicée.', NOW()),
+(35, 'mickael77@example.com', 5, 'Simple, rapide et délicieuse.', NOW());
+
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
+(36, 'emma.vegan@example.com', 5, 'Hyper gourmands, ces tacos !', NOW()),
+(36, 'paul.bio@example.com', 4, 'J’ai adoré mais j’ai rajouté une sauce épicée.', NOW()),
+(36, 'celine.veggie@example.com', 5, 'Super recette pour un repas convivial.', NOW()),
+(36, 'adrien.green@example.com', 5, 'Un vrai coup de cœur.', NOW()),
+(36, 'juliette.simple@example.com', 4, 'Très bon mais un peu sec sans sauce.', NOW()),
+(36, 'quentin77@example.com', 5, 'On s’est régalé.', NOW());
+
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
+(37, 'aurelie.vegan@example.com', 5, 'J’étais sceptique mais c’est un régal.', NOW()),
+(37, 'sebastien.green@example.com', 5, 'Super crémeux malgré l’absence de crème classique.', NOW()),
+(37, 'elodie.veggie@example.com', 5, 'Toute la famille a adoré.', NOW()),
+(37, 'kevin.bio@example.com', 4, 'Un peu trop d’ail pour moi.', NOW()),
+(37, 'amelie.veganlife@example.com', 5, 'Je referai sans hésiter.', NOW()),
+(37, 'nicolas77@example.com', 5, 'Parfait pour un plat d’hiver.', NOW());
+
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
+(38, 'caroline.vegan@example.com', 5, 'Fraîche et croquante, parfaite pour l’été.', NOW()),
+(38, 'mathieu.green@example.com', 4, 'Très bonne mais j’ai rajouté un filet de citron.', NOW()),
+(38, 'juliette.veggie@example.com', 5, 'Un délice, rapide à faire.', NOW()),
+(38, 'alexandre.bio@example.com', 5, 'Je recommande vivement.', NOW()),
+(38, 'sandra.veganlife@example.com', 4, 'Un peu fade sans sauce.', NOW()),
+(38, 'louis77@example.com', 5, 'Très bonne et légère.', NOW());
+
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
+(39, 'marion.vegan@example.com', 5, 'On a adoré ! Les steaks sont top.', NOW()),
+(39, 'romain.green@example.com', 5, 'Impossible de voir que c’est vegan.', NOW()),
+(39, 'emilie.veggie@example.com', 5, 'Super bon et moelleux.', NOW()),
+(39, 'antoine.bio@example.com', 4, 'Un peu trop de sauce pour moi.', NOW()),
+(39, 'lea.veganlife@example.com', 5, 'Les enfants ont adoré.', NOW()),
+(39, 'jerome77@example.com', 5, 'Facile et excellent.', NOW());
+
+INSERT INTO bddgmf.opinion (id_recipe, email, rate, comment, create_time) VALUES
+(40, 'camille.vegan@example.com', 5, 'Des pancakes bien moelleux et gourmands.', NOW()),
+(40, 'maxime.green@example.com', 5, 'Parfait pour le brunch.', NOW()),
+(40, 'audrey.veggie@example.com', 5, 'J’ai adoré avec du sirop d’érable.', NOW()),
+(40, 'julien.bio@example.com', 4, 'Très bon mais un peu denses.', NOW()),
+(40, 'elise.veganlife@example.com', 5, 'Un régal, j’en referai.', NOW()),
+(40, 'thibault77@example.com', 5, 'Vraiment délicieux.', NOW());
 
 SET FOREIGN_KEY_CHECKS = 1;
