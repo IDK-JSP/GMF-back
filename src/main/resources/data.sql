@@ -83,7 +83,7 @@ INSERT INTO `ingredient` (`name`, `content`, `create_time`, `update_time`) VALUE
 ('Piment', 'Épice forte utilisée pour relever les plats.', NOW(), NOW()),
 ('Vanille', 'Épice aromatique extraite de gousses utilisées en pâtisserie.', NOW(), NOW()),
 ('Lardon', 'Un truc moins bien que le bacon.', NOW(), NOW()),
-('Vin rouge', "Le vin c'est mal les enfants", NOW(), NOW()),
+('Vin rouge', "Le vin c\'est mal les enfants", NOW(), NOW()),
 ('Crême', 'Un pur délice si tu veux mon avis', NOW(),NOW()),
 ('Ciboulette','Une autre plante quoi',NOW(),NOW()),
 ('Estragon','Alors là tu me poses une colle',NOW(),NOW()),
@@ -93,8 +93,19 @@ INSERT INTO `ingredient` (`name`, `content`, `create_time`, `update_time`) VALUE
 ('Algue','Un pur délice', NOW(),NOW()),
 ('Miso',"Pareille c'est un banger ça", NOW(),NOW()),
 ('Petits pois', 'Bien vert bien bon', NOW(), NOW()),
-('Poivron', 'Pas bon ça non plus', NOW(),NOW()),
-('Concombre','Pas mal avec de la vinaigrette',NOW(),NOW());
+('Poivron', 'Pas bon ça non plus', NOW(), NOW()),
+('Concombre', 'Pas mal avec de la vinaigrette', NOW(), NOW()),
+('Crème de soja', 'Lait végétal version crémeuse', NOW(), NOW()),
+('Lait de coco', 'Douceur exotique et onctueuse', NOW(), NOW()),
+('Haricots rouges', 'Le carburant des plats tex-mex', NOW(), NOW()),
+('Maïs', 'Petits grains dorés et croquants', NOW(), NOW()),
+('Houmous', 'Tartinable et irrésistible', NOW(), NOW()),
+('Gingembre', 'Un coup de fouet épicé', NOW(), NOW()),
+('Quinoa', 'Les petites perles des salades saines', NOW(), NOW()),
+('Pâte brisée', 'La base croustillante des tartes', NOW(), NOW()),
+('Crème végétale', 'Douce alternative à la crème classique', NOW(), NOW()),
+('Chocolat noir', 'Intense et toujours réconfortant', NOW(), NOW()),
+('Lait végétal', 'Lait sans vache, mais tout aussi bon', NOW(), NOW());
 
 INSERT INTO `diet` (`name`, `content`) VALUES
 ('Végan', 'Régime excluant tous les produits d’origine animale, y compris viande, poisson, œufs, produits laitiers et miel.'),
@@ -226,7 +237,7 @@ INSERT INTO `recipe` (`email`, `title`, `search_title`, `content`, `image`, `per
 ('admin@gmail.com', 'Tarte aux Légumes Rôtis', 'tarte legumes rotis', 'Tarte colorée garnie de légumes de saison.', 'recipe_0', 6, 'tovalidation', 0, 0, NOW(), NOW(), 45),
 ('admin@gmail.com', 'Salade de Quinoa', 'salade quinoa', 'Salade fraîche et nourrissante à base de quinoa et légumes croquants.', 'recipe_0', 2, 'tovalidation', 0, 0, NOW(), NOW(), 20),
 ('admin@gmail.com', 'Gratin de Courgettes Vegan', 'gratin courgettes vegan', 'Gratin fondant de courgettes sans produits animaux.', 'recipe_0', 4, 'tovalidation', 0, 0, NOW(), NOW(), 50),
-('admin@gmail.com', 'Gâteau au Chocolat Vegan', 'gateau chocolat vegan', 'Moelleux au chocolat sans œufs ni lait.', 'recipe_0', 6, 'tovalidation', 0, 0, NOW(), NOW(), 60),
+('admin@gmail.com', 'Gâteau au Chocolat Vegan', 'gateau chocolat vegan', 'Moelleux au chocolat sans œufs ni lait.', 'recipe_0', 6, 'tovalidation', 0, 0, NOW(), NOW(), 60);
 
 -- Pâtes à la Carbonara (id_recipe = 1)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
