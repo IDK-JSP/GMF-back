@@ -228,16 +228,16 @@ INSERT INTO `recipe` (`email`, `title`, `search_title`, `content`, `image`, `per
 ('admin@gmail.com', 'Crêpes sucrées', 'crepes sucrees', 'De délicieuses crêpes fines à garnir avec du sucre, chocolat ou confiture.', 'recipe_0', 6, 'tovalidation', 4.9, 9, NOW(), NOW(), 20),
 ('admin@gmail.com', 'Fondue savoyarde', 'fondue savoyarde', 'Un mélange de fromages fondus, parfait pour une soirée conviviale.', 'recipe_0', 4, 'tovalidation', 4.7, 6, NOW(), NOW(), 30),
 ('admin@gmail.com', 'Gaspacho', 'gaspacho', 'Une soupe froide rafraîchissante à base de tomates et légumes mixés.', 'recipe_0', 4, 'tovalidation', 4.5, 5, NOW(), NOW(), 15),
-('admin@gmail.com', 'Curry de Pois Chiches', 'curry pois chiches', 'Curry vegan crémeux aux pois chiches et lait de coco.', 'recipe_0', 4, 'tovalidation', 4, 4, NOW(), NOW(), 40),
+('admin@gmail.com', 'Curry de Pois Chiches', 'curry de pois chiches', 'Curry vegan crémeux aux pois chiches et lait de coco.', 'recipe_0', 4, 'tovalidation', 4, 4, NOW(), NOW(), 40),
 ('admin@gmail.com', 'Chili Sin Carne', 'chili sin carne', 'Chili savoureux à base de haricots rouges et légumes.', 'recipe_0', 6, 'tovalidation', 0, 0, NOW(), NOW(), 50),
-('admin@gmail.com', 'Tofu Sauté aux Légumes', 'tofu saute legumes', 'Tofu mariné sauté avec légumes croquants.', 'recipe_0', 2, 'tovalidation', 0, 0, NOW(), NOW(), 30),
+('admin@gmail.com', 'Tofu Sauté aux Légumes', 'tofu saute aux legumes', 'Tofu mariné sauté avec légumes croquants.', 'recipe_0', 2, 'tovalidation', 0, 0, NOW(), NOW(), 30),
 ('admin@gmail.com', 'Buddha Bowl', 'buddha bowl', 'Bol complet avec quinoa, légumes rôtis et houmous.', 'recipe_0', 2, 'tovalidation', 0, 0, NOW(), NOW(), 25),
-('admin@gmail.com', 'Soupe Thaï au Lait de Coco', 'soupe thai coco', 'Soupe épicée et parfumée au lait de coco.', 'recipe_0', 4, 'tovalidation', 0, 0, NOW(), NOW(), 35),
-('admin@gmail.com', 'Pâtes aux Champignons et Crème Végétale', 'pates champignons creme', 'Pâtes nappées d’une sauce crémeuse aux champignons.', 'recipe_0', 4, 'tovalidation', 0, 0, NOW(), NOW(), 30),
-('admin@gmail.com', 'Tarte aux Légumes Rôtis', 'tarte legumes rotis', 'Tarte colorée garnie de légumes de saison.', 'recipe_0', 6, 'tovalidation', 0, 0, NOW(), NOW(), 45),
-('admin@gmail.com', 'Salade de Quinoa', 'salade quinoa', 'Salade fraîche et nourrissante à base de quinoa et légumes croquants.', 'recipe_0', 2, 'tovalidation', 0, 0, NOW(), NOW(), 20),
-('admin@gmail.com', 'Gratin de Courgettes Vegan', 'gratin courgettes vegan', 'Gratin fondant de courgettes sans produits animaux.', 'recipe_0', 4, 'tovalidation', 0, 0, NOW(), NOW(), 50),
-('admin@gmail.com', 'Gâteau au Chocolat Vegan', 'gateau chocolat vegan', 'Moelleux au chocolat sans œufs ni lait.', 'recipe_0', 6, 'tovalidation', 0, 0, NOW(), NOW(), 60);
+('admin@gmail.com', 'Soupe Thaï au Lait de Coco', 'soupe thai au lait de coco', 'Soupe épicée et parfumée au lait de coco.', 'recipe_0', 4, 'tovalidation', 0, 0, NOW(), NOW(), 35),
+('admin@gmail.com', 'Pâtes aux Champignons et Crème Végétale', 'pates aux champignons et creme vegetale', 'Pâtes nappées d’une sauce crémeuse aux champignons.', 'recipe_0', 4, 'tovalidation', 0, 0, NOW(), NOW(), 30),
+('admin@gmail.com', 'Tarte aux Légumes Rôtis', 'tarte aux legumes rotis', 'Tarte colorée garnie de légumes de saison.', 'recipe_0', 6, 'tovalidation', 0, 0, NOW(), NOW(), 45),
+('admin@gmail.com', 'Salade de Quinoa', 'salade de quinoa', 'Salade fraîche et nourrissante à base de quinoa et légumes croquants.', 'recipe_0', 2, 'tovalidation', 0, 0, NOW(), NOW(), 20),
+('admin@gmail.com', 'Gratin de Courgettes Vegan', 'gratin de courgettes vegan', 'Gratin fondant de courgettes sans produits animaux.', 'recipe_0', 4, 'tovalidation', 0, 0, NOW(), NOW(), 50),
+('admin@gmail.com', 'Gâteau au Chocolat Vegan', 'gateau au chocolat vegan', 'Moelleux au chocolat sans œufs ni lait.', 'recipe_0', 6, 'tovalidation', 0, 0, NOW(), NOW(), 60);
 
 -- Pâtes à la Carbonara (id_recipe = 1)
 INSERT INTO `recipe_ingredient` (`id_recipe`, `id_ingredient`, `quantity`, `id_measurement`) VALUES
