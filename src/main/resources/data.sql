@@ -147,7 +147,18 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (1,48),
 (1,49),
 (1,50),
-(1,51);
+(1,51),
+(1,52),
+(1,53),
+(1,54),
+(1,55),
+(1,56),
+(1,57),
+(1,58),
+(1,59),
+(1,60),
+(1,61),
+(1,62);
 -- Association pour le régime Végétarien (id_diet = 2)
 INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (2, 1),  -- Lait
@@ -195,8 +206,18 @@ INSERT INTO `diet_ingredient` (`id_diet`, `id_ingredient`) VALUES
 (2,48),
 (2,49),
 (2,50),
-(2,51); -- Vanille
-
+(2,51), -- Vanille
+(2,52),
+(2,53),
+(2,54),
+(2,55),
+(2,56),
+(2,57),
+(2,58),
+(2,59),
+(2,60),
+(2,61),
+(2,62);
 INSERT INTO `recipe` (`email`, `title`, `search_title`, `content`, `image`, `person`, `state`, `rate`, `nb_rate`, `create_time`, `update_time`, `cooking_time`) VALUES
 ('admin@gmail.com', 'Pâtes à la Carbonara','pates a la carbonara', 'Une délicieuse recette italienne avec des œufs, du parmesan et des lardons.', 'recipe_1', 4, 'validate', 4.8, 4, NOW(), NOW(), 30),
 ('admin@gmail.com', 'Salade César','salade cesar', 'Salade fraîche avec du poulet grillé, des croûtons et une sauce crémeuse. ', 'recipe_2', 2, 'validate', 2.8, 5, NOW(), NOW(),40),
