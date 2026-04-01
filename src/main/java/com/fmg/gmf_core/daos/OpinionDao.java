@@ -33,10 +33,10 @@ public class OpinionDao {
             rs.getString("comment"),
             rs.getTimestamp("create_time").toLocalDateTime()
     );
-    public List<Opinion> findRecipeOpinion(int id_recipe){
-        recipeHelper.recipeExist(id_recipe);
+    public List<Opinion> findRecipeOpinion(int idRecipe){
+        recipeHelper.recipeExist(idRecipe);
         String sql = "SELECT * FROM opinion where id_recipe = ? ORDER BY create_time DESC";
-        List<Opinion> opinions = jdbcTemplate.query(sql, opinionRowMapper, id_recipe);
+        List<Opinion> opinions = jdbcTemplate.query(sql, opinionRowMapper, idRecipe);
         return opinions;
     }
     public Opinion save(Opinion opinion) {

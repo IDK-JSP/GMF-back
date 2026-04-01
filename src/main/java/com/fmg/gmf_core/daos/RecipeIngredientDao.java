@@ -38,16 +38,16 @@ public class RecipeIngredientDao {
         jdbcTemplate.update(sql, recipeIngredient.getId_recipe(), recipeIngredient.getId_ingredient(), recipeIngredient.getQuantity(),recipeIngredient.getId_measurement());
         return  recipeIngredient;
     }
-    public void deleteRecipeIngredient(int recipeId, int id_ingredient) {
+    public void deleteRecipeIngredient(int recipeId, int idIngredient) {
         String sql = "DELETE FROM recipe_ingredient WHERE id_recipe = ? AND id_ingredient = ?";
-        jdbcTemplate.update(sql, recipeId, id_ingredient);
+        jdbcTemplate.update(sql, recipeId, idIngredient);
     }
     //Utilitaire
-    public Boolean recipeIngredientExist(int id_recipe, int id_ingredient){
-        recipeHelper.recipeExist(id_recipe);
-        ingredientHelper.ingredientExist(id_ingredient);
+    public Boolean recipeIngredientExist(int idRecipe, int idIngredient){
+        recipeHelper.recipeExist(idRecipe);
+        ingredientHelper.ingredientExist(idIngredient);
         String sql = "SELECT COUNT(*) FROM recipe_ingredient WHERE id_recipe = ? and id_ingredient = ?";
-        int count = jdbcTemplate.queryForObject(sql, Integer.class, id_recipe, id_ingredient);
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, idRecipe, idIngredient);
         return count > 0;
     }
 }

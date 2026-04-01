@@ -34,10 +34,10 @@ public class VoteDao {
             rs.getInt("id_duel"),
             rs.getTimestamp("create_time").toLocalDateTime()
     );
-    public List<Vote> getAllDuelVote(int id_duel){
-        duelHelper.duelExist(id_duel);
-        String sql = "SELECT * FROM vote where id_duel = ? ";
-        List<Vote> votes = jdbcTemplate.query(sql,voteRowMapper,id_duel);
+    public List<Vote> getAllDuelVote(int idDuel){
+        duelHelper.duelExist(idDuel);
+        String sql = "SELECT * FROM vote where idDuel = ? ";
+        List<Vote> votes = jdbcTemplate.query(sql,voteRowMapper, idDuel);
         globalHelper.isEmpty(votes, "vote pour ce duel");
         return votes;
     }
@@ -51,24 +51,24 @@ public class VoteDao {
         jdbcTemplate.update(sql,vote.getId_duel(),vote.getEmail(),vote.getId_recipe(),dateTimeService.getCurrentDateTime());
         return vote;
     }
-    public int totalDuelVote(int id_duel){
-        duelHelper.duelExist(id_duel);
+    public int totalDuelVote(int idDuel){
+        duelHelper.duelExist(idDuel);
         String sql = "SELECT COUNT(*) FROM vote WHERE id_duel = ?";
-        return jdbcTemplate.queryForObject(sql,Integer.class,id_duel);
+        return jdbcTemplate.queryForObject(sql,Integer.class, idDuel);
     }
-    public int totalDuelRightVote(int id_duel){
-        duelHelper.duelExist(id_duel);
+    public int totalDuelRightVote(int idDuel){
+        duelHelper.duelExist(idDuel);
         String sql = "SELECT COUNT(*) FROM duel WHERE id_duel = ? and id_recipe_right = ? ";
-        return jdbcTemplate.queryForObject(sql,Integer.class,id_duel,duelRecipeRightId(id_duel));
+        return jdbcTemplate.queryForObject(sql,Integer.class, idDuel,duelRecipeRightId(idDuel));
     }
     //Utiliraire
-    public boolean voteExist(String email, int id_duel){
+    public boolean voteExist(String email, int idDuel){
         String sql = "SELECT COUNT(*) FROM vote WHERE email = ? and id_duel = ?";
-        int count = jdbcTemplate.queryForObject(sql,Integer.class, email, id_duel);
+        int count = jdbcTemplate.queryForObject(sql,Integer.class, email, idDuel);
         return count > 0;
     }
-    public int duelRecipeRightId (int id_duel){
+    public int duelRecipeRightId (int idDuel){
         String sql = "SELECT id_recipe_right FROM duel WHERE id_duel = ?";
-        return jdbcTemplate.queryForObject(sql,Integer.class,id_duel);
+        return jdbcTemplate.queryForObject(sql,Integer.class, idDuel);
     }
 }

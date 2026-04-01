@@ -31,10 +31,10 @@ public class RecipeController {
     private final FavoriteDao favoriteDao;
     private final DuelDao duelDao;
 
-    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDietsDao recipeDietsDao1, RecipeDetailsDto recipeDetailsDto, StageDao stageDao, RecipeIngredientDao recipeIngredientDao, JwtUtil jwtUtil, OpinionDao opinionDao, RecipeHelper recipeHelper, IngredientDao ingredientDao, FavoriteDao favoriteDao, DuelDao duelDao) {
+    public RecipeController(RecipeDao recipeDao, IngredientDetailsDao ingredientDetailsDao, RecipeDietsDao recipeDietsDao, RecipeDetailsDto recipeDetailsDto, StageDao stageDao, RecipeIngredientDao recipeIngredientDao, JwtUtil jwtUtil, OpinionDao opinionDao, RecipeHelper recipeHelper, IngredientDao ingredientDao, FavoriteDao favoriteDao, DuelDao duelDao) {
         this.recipeDao = recipeDao;
         this.ingredientDetailsDao = ingredientDetailsDao;
-        this.recipeDietsDao = recipeDietsDao1;
+        this.recipeDietsDao = recipeDietsDao;
         this.recipeDetailsDto = recipeDetailsDto;
         this.stageDao = stageDao;
         this.recipeIngredientDao = recipeIngredientDao;
@@ -96,7 +96,11 @@ public class RecipeController {
                 newRecipeDto.getRecipeIngredients().get(i).setId_recipe(id_recipe);
                 recipeIngredientDao.save(newRecipeDto.getRecipeIngredients().get(i));
             }
-            return ResponseEntity.ok(id_recipe);
+            recipeDetailsDto.setRecipeDietsDto(recipeDao.findRecipeDetailsById(email,id_recipe));
+            recipeDetailsDto.setIngredientDetailDtos(ingredientDetailsDao.findRecipeIngredients(id_recipe));
+            recipeDetailsDto.setStages(stageDao.findRecipeStage(id_recipe));
+            recipeDetailsDto.setOpinions(opinionDao.findRecipeOpinion(id_recipe));
+            return ResponseEntity.ok(recipeDetailsDto);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Authorization header");
         }
